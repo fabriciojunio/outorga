@@ -10,7 +10,9 @@ COPY pom.xml .
 RUN mvn -B -q dependency:go-offline
 
 COPY src ./src
-RUN mvn -B -q clean package -DskipTests
+# maven.test.skip em vez de skipTests: alem de nao rodar, nem compila o teste,
+# o que evita baixar o binario do Postgres embutido dentro da imagem.
+RUN mvn -B -q clean package -Dmaven.test.skip=true
 
 FROM eclipse-temurin:21-jre-alpine AS execucao
 WORKDIR /app
