@@ -1,0 +1,26 @@
+# Java
+target/
+*.class
+*.jar
+!.mvn/wrapper/maven-wrapper.jar
+
+# Node
+node_modules/
+.next/
+out/
+*.tsbuildinfo
+
+# Ambiente. Segredo nao entra no repositorio, nunca.
+.env
+.env.local
+.env.*.local
+
+# IDE
+.idea/
+.vscode/
+*.iml
+.DS_Store
+
+# Relatorio de build
+coverage/
+dependency-check-report.html

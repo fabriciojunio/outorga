@@ -1,0 +1,44 @@
+# Deploy do Mirante no Render, dentro da camada gratuita.
+#
+# O banco NAO esta aqui de proposito. O Postgres gratuito do Render expira
+# depois de 30 dias e leva os dados junto; o Neon e o Supabase mantem o plano
+# gratuito sem prazo. A URL do banco entra como variavel de ambiente.
+#
+# Aviso honesto sobre o plano free: a instancia dorme depois de 15 minutos sem
+# acesso e a primeira requisicao seguinte leva de 30 a 60 segundos para
+# responder. Para demonstracao comercial, abra o link cinco minutos antes.
+
+services:
+  - type: web
+    name: mirante-api
+    runtime: docker
+    plan: free
+    region: oregon
+    rootDir: backend
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /actuator/health/readiness
+    autoDeploy: true
+    envVars:
+      - key: MIRANTE_MODO
+        value: DEMONSTRACAO
+      - key: PORT
+        value: 8080
+      # Gerado pelo Render na primeira subida e mantido entre deploys.
+      - key: JWT_SEGREDO
+        generateValue: true
+      # Preencher no painel do Render com a string de conexao do Neon.
+      # Formato: jdbc:postgresql://HOST/BANCO?sslmode=require
+      - key: DATABASE_URL
+        sync: false
+      - key: DATABASE_USER
+        sync: false
+      - key: DATABASE_PASSWORD
+        sync: false
+      - key: URL_PUBLICA
+        value: https://mirante-api.onrender.com
+      - key: ORIGENS_PERMITIDAS
+        value: http://localhost:3000
+      - key: DB_POOL_MAX
+        value: 3
+      - key: LOG_LEVEL
+        value: INFO

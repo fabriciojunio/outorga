@@ -1,0 +1,44 @@
+# Ambiente local: Postgres e a API.
+#
+# Para desenvolver so o backend, subir apenas o banco ja basta:
+#   docker compose up -d banco
+# e rodar a aplicacao pela IDE ou por `mvn spring-boot:run`.
+
+services:
+  banco:
+    image: postgres:16-alpine
+    container_name: mirante-banco
+    environment:
+      POSTGRES_DB: mirante
+      POSTGRES_USER: mirante
+      POSTGRES_PASSWORD: mirante
+    ports:
+      - "5432:5432"
+    volumes:
+      - dados-do-banco:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mirante -d mirante"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  api:
+    build:
+      context: ./backend
+    container_name: mirante-api
+    depends_on:
+      banco:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: jdbc:postgresql://banco:5432/mirante
+      DATABASE_USER: mirante
+      DATABASE_PASSWORD: mirante
+      MIRANTE_MODO: DEMONSTRACAO
+      JWT_SEGREDO: segredo-de-desenvolvimento-com-mais-de-sessenta-e-quatro-caracteres-ok
+      URL_PUBLICA: http://localhost:8080
+      ORIGENS_PERMITIDAS: http://localhost:3000
+    ports:
+      - "8080:8080"
+
+volumes:
+  dados-do-banco:

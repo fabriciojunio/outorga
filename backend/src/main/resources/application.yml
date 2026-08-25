@@ -1,0 +1,78 @@
+spring:
+  application:
+    name: mirante
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/mirante}
+    username: ${DATABASE_USER:mirante}
+    password: ${DATABASE_PASSWORD:mirante}
+    hikari:
+      # A camada gratuita de Postgres costuma limitar conexoes por projeto,
+      # e uma instancia que abre vinte conexoes ociosas derruba as outras.
+      maximum-pool-size: ${DB_POOL_MAX:5}
+      minimum-idle: 1
+      connection-timeout: 20000
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+  jackson:
+    default-property-inclusion: non_null
+  threads:
+    virtual:
+      enabled: true
+
+server:
+  port: ${PORT:8080}
+  shutdown: graceful
+  forward-headers-strategy: framework
+  error:
+    include-message: never
+    include-stacktrace: never
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  endpoint:
+    health:
+      probes:
+        enabled: true
+      show-details: when-authorized
+  metrics:
+    tags:
+      aplicacao: mirante
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+  api-docs:
+    path: /v3/api-docs
+
+logging:
+  level:
+    root: INFO
+    br.com.mirante: ${LOG_LEVEL:INFO}
+    org.springframework.jdbc.core: WARN
+
+mirante:
+  # DEMONSTRACAO roda sem fornecedor externo: video de amostra e cobranca
+  # simulada. PRODUCAO exige bucket e gateway configurados e recusa subir sem.
+  modo: ${MIRANTE_MODO:DEMONSTRACAO}
+  url-publica-da-api: ${URL_PUBLICA:http://localhost:8080}
+  origens-permitidas: ${ORIGENS_PERMITIDAS:http://localhost:3000}
+  autenticacao:
+    segredo: ${JWT_SEGREDO:troque-este-segredo-de-desenvolvimento-com-no-minimo-64-caracteres-ok}
+    validade-acesso: PT15M
+    validade-refresh: P14D
+  video:
+    endpoint: ${VIDEO_ENDPOINT:}
+    bucket: ${VIDEO_BUCKET:}
+    chave-de-acesso: ${VIDEO_CHAVE:}
+    segredo: ${VIDEO_SEGREDO:}
+    regiao: ${VIDEO_REGIAO:auto}
+    url-publica: ${VIDEO_URL_PUBLICA:}
+    amostra-hls: ${VIDEO_AMOSTRA:https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8}
+  cobranca:
+    url-base: ${COBRANCA_URL:https://api-sandbox.asaas.com/v3}
+    chave-de-api: ${COBRANCA_CHAVE:}
+    segredo-do-webhook: ${COBRANCA_WEBHOOK_SEGREDO:}
