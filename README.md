@@ -1,5 +1,7 @@
 # Mirante
 
+*[Read this in English](README.en.md)*
+
 Plataforma de streaming white-label. O cliente traz o catálogo e o direito de
 exibição; o Mirante entrega a tecnologia com a marca dele.
 
