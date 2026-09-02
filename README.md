@@ -23,6 +23,18 @@ YouTube. O que essa gente não tem é plataforma.
 O Outorga TV é para essa gente. E o gate de conteúdo é o que separa o produto de um
 serviço pirata: sem contrato cadastrado, não existe exibição.
 
+**No ar:** [outorga-tv.vercel.app](https://outorga-tv.vercel.app) · a API
+responde em [outorga-api.onrender.com](https://outorga-api.onrender.com/swagger-ui.html)
+
+Entre como espectador com `espectador@exemplo.com` e a senha `demonstracao2026`;
+as outras contas estão logo abaixo. O banco e a instância são de camada
+gratuita e dormem depois de quinze minutos parados, então a primeira abertura
+pode levar um minuto.
+
+Para ver o gate de conteúdo funcionando: entre no painel com
+`dono@cineserra.com.br`, rescinda a licença de um título publicado e volte ao
+catálogo. O título sai do ar sem que ninguém o tenha despublicado.
+
 ## O que já funciona
 
 - Multi-tenant: um servidor atende vários clientes, cada um com marca, catálogo,

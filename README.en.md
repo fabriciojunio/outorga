@@ -23,6 +23,17 @@ currently living on YouTube. What those people do not have is a platform.
 Outorga TV is for them, and the content gate is what separates the product from a
 piracy service: no contract on file, no exhibition.
 
+**Live:** [outorga-tv.vercel.app](https://outorga-tv.vercel.app) · the API answers at
+[outorga-api.onrender.com](https://outorga-api.onrender.com/swagger-ui.html)
+
+Sign in as a viewer with `espectador@exemplo.com` and the password
+`demonstracao2026`. The database and the instance are on free tiers and sleep
+after fifteen idle minutes, so the first request can take a minute.
+
+To watch the content gate work: sign into the panel as `dono@cineserra.com.br`,
+terminate the licence behind a published title, then go back to the catalogue.
+The title is gone, and nobody unpublished it.
+
 ## The interesting part
 
 Two files carry the whole idea, and they are the ones worth opening first.

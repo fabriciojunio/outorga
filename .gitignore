@@ -24,3 +24,4 @@ out/
 # Relatorio de build
 coverage/
 dependency-check-report.html
+.vercel
