@@ -1,0 +1,12 @@
+# O contexto do build e a raiz do repositorio, mas a imagem so precisa do
+# backend. Sem esta lista o front, os documentos e o alvo do Maven viajam
+# para o daemon do Docker a cada build, o que na camada gratuita custa minutos.
+web/
+docs/
+comercial/
+.git/
+.github/
+backend/target/
+*.md
+docker-compose.yml
+render.yaml

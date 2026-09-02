@@ -40,7 +40,10 @@ jobs:
           path: backend/target/site/jacoco/
           retention-days: 7
 
+      # O Dockerfile mora na raiz porque e de la que o Render constroi. Este
+      # passo precisa sair do backend, que e o diretorio padrao do job.
       - name: Conferir a imagem Docker
+        working-directory: .
         run: docker build -t outorga-api:ci .
 
   web:

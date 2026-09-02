@@ -1,3 +1,7 @@
+# O arquivo fica na raiz, e nao dentro de backend, porque o Render constroi a
+# partir da raiz do repositorio. O contexto entao inclui o web, e o
+# .dockerignore existe para ele nao subir junto.
+#
 # Build em duas etapas: o jar sai de uma imagem com Maven, e a imagem final
 # carrega so o runtime. Sem isso a imagem passaria de 700 MB e a camada
 # gratuita de qualquer provedor reclamaria do tempo de deploy.
@@ -6,10 +10,10 @@ WORKDIR /app
 
 # As dependencias mudam muito menos que o codigo. Copiar o pom primeiro faz o
 # cache do Docker aproveitar o download inteiro entre builds.
-COPY pom.xml .
+COPY backend/pom.xml .
 RUN mvn -B -q dependency:go-offline
 
-COPY src ./src
+COPY backend/src ./src
 # maven.test.skip em vez de skipTests: alem de nao rodar, nem compila o teste,
 # o que evita baixar o binario do Postgres embutido dentro da imagem.
 RUN mvn -B -q clean package -Dmaven.test.skip=true
