@@ -1,8 +1,8 @@
 {
-  "name": "mirante-web",
+  "name": "outorga-web",
   "version": "0.1.0",
   "private": true,
-  "description": "Vitrine, player e painel do Mirante",
+  "description": "Vitrine, player e painel do Outorga TV",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

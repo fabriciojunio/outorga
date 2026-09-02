@@ -1,5 +1,5 @@
 /**
- * Cliente da API do Mirante.
+ * Cliente da API do Outorga TV.
  *
  * Tudo passa por aqui de proposito. Assim existe um lugar so que conhece o
  * cabecalho de autenticacao, o identificador do aparelho e o formato do erro
@@ -9,9 +9,9 @@
 const BASE = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:8080';
 export const SERVICO = process.env.NEXT_PUBLIC_SERVICO ?? 'cineserra';
 
-const CHAVE_SESSAO = 'mirante.sessao';
-const CHAVE_APARELHO = 'mirante.aparelho';
-const CHAVE_PERFIL = 'mirante.perfil';
+const CHAVE_SESSAO = 'outorga.sessao';
+const CHAVE_APARELHO = 'outorga.aparelho';
+const CHAVE_PERFIL = 'outorga.perfil';
 
 export type Sessao = {
   acesso: string;
@@ -320,7 +320,7 @@ export const reproducao = {
     chamar<Reproducao>('/api/v1/reproducao/token', {
       metodo: 'POST',
       autenticado: true,
-      cabecalhosExtras: { 'X-Mirante-Dispositivo': identificadorDoAparelho() },
+      cabecalhosExtras: { 'X-Outorga TV-Dispositivo': identificadorDoAparelho() },
       corpo: {
         tituloId: params.tituloId,
         temporada: params.temporada ?? null,

@@ -1,10 +1,10 @@
 spring:
   application:
-    name: mirante
+    name: outorga
   datasource:
-    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/mirante}
-    username: ${DATABASE_USER:mirante}
-    password: ${DATABASE_PASSWORD:mirante}
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/outorga}
+    username: ${DATABASE_USER:outorga}
+    password: ${DATABASE_PASSWORD:outorga}
     hikari:
       # A camada gratuita de Postgres costuma limitar conexoes por projeto,
       # e uma instancia que abre vinte conexoes ociosas derruba as outras.
@@ -40,7 +40,7 @@ management:
       show-details: when-authorized
   metrics:
     tags:
-      aplicacao: mirante
+      aplicacao: outorga
 
 springdoc:
   swagger-ui:
@@ -51,13 +51,13 @@ springdoc:
 logging:
   level:
     root: INFO
-    br.com.mirante: ${LOG_LEVEL:INFO}
+    br.com.outorga: ${LOG_LEVEL:INFO}
     org.springframework.jdbc.core: WARN
 
-mirante:
+outorga:
   # DEMONSTRACAO roda sem fornecedor externo: video de amostra e cobranca
   # simulada. PRODUCAO exige bucket e gateway configurados e recusa subir sem.
-  modo: ${MIRANTE_MODO:DEMONSTRACAO}
+  modo: ${OUTORGA_MODO:DEMONSTRACAO}
   url-publica-da-api: ${URL_PUBLICA:http://localhost:8080}
   origens-permitidas: ${ORIGENS_PERMITIDAS:http://localhost:3000}
   autenticacao:

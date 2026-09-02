@@ -1,12 +1,12 @@
 # LGPD
 
-Como o Mirante trata dado pessoal, e o que quem contrata a plataforma precisa
+Como o Outorga TV trata dado pessoal, e o que quem contrata a plataforma precisa
 fazer do lado dele.
 
 ## Papéis
 
-Na relação com o assinante final, **quem contrata o Mirante é o controlador** e
-o **Mirante é operador**. Quem decide o que coletar, por quanto tempo guardar e
+Na relação com o assinante final, **quem contrata o Outorga TV é o controlador** e
+o **Outorga TV é operador**. Quem decide o que coletar, por quanto tempo guardar e
 para que usar é o dono do serviço; a plataforma trata os dados por conta dele.
 
 Isso precisa estar escrito no contrato entre as partes, com cláusula de
@@ -86,7 +86,7 @@ com o operador fornecendo o que for necessário.
 
 ## Encarregado
 
-Quem contrata o Mirante precisa indicar um encarregado de dados e publicar o
+Quem contrata o Outorga TV precisa indicar um encarregado de dados e publicar o
 contato na política de privacidade do próprio serviço. A plataforma não faz isso
 pelo cliente.
 

@@ -3,7 +3,7 @@ import './globals.css';
 import { Cabecalho } from '@/components/Cabecalho';
 
 export const metadata: Metadata = {
-  title: 'Mirante',
+  title: 'Outorga TV',
   description: 'Plataforma de streaming white-label com controle de direitos de exibicao',
   robots: {
     // Enquanto o servico e de demonstracao, nao ha motivo para indexar.
@@ -21,7 +21,7 @@ export default function LayoutRaiz({ children }: { children: React.ReactNode }) 
         <footer className="rodape">
           <div className="envolucro espalha">
             <span>
-              Mirante. Plataforma de streaming. O catalogo e o direito de exibicao sao do
+              Outorga TV. Plataforma de streaming. O catalogo e o direito de exibicao sao do
               cliente.
             </span>
             <span className="mono">v0.1.0</span>

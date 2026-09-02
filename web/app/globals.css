@@ -1,7 +1,7 @@
 /*
- * Identidade do Mirante.
+ * Identidade do Outorga TV.
  *
- * A referencia e um mirante de estrada no fim da tarde: fundo escuro com um
+ * A referencia e um outorga de estrada no fim da tarde: fundo escuro com um
  * pouco de azul, luz ambar cortando, e o horizonte como linha que separa as
  * secoes. Nada de gradiente roxo nem cartao com sombra difusa.
  *
@@ -444,7 +444,7 @@ textarea {
 .abertura {
   padding: 68px 0 54px;
   border-bottom: 1px solid var(--borda);
-  /* A linha ambar no rodape da secao e o horizonte visto do mirante. */
+  /* A linha ambar no rodape da secao e o horizonte visto do outorga. */
   background:
     radial-gradient(1100px 340px at 50% -180px, rgba(230, 184, 0, 0.09), transparent 70%);
 }

@@ -1,9 +1,9 @@
-# Mirante
+# Outorga TV
 
 *[Versão em português](README.md)*
 
 A white-label streaming platform. The customer brings the catalogue and the
-distribution rights; Mirante supplies the technology under their brand.
+distribution rights; Outorga TV supplies the technology under their brand.
 
 The centrepiece is not the player. It is the **content gate**: no title reaches
 the air without a current licence attached to it, and when a licence expires the
@@ -20,20 +20,20 @@ regional producer with a dormant archive, a school with recorded classes, a gym
 with workouts, a church with services, a small-town TV channel, an online course
 currently living on YouTube. What those people do not have is a platform.
 
-Mirante is for them, and the content gate is what separates the product from a
+Outorga TV is for them, and the content gate is what separates the product from a
 piracy service: no contract on file, no exhibition.
 
 ## The interesting part
 
 Two files carry the whole idea, and they are the ones worth opening first.
 
-[`Titulo.publicar`](backend/src/main/java/br/com/mirante/domain/catalog/Titulo.java)
+[`Titulo.publicar`](backend/src/main/java/br/com/outorga/domain/catalog/Titulo.java)
 is the only path to `PUBLICADO`, and it takes the licence as a parameter rather
 than looking it up. That is deliberate: the caller is forced to hold the licence,
 so no code path exists that can publish without one. The compiler enforces the
 business rule.
 
-[`PoliticaDeReproducao`](backend/src/main/java/br/com/mirante/domain/playback/PoliticaDeReproducao.java)
+[`PoliticaDeReproducao`](backend/src/main/java/br/com/outorga/domain/playback/PoliticaDeReproducao.java)
 decides whether someone may press play. Eight checks in sequence — subscription,
 territory, device, concurrent screens, parental rating, rights block, licence
 window, title status — each with its own distinct refusal code, because "you
@@ -54,7 +54,7 @@ api/            thin controllers that translate Result into HTTP
 
 The dependency rule is strict and checked by test: `domain` imports nothing from
 the outer layers. Use cases are ordinary classes wired by hand in
-[`ComposicaoDaAplicacao`](backend/src/main/java/br/com/mirante/infrastructure/config/ComposicaoDaAplicacao.java),
+[`ComposicaoDaAplicacao`](backend/src/main/java/br/com/outorga/infrastructure/config/ComposicaoDaAplicacao.java),
 so any use case runs in a test with stubs, without starting a context.
 
 Persistence is explicit SQL through `JdbcClient`, not an ORM. The reasoning is
@@ -76,7 +76,7 @@ returns a public HLS test stream while keeping the entire decision chain intact,
 and billing opens a simulated checkout that fires the same webhook the real
 gateway would fire.
 
-With `MIRANTE_MODO=PRODUCAO` and no provider configured, the application
+With `OUTORGA_MODO=PRODUCAO` and no provider configured, the application
 **refuses to start**. That is deliberate. Booting production with simulated
 billing would hand out free subscriptions to anyone who clicked, and the mistake
 would only surface at month-end reconciliation.
@@ -114,7 +114,7 @@ Each decision and its trade-off is written down in [docs/adr](docs/adr).
 
 ## Notice
 
-This repository ships technology, not a library of content. Mirante does not
+This repository ships technology, not a library of content. Outorga TV does not
 obtain, extract or redistribute third-party material. Every title and every
 channel reaches the air only with its distribution right documented inside the
 system, and responsibility for that right belongs to whoever registers it.

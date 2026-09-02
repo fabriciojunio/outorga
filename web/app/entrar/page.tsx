@@ -111,7 +111,7 @@ export default function Entrar() {
             <br />
             dono@cineserra.com.br
             <br />
-            plataforma@mirante.app
+            plataforma@outorga.app
             <br />
             <span className="fraco">senha de todas: demonstracao2026</span>
           </div>

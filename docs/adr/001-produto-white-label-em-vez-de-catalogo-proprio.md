@@ -23,7 +23,7 @@ curso online hospedado no YouTube sem controle de acesso nem cobrança.
 
 ## Decisão
 
-O Mirante é uma **plataforma white-label multi-tenant**. Quem contrata traz o
+O Outorga TV é uma **plataforma white-label multi-tenant**. Quem contrata traz o
 catálogo e declara o direito de distribuição; a plataforma entrega tecnologia,
 marca, cobrança e controle de acesso.
 

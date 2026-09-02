@@ -41,7 +41,7 @@ jobs:
           retention-days: 7
 
       - name: Conferir a imagem Docker
-        run: docker build -t mirante-api:ci .
+        run: docker build -t outorga-api:ci .
 
   web:
     name: Web

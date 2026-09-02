@@ -1,9 +1,9 @@
-# Mirante
+# Outorga TV
 
 *[Read this in English](README.en.md)*
 
 Plataforma de streaming white-label. O cliente traz o catálogo e o direito de
-exibição; o Mirante entrega a tecnologia com a marca dele.
+exibição; o Outorga TV entrega a tecnologia com a marca dele.
 
 A peça central não é o player: é o **gate de conteúdo**. Nenhum título vai ao ar
 sem uma licença vigente vinculada, e quando a licença vence o sistema tira do ar
@@ -20,7 +20,7 @@ regional com acervo parado, escola com aulas gravadas, academia com treinos,
 igreja com culto, canal de TV do interior, curso online que hoje mora no
 YouTube. O que essa gente não tem é plataforma.
 
-O Mirante é para essa gente. E o gate de conteúdo é o que separa o produto de um
+O Outorga TV é para essa gente. E o gate de conteúdo é o que separa o produto de um
 serviço pirata: sem contrato cadastrado, não existe exibição.
 
 ## O que já funciona
@@ -49,8 +49,8 @@ serviço pirata: sem contrato cadastrado, não existe exibição.
 Precisa de Java 21, Maven e Node 22. Docker é opcional.
 
 ```bash
-git clone <repositorio> mirante
-cd mirante
+git clone <repositorio> outorga
+cd outorga
 
 # banco local
 docker compose up -d banco
@@ -76,14 +76,14 @@ Flyway cria o esquema na primeira subida.
 
 ### Contas da demonstração
 
-Com `MIRANTE_MODO=DEMONSTRACAO` e o banco vazio, a aplicação cria sozinha um
+Com `OUTORGA_MODO=DEMONSTRACAO` e o banco vazio, a aplicação cria sozinha um
 cliente de exemplo:
 
 | Quem | E-mail | O que enxerga |
 |---|---|---|
 | Espectador | `espectador@exemplo.com` | catálogo, player, minha conta |
 | Dono do serviço | `dono@cineserra.com.br` | painel de catálogo, licenças e planos |
-| Operação da plataforma | `plataforma@mirante.app` | abertura e suspensão de clientes |
+| Operação da plataforma | `plataforma@outorga.app` | abertura e suspensão de clientes |
 
 Senha de todas: `demonstracao2026`.
 
@@ -98,7 +98,7 @@ Sem chave de fornecedor configurada, o sistema roda inteiro por conta própria:
 - cobrança: abre um checkout simulado que dispara o mesmo webhook que o gateway
   real dispararia
 
-Em `MIRANTE_MODO=PRODUCAO` sem fornecedor configurado, a aplicação **recusa
+Em `OUTORGA_MODO=PRODUCAO` sem fornecedor configurado, a aplicação **recusa
 subir**. É deliberado: subir em produção com cobrança simulada significaria dar
 assinatura de graça para quem clicasse, e o erro só apareceria na conciliação do
 fim do mês.
@@ -128,15 +128,15 @@ api/            controllers finos que traduzem Result em HTTP
 
 A regra de dependência é estrita: `domain` não importa nada das camadas de fora.
 Casos de uso são classes comuns, instanciadas à mão em
-[ComposicaoDaAplicacao](backend/src/main/java/br/com/mirante/infrastructure/config/ComposicaoDaAplicacao.java).
+[ComposicaoDaAplicacao](backend/src/main/java/br/com/outorga/infrastructure/config/ComposicaoDaAplicacao.java).
 O efeito prático é que qualquer caso de uso roda em teste com dublês, sem subir
 contexto.
 
 O coração do produto está em dois arquivos que vale a pena ler primeiro:
 
-- [Titulo.publicar](backend/src/main/java/br/com/mirante/domain/catalog/Titulo.java) —
+- [Titulo.publicar](backend/src/main/java/br/com/outorga/domain/catalog/Titulo.java) —
   única porta para o ar, e ela exige licença vigente
-- [PoliticaDeReproducao](backend/src/main/java/br/com/mirante/domain/playback/PoliticaDeReproducao.java) —
+- [PoliticaDeReproducao](backend/src/main/java/br/com/outorga/domain/playback/PoliticaDeReproducao.java) —
   a decisão de deixar alguém dar play, com um motivo distinto para cada recusa
 
 ## Testes
@@ -163,7 +163,7 @@ Com a aplicação de pé, a referência da API fica em `/swagger-ui.html`.
 
 ## Aviso
 
-Este repositório entrega tecnologia, não acervo. O Mirante não obtém, não
+Este repositório entrega tecnologia, não acervo. O Outorga TV não obtém, não
 extrai e não redistribui conteúdo de terceiros. Cada título e cada canal só vão
 ao ar com o direito de distribuição documentado no próprio sistema, e a
 responsabilidade por esse direito é de quem cadastra.

@@ -15,8 +15,8 @@ manhã, com o mínimo de prosa.
 
 Métricas próprias que valem acompanhar:
 
-- `mirante_direitos_titulos_bloqueados_total`
-- `mirante_direitos_titulos_liberados_total`
+- `outorga_direitos_titulos_bloqueados_total`
+- `outorga_direitos_titulos_liberados_total`
 
 Salto brusco no primeiro significa contrato vencendo em lote. Não é defeito do
 sistema, é aviso de que alguém precisa renovar.

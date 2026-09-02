@@ -1,6 +1,6 @@
 # Colocar no ar sem gastar nada
 
-Este roteiro põe o Mirante em produção usando só camada gratuita. Custo mensal:
+Este roteiro põe o Outorga TV em produção usando só camada gratuita. Custo mensal:
 zero. Leva por volta de 40 minutos na primeira vez.
 
 O que sai de graça e o que não sai está no fim do documento, sem enfeite.
@@ -79,7 +79,7 @@ NEXT_PUBLIC_SERVICO=cineserra
 
 ## 4. Vídeo (Cloudflare R2), quando sair da demonstração
 
-Enquanto `MIRANTE_MODO=DEMONSTRACAO`, o player toca um arquivo público de teste e
+Enquanto `OUTORGA_MODO=DEMONSTRACAO`, o player toca um arquivo público de teste e
 não é preciso configurar nada. Para servir conteúdo de verdade:
 
 1. Crie um bucket no R2
@@ -87,9 +87,9 @@ não é preciso configurar nada. Para servir conteúdo de verdade:
 3. Configure no Render:
 
 ```
-MIRANTE_MODO=PRODUCAO
+OUTORGA_MODO=PRODUCAO
 VIDEO_ENDPOINT=https://SEU-ID.r2.cloudflarestorage.com
-VIDEO_BUCKET=mirante
+VIDEO_BUCKET=outorga
 VIDEO_CHAVE=...
 VIDEO_SEGREDO=...
 VIDEO_REGIAO=auto

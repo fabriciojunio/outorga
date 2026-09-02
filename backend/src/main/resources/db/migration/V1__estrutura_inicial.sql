@@ -1,4 +1,4 @@
--- Mirante: estrutura inicial.
+-- Outorga TV: estrutura inicial.
 --
 -- Convencao adotada em todo o esquema:
 --   * identificadores sao uuid gerados pela aplicacao, nao pelo banco, porque

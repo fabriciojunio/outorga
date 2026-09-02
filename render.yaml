@@ -1,4 +1,4 @@
-# Deploy do Mirante no Render, dentro da camada gratuita.
+# Deploy do Outorga TV no Render, dentro da camada gratuita.
 #
 # O banco NAO esta aqui de proposito. O Postgres gratuito do Render expira
 # depois de 30 dias e leva os dados junto; o Neon e o Supabase mantem o plano
@@ -10,7 +10,7 @@
 
 services:
   - type: web
-    name: mirante-api
+    name: outorga-api
     runtime: docker
     plan: free
     region: oregon
@@ -19,7 +19,7 @@ services:
     healthCheckPath: /actuator/health/readiness
     autoDeploy: true
     envVars:
-      - key: MIRANTE_MODO
+      - key: OUTORGA_MODO
         value: DEMONSTRACAO
       - key: PORT
         value: 8080
@@ -35,7 +35,7 @@ services:
       - key: DATABASE_PASSWORD
         sync: false
       - key: URL_PUBLICA
-        value: https://mirante-api.onrender.com
+        value: https://outorga-api.onrender.com
       - key: ORIGENS_PERMITIDAS
         value: http://localhost:3000
       - key: DB_POOL_MAX

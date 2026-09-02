@@ -19,9 +19,9 @@ WORKDIR /app
 
 # Usuario sem privilegio. Container que roda como root e um convite: qualquer
 # execucao remota vira controle da maquina.
-RUN addgroup -S mirante && adduser -S mirante -G mirante
-COPY --from=construcao --chown=mirante:mirante /app/target/*.jar aplicacao.jar
-USER mirante
+RUN addgroup -S outorga && adduser -S outorga -G outorga
+COPY --from=construcao --chown=outorga:outorga /app/target/*.jar aplicacao.jar
+USER outorga
 
 EXPOSE 8080
 

@@ -28,7 +28,7 @@ export function Cabecalho() {
     );
   }, [caminho]);
 
-  const nome = identidade?.nome ?? 'Mirante';
+  const nome = identidade?.nome ?? 'Outorga TV';
 
   return (
     <>

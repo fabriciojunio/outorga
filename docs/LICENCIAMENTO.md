@@ -1,6 +1,6 @@
 # Gate de conteúdo
 
-Este documento descreve como o Mirante impede que algo vá ao ar sem direito de
+Este documento descreve como o Outorga TV impede que algo vá ao ar sem direito de
 exibição, e o que ele deliberadamente não faz.
 
 Não é parecer jurídico. É a descrição de um comportamento do sistema.
@@ -14,13 +14,13 @@ ambiente digital. Música embutida em vídeo pode envolver direitos próprios, e
 ECAD trata de licença para transmissão musical em serviços digitais.
 
 A conclusão de produto é direta: quem responde pelo direito é quem tem o
-conteúdo. O Mirante entrega a plataforma; o acervo e o contrato são do cliente.
+conteúdo. O Outorga TV entrega a plataforma; o acervo e o contrato são do cliente.
 
 ## Como o sistema cobra isso
 
 ### A licença é uma entidade, não um campo de observação
 
-[Licenca](../backend/src/main/java/br/com/mirante/domain/rights/Licenca.java)
+[Licenca](../backend/src/main/java/br/com/outorga/domain/rights/Licenca.java)
 guarda titular, referência do contrato, territórios, janela de vigência,
 dispositivos autorizados e a comprovação anexada.
 
@@ -40,7 +40,7 @@ Não há setter público de status, não há atalho de administrador e o própri
 
 ### A varredura acerta o que o tempo estragou
 
-[RevisarDireitosVigentes](../backend/src/main/java/br/com/mirante/application/usecases/rights/RevisarDireitosVigentes.java)
+[RevisarDireitosVigentes](../backend/src/main/java/br/com/outorga/application/usecases/rights/RevisarDireitosVigentes.java)
 roda de hora em hora, e também logo depois de a aplicação subir. Ela compara o
 que está no ar com o que tem licença vigente agora e acerta a diferença nos dois
 sentidos:
@@ -62,7 +62,7 @@ dependia daquela licença, e devolve quantos foram.
 ### A reprodução confere de novo
 
 Nada é aceito só porque foi aprovado antes. Em cada pedido de play,
-[PoliticaDeReproducao](../backend/src/main/java/br/com/mirante/domain/playback/PoliticaDeReproducao.java)
+[PoliticaDeReproducao](../backend/src/main/java/br/com/outorga/domain/playback/PoliticaDeReproducao.java)
 confere:
 
 1. o serviço do cliente aceita tráfego

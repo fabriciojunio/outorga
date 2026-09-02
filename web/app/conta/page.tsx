@@ -69,7 +69,7 @@ export default function Conta() {
     const url = URL.createObjectURL(arquivo);
     const link = document.createElement('a');
     link.href = url;
-    link.download = 'meus-dados-mirante.json';
+    link.download = 'meus-dados-outorga.json';
     link.click();
     URL.revokeObjectURL(url);
   }

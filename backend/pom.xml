@@ -11,10 +11,10 @@
     <relativePath/>
   </parent>
 
-  <groupId>br.com.mirante</groupId>
-  <artifactId>mirante-backend</artifactId>
+  <groupId>br.com.outorga</groupId>
+  <artifactId>outorga-backend</artifactId>
   <version>0.1.0</version>
-  <name>Mirante Backend</name>
+  <name>Outorga TV Backend</name>
   <description>Plataforma de streaming white-label multi-tenant</description>
 
   <properties>
@@ -148,7 +148,7 @@
                 <rule>
                   <element>PACKAGE</element>
                   <includes>
-                    <include>br.com.mirante.domain.*</include>
+                    <include>br.com.outorga.domain.*</include>
                   </includes>
                   <limits>
                     <limit>

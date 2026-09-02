@@ -19,7 +19,7 @@ vende, o gateway não cobra.
 
 Decisões que acompanham:
 
-- **Nenhum dado de cartão passa pelo Mirante.** O que sai é um pedido de
+- **Nenhum dado de cartão passa pelo Outorga TV.** O que sai é um pedido de
   cobrança; o que volta é uma URL de fatura e uma referência
 - **`billingType: UNDEFINED`**, deixando o pagador escolher PIX, boleto ou cartão
   na própria fatura. Fixar a forma só reduz conversão
