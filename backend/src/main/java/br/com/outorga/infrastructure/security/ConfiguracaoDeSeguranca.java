@@ -74,9 +74,9 @@ public class ConfiguracaoDeSeguranca {
         var config = new CorsConfiguration();
         config.setAllowedOrigins(List.of(origensPermitidas));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
-        config.setAllowedHeaders(List.of("Authorization", "Content-Type", "X-Outorga TV-Tenant",
-                "X-Outorga TV-Dispositivo", "X-Outorga TV-Perfil"));
-        config.setExposedHeaders(List.of("X-Outorga TV-Requisicao"));
+        config.setAllowedHeaders(List.of("Authorization", "Content-Type", "X-Outorga-Tenant",
+                "X-Outorga-Dispositivo", "X-Outorga-Perfil"));
+        config.setExposedHeaders(List.of("X-Outorga-Requisicao"));
         config.setAllowCredentials(false);
         config.setMaxAge(3600L);
 

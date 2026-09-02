@@ -320,7 +320,7 @@ export const reproducao = {
     chamar<Reproducao>('/api/v1/reproducao/token', {
       metodo: 'POST',
       autenticado: true,
-      cabecalhosExtras: { 'X-Outorga TV-Dispositivo': identificadorDoAparelho() },
+      cabecalhosExtras: { 'X-Outorga-Dispositivo': identificadorDoAparelho() },
       corpo: {
         tituloId: params.tituloId,
         temporada: params.temporada ?? null,

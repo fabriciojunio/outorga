@@ -52,7 +52,7 @@ public class ReproducaoController {
 
     @PostMapping("/token")
     public ResponseEntity<?> autorizar(@Valid @RequestBody PedidoDePlay pedido,
-                                       @RequestHeader("X-Outorga TV-Dispositivo") String dispositivo) {
+                                       @RequestHeader("X-Outorga-Dispositivo") String dispositivo) {
         var autenticado = autenticado();
         var entrada = new AutorizarReproducao.Entrada(
                 pedido.tituloId(), pedido.temporada(), pedido.episodio(), pedido.perfilId(),

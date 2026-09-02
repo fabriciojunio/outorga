@@ -188,7 +188,7 @@ class AplicacaoTest {
     void playAutorizado() throws Exception {
         mvc.perform(post("/api/v1/reproducao/token")
                         .header("Authorization", "Bearer " + tokenDoEspectador)
-                        .header("X-Outorga TV-Dispositivo", "aparelho-de-teste-1")
+                        .header("X-Outorga-Dispositivo", "aparelho-de-teste-1")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(json.writeValueAsString(Map.of(
                                 "tituloId", tituloId,
@@ -208,7 +208,7 @@ class AplicacaoTest {
     void playDeTituloInexistente() throws Exception {
         mvc.perform(post("/api/v1/reproducao/token")
                         .header("Authorization", "Bearer " + tokenDoEspectador)
-                        .header("X-Outorga TV-Dispositivo", "aparelho-de-teste-1")
+                        .header("X-Outorga-Dispositivo", "aparelho-de-teste-1")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(json.writeValueAsString(Map.of(
                                 "tituloId", "00000000-0000-0000-0000-000000000000",
