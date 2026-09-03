@@ -18,7 +18,7 @@ import java.util.UUID;
  * caminho do dinheiro fica exercitado de ponta a ponta, incluindo a mudança de
  * status da assinatura e a trilha de auditoria, sem nenhum centavo circulando.
  *
- * Um cuidado deliberado: está classe só entra em cena com o sistema em
+ * Um cuidado deliberado: esta classe só entra em cena com o sistema em
  * Demonstração. Em Produção sem chave de gateway o sistema recusa subir, em
  * vez de silenciosamente liberar assinatura de graca para todo mundo, que e o
  * jeito mais caro de descobrir que faltou uma variável de ambiente.

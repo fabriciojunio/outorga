@@ -14,7 +14,7 @@ public enum Papel {
     DONO,
     /** Cadastra catálogo, licença e canal. Não mexe em plano nem em cobrança. */
     EDITOR,
-    /** Atende assinante. Le, não pública. */
+    /** Atende assinante. Lê, não publica. */
     SUPORTE,
     /** Espectador que assina o serviço do cliente. */
     ASSINANTE;

@@ -137,7 +137,7 @@ class CasosDeUsoTest {
         }
 
         @Test
-        @DisplayName("assinante não pública nada")
+        @DisplayName("assinante não publica nada")
         void assinanteNaoPublica() {
             var saida = caso().executar(cenario.comoAssinante(), cenario.filme.id(),
                     cenario.licenca.id());
@@ -642,7 +642,7 @@ class CasosDeUsoTest {
         }
 
         @Test
-        @DisplayName("não pública título com licença de outro cliente")
+        @DisplayName("não publica título com licença de outro cliente")
         void naoPublicaComLicencaAlheia() {
             var outroTenant = br.com.outorga.domain.tenant.Tenant.abrir("outra", "Outra TV", null,
                     null, CenarioDeTeste.AGORA).valorOuFalha();

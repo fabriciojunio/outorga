@@ -6,7 +6,7 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 /**
- * Resultado de uma operação de negocio: ou deu certo e carrega um valor, ou
+ * Resultado de uma operação de negócio: ou deu certo e carrega um valor, ou
  * falhou e carrega o motivo. Casos de uso devolvem Result; a camada HTTP faz o
  * unwrap. O dominio não lanca exceção para condição esperada.
  */

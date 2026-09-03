@@ -22,7 +22,7 @@ import java.util.UUID;
  * identidade visual do cliente, tudo pelo slug do serviço.
  *
  * O catálogo aqui já sai filtrado por publicação, e publicação só existe com
- * licença vigente. Ou seja: não ha caminho público que liste uma obra sem
+ * licença vigente. Ou seja: não há caminho público que liste uma obra sem
  * direito, nem mesmo a capa.
  */
 @RestController

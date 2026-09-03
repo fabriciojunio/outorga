@@ -38,7 +38,7 @@ import java.util.UUID;
  * Painel do cliente: catálogo, licenças, planos e canais.
  *
  * A ordem natural de uso e essa mesma: cadastra a licença, anexa a
- * comprovacao, cadastra o título, pública apontando para a licença. Tentar
+ * comprovação, cadastra o título, publica apontando para a licença. Tentar
  * pular a licença da erro, e da de propósito.
  */
 @RestController

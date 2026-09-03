@@ -9,9 +9,9 @@ import org.springframework.stereotype.Component;
  *
  * Argon2id seria a escolha de manual, e o dominio não muda se trocarmos: e um
  * adaptador atrás de uma interface. O que decidiu foi a memória. A instancia
- * gratuita onde isso roda tem 512 MB, e o Argon2 com parametro decente come
+ * gratuita onde isso roda tem 512 MB, e o Argon2 com parâmetro decente come
  * dezenas de MB por hash simultaneo. Custo 12 de BCrypt gasta CPU, não RAM, e
- * cabe. Quando o servidor crescer, está classe e o único lugar a mexer.
+ * cabe. Quando o servidor crescer, esta classe é o único lugar a mexer.
  */
 @Component
 public class CifradorBCrypt implements CifradorDeSenha {

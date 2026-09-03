@@ -29,7 +29,7 @@ import java.util.UUID;
  * politica disser sim, pede o endereço assinado e abre a sessão.
  *
  * A politica de decisão fica no dominio. Aqui só tem busca, efeito colateral
- * e traducao. Nenhum "if" de regra de negocio mora neste arquivo, e essa
+ * e tradução. Nenhum "if" de regra de negócio mora neste arquivo, e essa
  * separação e o que deixa a regra testavel sem banco.
  */
 public class AutorizarReproducao {

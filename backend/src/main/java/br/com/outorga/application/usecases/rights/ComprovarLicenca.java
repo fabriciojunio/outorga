@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
- * Anexa a comprovacao e coloca a licença em vigencia. E o momento em que o
+ * Anexa a comprovação e coloca a licença em vigência. É o momento em que o
  * conteúdo dela passa a valer para publicação.
  */
 public class ComprovarLicenca {

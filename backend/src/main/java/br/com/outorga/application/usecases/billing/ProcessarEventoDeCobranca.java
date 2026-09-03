@@ -16,7 +16,7 @@ import java.util.Map;
  * Webhook de cobrança.
  *
  * Duas coisas não são negociaveis aqui. A assinatura do webhook e conferida
- * antes de qualquer leitura do corpo, porque este endereço e público. E o
+ * antes de qualquer leitura do corpo, porque este endereço é público. É o
  * processamento e idempotente por natureza: confirmar duas vezes o mesmo
  * pagamento estende o ciclo a partir do fim vigente, então reentrega de
  * webhook não vira mes de graca.

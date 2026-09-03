@@ -12,7 +12,7 @@ import java.util.UUID;
 
 /**
  * Autorização de distribuicao de uma obra ou canal, com titular, contrato,
- * território, janela e comprovacao. E a peca que decide se algo pode ir ao ar.
+ * território, janela e comprovação. É a peça que decide se algo pode ir ao ar.
  *
  * Regra da casa: sem licença VIGENTE cobrindo hoje e o território do
  * espectador, não existe reprodução. Não ha caminho no dominio que contorne
@@ -76,7 +76,7 @@ public class Licenca {
     }
 
     /**
-     * Anexar a comprovacao e o que promove a licença a VIGENTE. Enquanto não
+     * Anexar a comprovação é o que promove a licença a VIGENTE. Enquanto não
      * houver documento, ela não autoriza nada.
      */
     public Result<Licenca> anexarComprovacao(String uri) {

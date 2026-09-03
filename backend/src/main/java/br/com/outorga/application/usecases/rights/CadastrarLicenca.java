@@ -60,8 +60,8 @@ public class CadastrarLicenca {
 
         var licenca = criada.valorOuFalha();
 
-        // Cadastro com comprovacao já em maos vira VIGENTE de uma vez; sem
-        // comprovacao a licença nasce em rascunho e não pública nada.
+        // Cadastro com comprovação já em mãos vira VIGENTE de uma vez; sem
+        // comprovação a licença nasce em rascunho e não publica nada.
         if (entrada.comprovacaoUri() != null && !entrada.comprovacaoUri().isBlank()) {
             var anexo = licenca.anexarComprovacao(entrada.comprovacaoUri());
             if (anexo.falhou()) {

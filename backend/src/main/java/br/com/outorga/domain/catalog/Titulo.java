@@ -19,7 +19,7 @@ import java.util.UUID;
  *
  * O metodo que importa aqui e {@link #publicar(Licença, Instant)}: não existe
  * outro caminho para o status PUBLICADO. Se a licença não estiver vigente, o
- * título não vai ao ar, e nenhum campo público permite forcar o status por
+ * título não vai ao ar, e nenhum campo público permite forçar o status por
  * fora. Esse e o "gate de conteúdo" do blueprint, escrito como invariante.
  */
 public class Titulo {

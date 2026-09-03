@@ -1,7 +1,7 @@
 package br.com.outorga.domain.rights;
 
 public enum StatusDaLicenca {
-    /** Cadastrada, ainda sem comprovacao anexada. */
+    /** Cadastrada, ainda sem comprovação anexada. */
     RASCUNHO,
     /** Comprovacao anexada e conferida. Única que autoriza publicação. */
     VIGENTE,
