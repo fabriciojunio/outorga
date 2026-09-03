@@ -47,7 +47,7 @@ class CanalEGradeTest {
 
         @ParameterizedTest
         @ValueSource(strings = {"http://inseguro.com/x.m3u8", "ftp://a/b", "udp://239.0.0.1:1234"})
-        @DisplayName("recusa fonte que nao trafega cifrada")
+        @DisplayName("recusa fonte que não trafega cifrada")
         void recusaFonteInsegura(String url) {
             var canal = CanalAoVivo.cadastrar(TENANT, "Serra TV", 10, ClassificacaoIndicativa.LIVRE)
                     .valorOuFalha();
@@ -72,7 +72,7 @@ class CanalEGradeTest {
     class AoEntrarNoAr {
 
         @Test
-        @DisplayName("entra no ar com fonte e licenca vigente")
+        @DisplayName("entra no ar com fonte e licença vigente")
         void entraNoAr() {
             var canal = canalComFonte();
 
@@ -91,7 +91,7 @@ class CanalEGradeTest {
         }
 
         @Test
-        @DisplayName("recusa licenca de outro cliente")
+        @DisplayName("recusa licença de outro cliente")
         void recusaLicencaDeOutro() {
             var deOutro = Licenca.cadastrar(UUID.randomUUID(), "Outra", "CT-2",
                     Set.of(Territorio.BRASIL), JanelaDeLicenca.aPartirDe(AGORA),
@@ -103,7 +103,7 @@ class CanalEGradeTest {
         }
 
         @Test
-        @DisplayName("sai do ar quando a licenca deixa de valer e volta quando renova")
+        @DisplayName("sai do ar quando a licença deixa de valer e volta quando renova")
         void saiEVolta() {
             var canal = canalComFonte();
             var licenca = licencaVigente();
@@ -119,7 +119,7 @@ class CanalEGradeTest {
         }
 
         @Test
-        @DisplayName("canal tirado do ar pelo operador nao volta sozinho")
+        @DisplayName("canal tirado do ar pelo operador não volta sozinho")
         void tiradoManualmenteNaoVolta() {
             var canal = canalComFonte();
             var licenca = licencaVigente();
@@ -143,7 +143,7 @@ class CanalEGradeTest {
         }
 
         @Test
-        @DisplayName("recusa programa com fim antes do inicio")
+        @DisplayName("recusa programa com fim antes do início")
         void recusaHorarioInvertido() {
             var resultado = ProgramaEpg.criar(TENANT, UUID.randomUUID(), "Jornal",
                     AGORA, AGORA.minus(Duration.ofHours(1)), ClassificacaoIndicativa.LIVRE);
@@ -152,7 +152,7 @@ class CanalEGradeTest {
         }
 
         @Test
-        @DisplayName("detecta choque de horario no mesmo canal")
+        @DisplayName("detecta choque de horário no mesmo canal")
         void detectaChoque() {
             var jornal = programa("Jornal", 0, 2);
             var filme = programa("Filme", 1, 3);
@@ -163,7 +163,7 @@ class CanalEGradeTest {
         }
 
         @Test
-        @DisplayName("acha o que esta no ar e o que vem depois")
+        @DisplayName("acha o que está no ar e o que vem depois")
         void agoraEaSeguir() {
             var grade = List.of(programa("Jornal", -1, 1), programa("Filme", 1, 3),
                     programa("Madrugada", 3, 6));
@@ -173,7 +173,7 @@ class CanalEGradeTest {
         }
 
         @Test
-        @DisplayName("grade vazia nao quebra a consulta")
+        @DisplayName("grade vazia não quebra a consulta")
         void gradeVazia() {
             assertThat(ProgramaEpg.agora(List.of(), AGORA)).isEmpty();
             assertThat(ProgramaEpg.aSeguir(List.of(), AGORA)).isEmpty();

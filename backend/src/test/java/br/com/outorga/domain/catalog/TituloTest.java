@@ -16,10 +16,10 @@ import java.util.UUID;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * O que este teste protege e a promessa central do produto: nao existe titulo
- * no ar sem licenca vigente, e o sistema tira do ar sozinho quando ela cai.
+ * O que este teste protege e a promessa central do produto: não existe título
+ * no ar sem licença vigente, e o sistema tira do ar sozinho quando ela cai.
  */
-@DisplayName("Titulo")
+@DisplayName("Título")
 class TituloTest {
 
     private static final UUID TENANT = UUID.randomUUID();
@@ -50,7 +50,7 @@ class TituloTest {
     class AoPublicar {
 
         @Test
-        @DisplayName("publica com licenca vigente e video pronto")
+        @DisplayName("pública com licença vigente e vídeo pronto")
         void publicaComLicencaVigente() {
             var filme = filmeComVideo();
             var licenca = licencaVigente();
@@ -64,7 +64,7 @@ class TituloTest {
         }
 
         @Test
-        @DisplayName("recusa sem licenca")
+        @DisplayName("recusa sem licença")
         void recusaSemLicenca() {
             var resultado = filmeComVideo().publicar(null, AGORA);
 
@@ -72,7 +72,7 @@ class TituloTest {
         }
 
         @Test
-        @DisplayName("recusa licenca ainda sem comprovacao")
+        @DisplayName("recusa licença ainda sem comprovacao")
         void recusaLicencaEmRascunho() {
             var rascunho = Licenca.cadastrar(TENANT, "Produtora", "CT-9", Set.of(Territorio.BRASIL),
                     JanelaDeLicenca.aPartirDe(AGORA.minus(Duration.ofDays(1))),
@@ -84,7 +84,7 @@ class TituloTest {
         }
 
         @Test
-        @DisplayName("recusa licenca ja vencida")
+        @DisplayName("recusa licença já vencida")
         void recusaLicencaVencida() {
             var vencida = licencaAte(AGORA.minus(Duration.ofDays(1)));
 
@@ -94,7 +94,7 @@ class TituloTest {
         }
 
         @Test
-        @DisplayName("recusa licenca de outro cliente")
+        @DisplayName("recusa licença de outro cliente")
         void recusaLicencaDeOutroTenant() {
             var deOutro = Licenca.cadastrar(UUID.randomUUID(), "Produtora", "CT-8",
                     Set.of(Territorio.BRASIL),
@@ -108,7 +108,7 @@ class TituloTest {
         }
 
         @Test
-        @DisplayName("recusa filme sem video")
+        @DisplayName("recusa filme sem vídeo")
         void recusaFilmeSemVideo() {
             var filme = Titulo.criarFilme(TENANT, "Sem arquivo", ClassificacaoIndicativa.LIVRE,
                     Duration.ofMinutes(80)).valorOuFalha();
@@ -119,7 +119,7 @@ class TituloTest {
         }
 
         @Test
-        @DisplayName("recusa serie sem nenhum episodio reproduzivel")
+        @DisplayName("recusa série sem nenhum episódio reproduzivel")
         void recusaSerieVazia() {
             var serie = Titulo.criarSerie(TENANT, "Cerrado", ClassificacaoIndicativa.LIVRE)
                     .valorOuFalha();
@@ -134,7 +134,7 @@ class TituloTest {
         }
 
         @Test
-        @DisplayName("publica serie com ao menos um episodio pronto")
+        @DisplayName("pública série com ao menos um episódio pronto")
         void publicaSerieComUmEpisodio() {
             var serie = Titulo.criarSerie(TENANT, "Cerrado", ClassificacaoIndicativa.LIVRE)
                     .valorOuFalha();
@@ -156,7 +156,7 @@ class TituloTest {
     class NaRevisaoDeDireitos {
 
         @Test
-        @DisplayName("bloqueia titulo no ar quando a janela vence")
+        @DisplayName("bloqueia título no ar quando a janela vence")
         void bloqueiaQuandoVence() {
             var filme = filmeComVideo();
             var licenca = licencaAte(AGORA.plus(Duration.ofDays(1)));
@@ -171,7 +171,7 @@ class TituloTest {
         }
 
         @Test
-        @DisplayName("bloqueia quando a licenca e rescindida")
+        @DisplayName("bloqueia quando a licença e rescindida")
         void bloqueiaQuandoRescinde() {
             var filme = filmeComVideo();
             var licenca = licencaVigente();
@@ -185,7 +185,7 @@ class TituloTest {
         }
 
         @Test
-        @DisplayName("bloqueia quando a licenca vinculada some")
+        @DisplayName("bloqueia quando a licença vinculada some")
         void bloqueiaQuandoLicencaSome() {
             var filme = filmeComVideo();
             filme.publicar(licencaVigente(), AGORA);
@@ -197,7 +197,7 @@ class TituloTest {
         }
 
         @Test
-        @DisplayName("devolve ao ar quando a licenca volta a vigorar")
+        @DisplayName("devolve ao ar quando a licença volta a vigorar")
         void devolveAoArQuandoVolta() {
             var filme = filmeComVideo();
             var licenca = licencaAte(AGORA.plus(Duration.ofDays(1)));
@@ -213,7 +213,7 @@ class TituloTest {
         }
 
         @Test
-        @DisplayName("nao mexe em titulo que o operador despublicou de proposito")
+        @DisplayName("não mexe em título que o operador despublicou de proposito")
         void naoMexeEmDespublicado() {
             var filme = filmeComVideo();
             var licenca = licencaVigente();
@@ -227,7 +227,7 @@ class TituloTest {
         }
 
         @Test
-        @DisplayName("revisao sem mudanca nao reporta alteracao")
+        @DisplayName("revisao sem mudança não reporta alteracao")
         void semMudancaNaoReporta() {
             var filme = filmeComVideo();
             var licenca = licencaVigente();
@@ -242,13 +242,13 @@ class TituloTest {
     class NoControleParental {
 
         @Test
-        @DisplayName("titulo de 12 anos nao aparece em perfil de 10")
+        @DisplayName("título de 12 anos não aparece em perfil de 10")
         void escondeAcimaDoTeto() {
             assertThat(filmeComVideo().visivelPara(ClassificacaoIndicativa.DEZ_ANOS)).isFalse();
         }
 
         @Test
-        @DisplayName("titulo de 12 anos aparece em perfil de 16")
+        @DisplayName("título de 12 anos aparece em perfil de 16")
         void mostraDentroDoTeto() {
             assertThat(filmeComVideo().visivelPara(ClassificacaoIndicativa.DEZESSEIS_ANOS)).isTrue();
         }
@@ -259,7 +259,7 @@ class TituloTest {
     class NaMontagem {
 
         @Test
-        @DisplayName("recusa filme sem duracao")
+        @DisplayName("recusa filme sem duração")
         void recusaFilmeSemDuracao() {
             var resultado = Titulo.criarFilme(TENANT, "Nada", ClassificacaoIndicativa.LIVRE, null);
 
@@ -288,7 +288,7 @@ class TituloTest {
         }
 
         @Test
-        @DisplayName("recusa video direto em serie")
+        @DisplayName("recusa vídeo direto em série")
         void recusaVideoEmSerie() {
             var serie = Titulo.criarSerie(TENANT, "Cerrado", ClassificacaoIndicativa.LIVRE)
                     .valorOuFalha();
@@ -309,7 +309,7 @@ class TituloTest {
         }
 
         @Test
-        @DisplayName("despublicar so vale para titulo no ar")
+        @DisplayName("despublicar só vale para título no ar")
         void despublicarSoNoAr() {
             assertThat(filmeComVideo().despublicar("motivo").falha().orElseThrow().codigo())
                     .isEqualTo("TITULO_NAO_PUBLICADO");

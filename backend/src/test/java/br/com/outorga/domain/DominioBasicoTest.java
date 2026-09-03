@@ -37,7 +37,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
  * Os blocos menores do dominio. Estao juntos porque cada um cabe em poucos
- * casos e espalhar isso em quinze arquivos so aumentaria o custo de ler.
+ * casos e espalhar isso em quinze arquivos só aumentaria o custo de ler.
  */
 @DisplayName("Blocos do dominio")
 class DominioBasicoTest {
@@ -73,7 +73,7 @@ class DominioBasicoTest {
         }
 
         @Test
-        @DisplayName("recusa valor negativo e moeda invalida")
+        @DisplayName("recusa valor negativo e moeda inválida")
         void recusaInvalidos() {
             assertThatThrownBy(() -> Dinheiro.reais(-1))
                     .isInstanceOf(IllegalArgumentException.class);
@@ -90,14 +90,14 @@ class DominioBasicoTest {
         }
 
         @Test
-        @DisplayName("subtracao nao passa de zero")
+        @DisplayName("subtracao não passa de zero")
         void subtracaoNaoFicaNegativa() {
             assertThat(Dinheiro.reais(100).menos(Dinheiro.reais(500))).isEqualTo(Dinheiro.ZERO);
         }
     }
 
     @Nested
-    @DisplayName("Classificacao indicativa")
+    @DisplayName("Classificação indicativa")
     class DaClassificacao {
 
         @Test
@@ -123,20 +123,20 @@ class DominioBasicoTest {
 
         @ParameterizedTest
         @ValueSource(strings = {"sem-arroba", "a@b", "@dominio.com", "a a@dominio.com"})
-        @DisplayName("recusa formato invalido")
+        @DisplayName("recusa formato inválido")
         void recusaInvalido(String entrada) {
             assertThat(Email.de(entrada).falhou()).isTrue();
         }
 
         @Test
-        @DisplayName("normaliza para minusculo e sem espaco")
+        @DisplayName("normaliza para minusculo e sem espaço")
         void normaliza() {
             assertThat(new Email("  Fabricio@Exemplo.COM ").valor())
                     .isEqualTo("fabricio@exemplo.com");
         }
 
         @Test
-        @DisplayName("mascara o endereco para log e suporte")
+        @DisplayName("mascara o endereço para log e suporte")
         void mascara() {
             assertThat(new Email("fabricio@exemplo.com").mascarado())
                     .isEqualTo("fa***@exemplo.com");
@@ -145,7 +145,7 @@ class DominioBasicoTest {
     }
 
     @Nested
-    @DisplayName("Usuario")
+    @DisplayName("Usuário")
     class DoUsuario {
 
         private Usuario novo() {
@@ -254,7 +254,7 @@ class DominioBasicoTest {
         }
 
         @Test
-        @DisplayName("perfil infantil nao aceita teto acima de 12")
+        @DisplayName("perfil infantil não aceita teto acima de 12")
         void infantilNaoSobe() {
             var perfil = Perfil.criar(USUARIO, "Kids", null, true, 0).valorOuFalha();
 
@@ -297,7 +297,7 @@ class DominioBasicoTest {
         }
 
         @Test
-        @DisplayName("aparelhos registraveis sao o dobro das telas")
+        @DisplayName("aparelhos registraveis são o dobro das telas")
         void dobroDeAparelhos() {
             var plano = Plano.criar(TENANT, "Familia", Dinheiro.reais(2490), Periodicidade.MENSAL, 2,
                     Qualidade.FULL_HD).valorOuFalha();
@@ -315,7 +315,7 @@ class DominioBasicoTest {
         }
 
         @Test
-        @DisplayName("preco com cupom aplica o desconto")
+        @DisplayName("preço com cupom aplica o desconto")
         void precoComCupom() {
             var plano = Plano.criar(TENANT, "Familia", Dinheiro.reais(2490), Periodicidade.MENSAL, 2,
                     Qualidade.FULL_HD).valorOuFalha();
@@ -331,14 +331,14 @@ class DominioBasicoTest {
     class DoCupom {
 
         @Test
-        @DisplayName("normaliza o codigo para maiusculo")
+        @DisplayName("normaliza o código para maiusculo")
         void normalizaCodigo() {
             assertThat(Cupom.criar(TENANT, " lancamento ", 20, null, 5).valorOuFalha().codigo())
                     .isEqualTo("LANCAMENTO");
         }
 
         @Test
-        @DisplayName("esgota depois do numero maximo de usos")
+        @DisplayName("esgota depois do número máximo de usos")
         void esgota() {
             var cupom = Cupom.criar(TENANT, "X", 20, null, 2).valorOuFalha();
 
@@ -370,7 +370,7 @@ class DominioBasicoTest {
     class DoTenant {
 
         @Test
-        @DisplayName("recusa identificador fora do padrao")
+        @DisplayName("recusa identificador fora do padrão")
         void recusaSlugInvalido() {
             assertThat(Tenant.abrir("A B", "Nome", null, null, AGORA).falha().orElseThrow().codigo())
                     .isEqualTo("TENANT_SLUG_INVALIDO");
@@ -378,7 +378,7 @@ class DominioBasicoTest {
         }
 
         @Test
-        @DisplayName("em implantacao so aceita trafego dentro do periodo de teste")
+        @DisplayName("em implantacao só aceita trafego dentro do período de teste")
         void implantacaoUsaPeriodoDeTeste() {
             var tenant = Tenant.abrir("cineserra", "Cine Serra", null, null, AGORA).valorOuFalha();
 
@@ -404,7 +404,7 @@ class DominioBasicoTest {
         }
 
         @Test
-        @DisplayName("encerrado nao volta a operar")
+        @DisplayName("encerrado não volta a operar")
         void encerradoNaoVolta() {
             var tenant = Tenant.abrir("cineserra", "Cine Serra", null, null, AGORA).valorOuFalha();
             tenant.encerrar();
@@ -423,18 +423,18 @@ class DominioBasicoTest {
     }
 
     @Nested
-    @DisplayName("Janela de licenca")
+    @DisplayName("Janela de licença")
     class DaJanela {
 
         @Test
-        @DisplayName("recusa fim antes do inicio")
+        @DisplayName("recusa fim antes do início")
         void recusaFimAntesDoInicio() {
             assertThatThrownBy(() -> new JanelaDeLicenca(AGORA, AGORA.minusSeconds(1)))
                     .isInstanceOf(IllegalArgumentException.class);
         }
 
         @Test
-        @DisplayName("o instante do fim ja esta fora da janela")
+        @DisplayName("o instante do fim já está fora da janela")
         void fimEExclusivo() {
             var janela = new JanelaDeLicenca(AGORA, AGORA.plus(Duration.ofDays(1)));
 
@@ -445,11 +445,11 @@ class DominioBasicoTest {
     }
 
     @Nested
-    @DisplayName("Territorio")
+    @DisplayName("Território")
     class DoTerritorio {
 
         @Test
-        @DisplayName("aceita codigo ISO e recusa invento")
+        @DisplayName("aceita código ISO e recusa invento")
         void validaCodigo() {
             assertThat(Territorio.de("br").valorOuFalha()).isEqualTo(Territorio.BRASIL);
             assertThat(Territorio.de("XX").falha().orElseThrow().codigo())
@@ -457,7 +457,7 @@ class DominioBasicoTest {
         }
 
         @Test
-        @DisplayName("mundial cobre todos, pais cobre so a si mesmo")
+        @DisplayName("mundial cobre todos, pais cobre só a si mesmo")
         void cobertura() {
             assertThat(Territorio.MUNDIAL.cobre(new Territorio("JP"))).isTrue();
             assertThat(Territorio.BRASIL.cobre(new Territorio("JP"))).isFalse();
@@ -466,7 +466,7 @@ class DominioBasicoTest {
     }
 
     @Nested
-    @DisplayName("Sessao de reproducao")
+    @DisplayName("Sessão de reprodução")
     class DaSessao {
 
         private SessaoDeReproducao aberta() {
@@ -476,7 +476,7 @@ class DominioBasicoTest {
         }
 
         @Test
-        @DisplayName("sessao sem sinal por tempo demais deixa de contar como viva")
+        @DisplayName("sessão sem sinal por tempo demais deixa de contar como viva")
         void morreSemSinal() {
             var sessao = aberta();
 
@@ -507,7 +507,7 @@ class DominioBasicoTest {
         }
 
         @Test
-        @DisplayName("sessao fechada nao esta viva nem com sinal recente")
+        @DisplayName("sessão fechada não está viva nem com sinal recente")
         void fechadaNaoVive() {
             var sessao = aberta();
             sessao.fechar(AGORA);
@@ -521,7 +521,7 @@ class DominioBasicoTest {
     class DoDispositivo {
 
         @Test
-        @DisplayName("usa o tipo como apelido quando nao vem nome")
+        @DisplayName("usa o tipo como apelido quando não vem nome")
         void apelidoPadrao() {
             var dispositivo = Dispositivo.registrar(USUARIO, "id-1", TipoDeDispositivo.ANDROID,
                     "  ", AGORA).valorOuFalha();
@@ -542,7 +542,7 @@ class DominioBasicoTest {
     class DoResult {
 
         @Test
-        @DisplayName("mapear so acontece no sucesso")
+        @DisplayName("mapear só acontece no sucesso")
         void mapearSoNoSucesso() {
             assertThat(Result.ok(2).mapear(n -> n * 3).valorOuFalha()).isEqualTo(6);
 
@@ -572,7 +572,7 @@ class DominioBasicoTest {
         }
 
         @Test
-        @DisplayName("detalhes da falha sao acumulaveis e imutaveis")
+        @DisplayName("detalhes da falha são acumulaveis e imutaveis")
         void detalhesAcumulam() {
             var falha = new FalhaDeNegocio("X", "msg").com("a", 1).com("b", "dois");
 

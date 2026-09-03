@@ -27,9 +27,9 @@ import java.util.UUID;
 
 /**
  * Cenario compartilhado pelos testes de caso de uso: um cliente ativo, um
- * plano, um assinante em dia, uma licenca vigente e um filme no ar.
+ * plano, um assinante em dia, uma licença vigente e um filme no ar.
  *
- * O relogio e fixo. Teste que depende de {@code Instant.now()} passa hoje e
+ * O relógio e fixo. Teste que depende de {@code Instant.now()} passa hoje e
  * quebra na virada do mes por motivo nenhum.
  */
 public class CenarioDeTeste {

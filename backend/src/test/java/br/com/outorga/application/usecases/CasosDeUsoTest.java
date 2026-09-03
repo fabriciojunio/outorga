@@ -51,7 +51,7 @@ class CasosDeUsoTest {
     }
 
     @Nested
-    @DisplayName("Autenticar usuario")
+    @DisplayName("Autenticar usuário")
     class DoLogin {
 
         private AutenticarUsuario caso() {
@@ -100,7 +100,7 @@ class CasosDeUsoTest {
         }
 
         @Test
-        @DisplayName("recusa quando o servico nao existe")
+        @DisplayName("recusa quando o serviço não existe")
         void recusaServicoInexistente() {
             var saida = caso().executar(new AutenticarUsuario.Entrada(UUID.randomUUID(),
                     "assinante@exemplo.com", "senha-do-assinante", "203.0.113.10"));
@@ -110,7 +110,7 @@ class CasosDeUsoTest {
     }
 
     @Nested
-    @DisplayName("Publicar titulo")
+    @DisplayName("Publicar título")
     class DaPublicacao {
 
         private PublicarTitulo caso() {
@@ -119,7 +119,7 @@ class CasosDeUsoTest {
         }
 
         @Test
-        @DisplayName("publica e registra qual contrato autorizou")
+        @DisplayName("pública e registra qual contrato autorizou")
         void publicaRegistrandoContrato() {
             var novo = Titulo.criarFilme(cenario.tenantId(), "Beira do Rio",
                     ClassificacaoIndicativa.LIVRE, Duration.ofMinutes(88)).valorOuFalha();
@@ -137,7 +137,7 @@ class CasosDeUsoTest {
         }
 
         @Test
-        @DisplayName("assinante nao publica nada")
+        @DisplayName("assinante não pública nada")
         void assinanteNaoPublica() {
             var saida = caso().executar(cenario.comoAssinante(), cenario.filme.id(),
                     cenario.licenca.id());
@@ -146,7 +146,7 @@ class CasosDeUsoTest {
         }
 
         @Test
-        @DisplayName("recusa licenca inexistente")
+        @DisplayName("recusa licença inexistente")
         void recusaLicencaInexistente() {
             var saida = caso().executar(cenario.comoEditor(), cenario.filme.id(), UUID.randomUUID());
 
@@ -155,7 +155,7 @@ class CasosDeUsoTest {
     }
 
     @Nested
-    @DisplayName("Cadastrar licenca")
+    @DisplayName("Cadastrar licença")
     class DoCadastroDeLicenca {
 
         private CadastrarLicenca caso() {
@@ -163,7 +163,7 @@ class CasosDeUsoTest {
         }
 
         @Test
-        @DisplayName("com comprovacao ja vem vigente")
+        @DisplayName("com comprovacao já vem vigente")
         void comComprovacaoVemVigente() {
             var saida = caso().executar(cenario.comoEditor(), new CadastrarLicenca.Entrada(
                     "Distribuidora Norte", "CT-2026-050", Set.of("BR"),
@@ -174,7 +174,7 @@ class CasosDeUsoTest {
         }
 
         @Test
-        @DisplayName("sem comprovacao fica em rascunho e nao autoriza publicar")
+        @DisplayName("sem comprovacao fica em rascunho e não autoriza publicar")
         void semComprovacaoFicaEmRascunho() {
             var saida = caso().executar(cenario.comoEditor(), new CadastrarLicenca.Entrada(
                     "Distribuidora Norte", "CT-2026-051", Set.of("BR"),
@@ -184,7 +184,7 @@ class CasosDeUsoTest {
         }
 
         @Test
-        @DisplayName("recusa territorio inventado")
+        @DisplayName("recusa território inventado")
         void recusaTerritorioInvalido() {
             var saida = caso().executar(cenario.comoEditor(), new CadastrarLicenca.Entrada(
                     "Distribuidora", "CT-X", Set.of("ZZ"), CenarioDeTeste.AGORA, null,
@@ -204,7 +204,7 @@ class CasosDeUsoTest {
         }
 
         @Test
-        @DisplayName("tira do ar o titulo cuja licenca venceu")
+        @DisplayName("tira do ar o título cuja licença venceu")
         void tiraDoArQuandoVence() {
             var depoisDoVencimento = CenarioDeTeste.AGORA.plus(Duration.ofDays(6));
 
@@ -218,7 +218,7 @@ class CasosDeUsoTest {
         }
 
         @Test
-        @DisplayName("nao mexe em nada enquanto a licenca esta em dia")
+        @DisplayName("não mexe em nada enquanto a licença está em dia")
         void naoMexeComLicencaEmDia() {
             var resultado = caso(cenario.relogio).executar();
 
@@ -227,7 +227,7 @@ class CasosDeUsoTest {
         }
 
         @Test
-        @DisplayName("devolve ao ar quando a licenca e renovada")
+        @DisplayName("devolve ao ar quando a licença e renovada")
         void devolveAoArQuandoRenova() {
             var depoisDoVencimento = CenarioDeTeste.AGORA.plus(Duration.ofDays(6));
             caso(cenario.relogioEm(depoisDoVencimento)).executar();
@@ -250,11 +250,11 @@ class CasosDeUsoTest {
     }
 
     @Nested
-    @DisplayName("Rescindir licenca")
+    @DisplayName("Rescindir licença")
     class DaRescisao {
 
         @Test
-        @DisplayName("tira do ar na hora tudo que dependia daquela licenca")
+        @DisplayName("tira do ar na hora tudo que dependia daquela licença")
         void tiraDoArNaHora() {
             var caso = new RescindirLicenca(cenario.licencas, cenario.titulos, cenario.canais,
                     cenario.auditor, cenario.relogio);
@@ -269,7 +269,7 @@ class CasosDeUsoTest {
     }
 
     @Nested
-    @DisplayName("Autorizar reproducao")
+    @DisplayName("Autorizar reprodução")
     class DaReproducao {
 
         private AutorizarReproducao caso(Clock relogio) {
@@ -286,7 +286,7 @@ class CasosDeUsoTest {
         }
 
         @Test
-        @DisplayName("autoriza, registra o aparelho e abre a sessao")
+        @DisplayName("autoriza, registra o aparelho e abre a sessão")
         void autorizaEabreSessao() {
             var saida = caso(cenario.relogio).executar(cenario.comoAssinante(), pedidoPadrao());
 
@@ -298,7 +298,7 @@ class CasosDeUsoTest {
         }
 
         @Test
-        @DisplayName("recusa quando a licenca ja venceu, e o motivo fica auditado")
+        @DisplayName("recusa quando a licença já venceu, e o motivo fica auditado")
         void recusaLicencaVencida() {
             var depois = CenarioDeTeste.AGORA.plus(Duration.ofDays(6));
 
@@ -346,7 +346,7 @@ class CasosDeUsoTest {
         }
 
         @Test
-        @DisplayName("perfil infantil nao alcanca titulo de 12 anos")
+        @DisplayName("perfil infantil não alcanca título de 12 anos")
         void perfilInfantilNaoAlcanca() {
             var infantil = Perfil.criar(cenario.assinante.id(), "Kids", null, true, 1)
                     .valorOuFalha();
@@ -373,7 +373,7 @@ class CasosDeUsoTest {
         }
 
         @Test
-        @DisplayName("recusa quem nao tem assinatura nenhuma")
+        @DisplayName("recusa quem não tem assinatura nenhuma")
         void recusaSemAssinatura() {
             cenario.assinaturas.dados.clear();
 
@@ -383,7 +383,7 @@ class CasosDeUsoTest {
         }
 
         @Test
-        @DisplayName("propaga falha do fornecedor de video sem abrir sessao")
+        @DisplayName("propaga falha do fornecedor de vídeo sem abrir sessão")
         void propagaFalhaDaEntrega() {
             cenario.entrega.falhar = true;
 
@@ -404,7 +404,7 @@ class CasosDeUsoTest {
         }
 
         @Test
-        @DisplayName("recusa quem ja tem assinatura ativa")
+        @DisplayName("recusa quem já tem assinatura ativa")
         void recusaQuemJaAssina() {
             var saida = caso().executar(cenario.comoAssinante(),
                     new AssinarPlano.Entrada(cenario.plano.id(), null, null, null));
@@ -413,7 +413,7 @@ class CasosDeUsoTest {
         }
 
         @Test
-        @DisplayName("abre a cobranca e devolve o checkout")
+        @DisplayName("abre a cobrança e devolve o checkout")
         void abreCobranca() {
             cenario.assinaturas.dados.clear();
 
@@ -440,7 +440,7 @@ class CasosDeUsoTest {
         }
 
         @Test
-        @DisplayName("recusa cupom que nao existe")
+        @DisplayName("recusa cupom que não existe")
         void recusaCupomInexistente() {
             cenario.assinaturas.dados.clear();
 
@@ -452,7 +452,7 @@ class CasosDeUsoTest {
     }
 
     @Nested
-    @DisplayName("Processar evento de cobranca")
+    @DisplayName("Processar evento de cobrança")
     class DoWebhook {
 
         private ProcessarEventoDeCobranca caso() {
@@ -500,7 +500,7 @@ class CasosDeUsoTest {
         }
 
         @Test
-        @DisplayName("cobranca de outro ambiente responde ok em vez de estourar")
+        @DisplayName("cobrança de outro ambiente responde ok em vez de estourar")
         void cobrancaDesconhecidaNaoQuebra() {
             cenario.gateway.proximoEvento = Dubles.Gateway.confirmado("ref-de-outro-lugar", 100);
 
@@ -530,11 +530,11 @@ class CasosDeUsoTest {
     }
 
     @Nested
-    @DisplayName("Listar catalogo")
+    @DisplayName("Listar catálogo")
     class DoCatalogo {
 
         @Test
-        @DisplayName("esconde do perfil infantil o que passa da classificacao")
+        @DisplayName("esconde do perfil infantil o que passa da classificação")
         void escondeDoPerfilInfantil() {
             var infantil = Perfil.criar(cenario.assinante.id(), "Kids", null, true, 1)
                     .valorOuFalha();
@@ -558,7 +558,7 @@ class CasosDeUsoTest {
         }
 
         @Test
-        @DisplayName("titulo bloqueado por direito some do catalogo")
+        @DisplayName("título bloqueado por direito some do catálogo")
         void bloqueadoSomeDoCatalogo() {
             cenario.filme.revisarDireitos(null, CenarioDeTeste.AGORA);
             cenario.titulos.salvar(cenario.filme);
@@ -588,7 +588,7 @@ class CasosDeUsoTest {
         }
 
         @Test
-        @DisplayName("nao apaga conta com assinatura ativa")
+        @DisplayName("não apaga conta com assinatura ativa")
         void naoApagaComAssinaturaAtiva() {
             var saida = caso().apagar(cenario.comoAssinante());
 
@@ -596,7 +596,7 @@ class CasosDeUsoTest {
         }
 
         @Test
-        @DisplayName("apaga anonimizando, derrubando sessoes e sumindo com os perfis")
+        @DisplayName("apaga anonimizando, derrubando sessões e sumindo com os perfis")
         void apagaAnonimizando() {
             cenario.assinaturas.dados.clear();
 
@@ -612,7 +612,7 @@ class CasosDeUsoTest {
         }
 
         @Test
-        @DisplayName("a auditoria da exclusao guarda o e-mail mascarado, nao o e-mail")
+        @DisplayName("a auditoria da exclusão guarda o e-mail mascarado, não o e-mail")
         void auditoriaGuardaMascarado() {
             cenario.assinaturas.dados.clear();
 
@@ -630,7 +630,7 @@ class CasosDeUsoTest {
     class DoIsolamento {
 
         @Test
-        @DisplayName("titulo de um cliente nao aparece na consulta de outro")
+        @DisplayName("título de um cliente não aparece na consulta de outro")
         void naoVazaEntreClientes() {
             var outroTenant = br.com.outorga.domain.tenant.Tenant.abrir("outra", "Outra TV", null,
                     null, CenarioDeTeste.AGORA).valorOuFalha();
@@ -642,7 +642,7 @@ class CasosDeUsoTest {
         }
 
         @Test
-        @DisplayName("nao publica titulo com licenca de outro cliente")
+        @DisplayName("não pública título com licença de outro cliente")
         void naoPublicaComLicencaAlheia() {
             var outroTenant = br.com.outorga.domain.tenant.Tenant.abrir("outra", "Outra TV", null,
                     null, CenarioDeTeste.AGORA).valorOuFalha();
@@ -668,7 +668,7 @@ class CasosDeUsoTest {
     class DoPlanoAlheio {
 
         @Test
-        @DisplayName("nao deixa assinar plano que pertence a outro cliente")
+        @DisplayName("não deixa assinar plano que pertence a outro cliente")
         void naoAssinaPlanoAlheio() {
             cenario.assinaturas.dados.clear();
             var alheio = Plano.criar(UUID.randomUUID(), "Alheio", Dinheiro.reais(100),
@@ -685,11 +685,11 @@ class CasosDeUsoTest {
     }
 
     @Nested
-    @DisplayName("Assinatura em memoria")
+    @DisplayName("Assinatura em memória")
     class DaConsistencia {
 
         @Test
-        @DisplayName("a assinatura salva guarda a referencia do gateway")
+        @DisplayName("a assinatura salva guarda a referência do gateway")
         void guardaReferencia() {
             Assinatura salva = cenario.assinaturas.dados.get(cenario.assinatura.id());
 

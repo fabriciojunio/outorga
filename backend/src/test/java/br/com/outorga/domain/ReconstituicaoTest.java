@@ -46,9 +46,9 @@ import static org.assertj.core.api.Assertions.assertThat;
  * Ida e volta pelo caminho de reconstituicao, que e por onde toda entidade
  * passa quando vem do banco.
  *
- * Nao e teste de getter por teste de getter: um campo esquecido no
+ * Não e teste de getter por teste de getter: um campo esquecido no
  * {@code reconstituir} some silenciosamente na primeira releitura, e o sintoma
- * aparece longe daqui, como um titulo que "perdeu" a licenca ou um assinante
+ * aparece longe daqui, como um título que "perdeu" a licença ou um assinante
  * que voltou a ser inadimplente do nada.
  */
 @DisplayName("Reconstituicao a partir do banco")
@@ -59,11 +59,11 @@ class ReconstituicaoTest {
     private static final UUID USUARIO = UUID.randomUUID();
 
     @Nested
-    @DisplayName("Catalogo")
+    @DisplayName("Catálogo")
     class DoCatalogo {
 
         @Test
-        @DisplayName("serie inteira volta com temporadas, episodios e estado")
+        @DisplayName("série inteira volta com temporadas, episódios e estado")
         void serieCompleta() {
             var id = UUID.randomUUID();
             var licencaId = UUID.randomUUID();
@@ -92,7 +92,7 @@ class ReconstituicaoTest {
         }
 
         @Test
-        @DisplayName("titulo bloqueado volta com o motivo do bloqueio")
+        @DisplayName("título bloqueado volta com o motivo do bloqueio")
         void bloqueadoMantemMotivo() {
             var filme = Titulo.reconstituir(UUID.randomUUID(), TENANT, TipoDeTitulo.FILME, "X", null,
                     null, ClassificacaoIndicativa.LIVRE, Duration.ofMinutes(90), "acervo/x", null,
@@ -106,7 +106,7 @@ class ReconstituicaoTest {
         }
 
         @Test
-        @DisplayName("temporada ordena episodios pelo numero, venha o banco como vier")
+        @DisplayName("temporada ordena episódios pelo número, venha o banco como vier")
         void temporadaOrdena() {
             var terceiro = Episodio.reconstituir(UUID.randomUUID(), 3, "C", null,
                     Duration.ofMinutes(40), "c");
@@ -121,7 +121,7 @@ class ReconstituicaoTest {
         }
 
         @Test
-        @DisplayName("episodio recusa numero, titulo e duracao invalidos")
+        @DisplayName("episódio recusa número, título e duração invalidos")
         void episodioValida() {
             assertThat(Episodio.criar(0, "A", Duration.ofMinutes(1), null).falha().orElseThrow()
                     .codigo()).isEqualTo("EPISODIO_NUMERO_INVALIDO");
@@ -132,7 +132,7 @@ class ReconstituicaoTest {
         }
 
         @Test
-        @DisplayName("episodio ganha video e sinopse depois de criado")
+        @DisplayName("episódio ganha vídeo e sinopse depois de criado")
         void episodioRecebeVideo() {
             var episodio = Episodio.criar(1, "Piloto", Duration.ofMinutes(42), null).valorOuFalha();
             assertThat(episodio.reproduzivel()).isFalse();
@@ -146,7 +146,7 @@ class ReconstituicaoTest {
         }
 
         @Test
-        @DisplayName("temporada recusa episodio com numero repetido")
+        @DisplayName("temporada recusa episódio com número repetido")
         void temporadaRecusaDuplicado() {
             var temporada = Temporada.criar(1, null).valorOuFalha();
             temporada.adicionar(Episodio.criar(1, "A", Duration.ofMinutes(40), "a").valorOuFalha());
@@ -159,7 +159,7 @@ class ReconstituicaoTest {
         }
 
         @Test
-        @DisplayName("temporada recusa numero abaixo de um")
+        @DisplayName("temporada recusa número abaixo de um")
         void temporadaRecusaNumero() {
             assertThat(Temporada.criar(0, "X").falha().orElseThrow().codigo())
                     .isEqualTo("TEMPORADA_NUMERO_INVALIDO");
@@ -171,7 +171,7 @@ class ReconstituicaoTest {
     class DaIdentidade {
 
         @Test
-        @DisplayName("usuario volta com bloqueio, ultimo acesso e anonimizacao")
+        @DisplayName("usuário volta com bloqueio, último acesso e anonimização")
         void usuarioCompleto() {
             var id = UUID.randomUUID();
             var bloqueadoAte = AGORA.plus(Duration.ofMinutes(15));
@@ -334,7 +334,7 @@ class ReconstituicaoTest {
         }
 
         @Test
-        @DisplayName("cupom volta com uso ja gasto e pode ser desativado")
+        @DisplayName("cupom volta com uso já gasto e pode ser desativado")
         void cupomCompleto() {
             var id = UUID.randomUUID();
             var cupom = Cupom.reconstituir(id, TENANT, "METADE", 50, AGORA.plus(Duration.ofDays(30)),
@@ -355,7 +355,7 @@ class ReconstituicaoTest {
         }
 
         @Test
-        @DisplayName("cupom recusa criacao sem codigo ou sem limite de uso")
+        @DisplayName("cupom recusa criacao sem código ou sem limite de uso")
         void cupomValida() {
             assertThat(Cupom.criar(TENANT, " ", 10, null, 1).falha().orElseThrow().codigo())
                     .isEqualTo("CUPOM_SEM_CODIGO");
@@ -421,7 +421,7 @@ class ReconstituicaoTest {
         }
 
         @Test
-        @DisplayName("periodicidade calcula o proximo vencimento")
+        @DisplayName("periodicidade calcula o próximo vencimento")
         void periodicidadeCalcula() {
             assertThat(Periodicidade.ANUAL.proximoVencimento(AGORA))
                     .isEqualTo(AGORA.plus(Duration.ofDays(365)));
@@ -452,7 +452,7 @@ class ReconstituicaoTest {
     class DoClienteEcanal {
 
         @Test
-        @DisplayName("tenant volta com dominio proprio e periodo de teste")
+        @DisplayName("tenant volta com dominio próprio e período de teste")
         void tenantCompleto() {
             var id = UUID.randomUUID();
             var marca = new Marca("Cine Serra", "logo.svg", "#112233", "#000000");
@@ -497,7 +497,7 @@ class ReconstituicaoTest {
         }
 
         @Test
-        @DisplayName("tenant encerrado nao aceita suspensao nem trafego")
+        @DisplayName("tenant encerrado não aceita suspensao nem trafego")
         void encerradoNaoAceita() {
             var tenant = Tenant.abrir("cineserra", "Cine Serra", null, null, AGORA).valorOuFalha();
             tenant.encerrar();
@@ -559,11 +559,11 @@ class ReconstituicaoTest {
     }
 
     @Nested
-    @DisplayName("Direitos e sessao")
+    @DisplayName("Direitos e sessão")
     class DosDireitosEsessao {
 
         @Test
-        @DisplayName("licenca volta com comprovacao, status e observacao")
+        @DisplayName("licença volta com comprovacao, status e observacao")
         void licencaCompleta() {
             var id = UUID.randomUUID();
 
@@ -581,7 +581,7 @@ class ReconstituicaoTest {
         }
 
         @Test
-        @DisplayName("licenca recusa cadastro sem janela e sem dispositivo")
+        @DisplayName("licença recusa cadastro sem janela e sem dispositivo")
         void licencaValida() {
             assertThat(Licenca.cadastrar(TENANT, "T", "C", Set.of(Territorio.BRASIL),
                     JanelaDeLicenca.aPartirDe(AGORA), Set.of()).falha().orElseThrow().codigo())
@@ -607,7 +607,7 @@ class ReconstituicaoTest {
         }
 
         @Test
-        @DisplayName("sessao volta com posicao e fechamento")
+        @DisplayName("sessão volta com posicao e fechamento")
         void sessaoCompleta() {
             var id = UUID.randomUUID();
             var perfilId = UUID.randomUUID();
@@ -627,7 +627,7 @@ class ReconstituicaoTest {
         }
 
         @Test
-        @DisplayName("autorizacao carrega o que o player precisa")
+        @DisplayName("autorização carrega o que o player precisa")
         void autorizacaoCarrega() {
             var sessaoId = UUID.randomUUID();
             var autorizacao = new Autorizacao(sessaoId, TENANT, null, UUID.randomUUID(),

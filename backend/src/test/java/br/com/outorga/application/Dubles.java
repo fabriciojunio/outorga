@@ -37,10 +37,10 @@ import java.util.Optional;
 import java.util.UUID;
 
 /**
- * Dubles em memoria para testar caso de uso sem banco.
+ * Dubles em memória para testar caso de uso sem banco.
  *
- * Sao implementacoes de verdade, nao mocks com expectativa: guardam estado e
- * respondem consulta. O teste fica lendo como o sistema se comporta, e nao
+ * São implementacoes de verdade, não mocks com expectativa: guardam estado e
+ * respondem consulta. O teste fica lendo como o sistema se comporta, e não
  * como as chamadas foram feitas, que e o que envelhece mal quando a
  * implementacao muda.
  */

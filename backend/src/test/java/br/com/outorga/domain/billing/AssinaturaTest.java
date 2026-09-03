@@ -92,11 +92,11 @@ class AssinaturaTest {
 
         /**
          * Gateway reentrega webhook. Se cada reentrega somasse um mes a partir
-         * de hoje, uma cobranca virava tres meses de graca; somando a partir do
+         * de hoje, uma cobrança virava três meses de graca; somando a partir do
          * fim vigente, o total continua certo.
          */
         @Test
-        @DisplayName("confirmacao repetida soma a partir do fim vigente, nao de hoje")
+        @DisplayName("confirmação repetida soma a partir do fim vigente, não de hoje")
         void confirmacaoRepetidaNaoDaMesDeGraca() {
             var plano = planoMensal(0);
             var assinatura = Assinatura.abrir(TENANT, USUARIO, plano, AGORA).valorOuFalha();
@@ -126,7 +126,7 @@ class AssinaturaTest {
         }
 
         @Test
-        @DisplayName("segunda falha nao reinicia a carencia")
+        @DisplayName("segunda falha não reinicia a carencia")
         void segundaFalhaNaoEstendeCarencia() {
             var plano = planoMensal(0);
             var assinatura = Assinatura.abrir(TENANT, USUARIO, plano, AGORA).valorOuFalha();
@@ -160,7 +160,7 @@ class AssinaturaTest {
     class NoCancelamento {
 
         @Test
-        @DisplayName("cancelar mantem acesso ate o fim do ciclo pago")
+        @DisplayName("cancelar mantem acesso até o fim do ciclo pago")
         void cancelarMantemAcesso() {
             var plano = planoMensal(0);
             var assinatura = Assinatura.abrir(TENANT, USUARIO, plano, AGORA).valorOuFalha();
@@ -174,7 +174,7 @@ class AssinaturaTest {
         }
 
         @Test
-        @DisplayName("nao aceita cancelar duas vezes")
+        @DisplayName("não aceita cancelar duas vezes")
         void naoCancelaDuasVezes() {
             var assinatura = Assinatura.abrir(TENANT, USUARIO, planoMensal(7), AGORA).valorOuFalha();
             assinatura.cancelar("motivo", AGORA);
@@ -185,7 +185,7 @@ class AssinaturaTest {
         }
 
         @Test
-        @DisplayName("passagem do tempo encerra o que venceu e nao voltou")
+        @DisplayName("passagem do tempo encerra o que venceu e não voltou")
         void tempoEncerra() {
             var plano = planoMensal(0);
             var assinatura = Assinatura.abrir(TENANT, USUARIO, plano, AGORA).valorOuFalha();
@@ -199,7 +199,7 @@ class AssinaturaTest {
         }
 
         @Test
-        @DisplayName("passagem do tempo nao mexe em assinatura em dia")
+        @DisplayName("passagem do tempo não mexe em assinatura em dia")
         void tempoNaoMexeEmDia() {
             var plano = planoMensal(0);
             var assinatura = Assinatura.abrir(TENANT, USUARIO, plano, AGORA).valorOuFalha();
@@ -209,7 +209,7 @@ class AssinaturaTest {
         }
 
         @Test
-        @DisplayName("assinatura encerrada nao aceita mais pagamento")
+        @DisplayName("assinatura encerrada não aceita mais pagamento")
         void encerradaNaoAceitaPagamento() {
             var plano = planoMensal(0);
             var assinatura = Assinatura.abrir(TENANT, USUARIO, plano, AGORA).valorOuFalha();

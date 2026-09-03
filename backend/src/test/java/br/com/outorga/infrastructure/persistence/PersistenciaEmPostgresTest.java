@@ -50,11 +50,11 @@ import java.util.UUID;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * Persistencia contra um Postgres de verdade, subido pelo proprio teste.
+ * Persistencia contra um Postgres de verdade, subido pelo próprio teste.
  *
- * Esta classe existe porque o esquema usa coisa que banco em memoria nao
+ * Está classe existe porque o esquema usa coisa que banco em memória não
  * imita: arranjo de texto, jsonb, indice parcial e funcao SQL para busca sem
- * acento. Testar isso com H2 daria uma sensacao falsa de seguranca e o erro
+ * acento. Testar isso com H2 daria uma sensacao falsa de segurança e o erro
  * apareceria no primeiro deploy.
  *
  * Roda no ciclo normal de testes. A primeira execucao baixa o binario do
@@ -162,7 +162,7 @@ class PersistenciaEmPostgresTest {
         }
 
         @Test
-        @DisplayName("usuario preserva papeis, bloqueio e anonimizacao")
+        @DisplayName("usuário preserva papeis, bloqueio e anonimização")
         void usuarioVaiEvolta() {
             var usuario = Usuario.criar(tenant.id(), new Email("dono@exemplo.com"), "hash", "Dono",
                     Set.of(Papel.DONO, Papel.EDITOR), AGORA).valorOuFalha();
@@ -185,7 +185,7 @@ class PersistenciaEmPostgresTest {
         }
 
         @Test
-        @DisplayName("consulta por outro tenant nao acha nada")
+        @DisplayName("consulta por outro tenant não acha nada")
         void isolamentoPorTenant() {
             var usuario = Usuario.criar(tenant.id(), new Email("dono@exemplo.com"), "hash", "Dono",
                     Set.of(Papel.DONO), AGORA).valorOuFalha();
@@ -229,7 +229,7 @@ class PersistenciaEmPostgresTest {
     }
 
     @Nested
-    @DisplayName("Licenca e catalogo")
+    @DisplayName("Licença e catálogo")
     class DoCatalogo {
 
         private Licenca licencaVigente() {
@@ -243,7 +243,7 @@ class PersistenciaEmPostgresTest {
         }
 
         @Test
-        @DisplayName("licenca preserva arranjos de territorio e dispositivo")
+        @DisplayName("licença preserva arranjos de território e dispositivo")
         void licencaVaiEvolta() {
             var salva = licencaVigente();
 
@@ -258,7 +258,7 @@ class PersistenciaEmPostgresTest {
         }
 
         @Test
-        @DisplayName("acha as licencas que vencem ate uma data")
+        @DisplayName("acha as licenças que vencem até uma data")
         void achaVencendo() {
             licencaVigente();
 
@@ -267,7 +267,7 @@ class PersistenciaEmPostgresTest {
         }
 
         @Test
-        @DisplayName("licenca por prazo indeterminado grava com fim nulo")
+        @DisplayName("licença por prazo indeterminado grava com fim nulo")
         void licencaIndeterminada() {
             var licenca = Licenca.cadastrar(tenant.id(), "Acervo proprio", "INTERNO-1",
                     Set.of(Territorio.MUNDIAL), JanelaDeLicenca.aPartirDe(AGORA),
@@ -281,7 +281,7 @@ class PersistenciaEmPostgresTest {
         }
 
         @Test
-        @DisplayName("filme publicado volta com generos e vinculo de licenca")
+        @DisplayName("filme publicado volta com generos e vinculo de licença")
         void filmeVaiEvolta() {
             var licenca = licencaVigente();
             var filme = Titulo.criarFilme(tenant.id(), "Estrada de Terra",
@@ -306,7 +306,7 @@ class PersistenciaEmPostgresTest {
         }
 
         @Test
-        @DisplayName("serie volta com temporadas e episodios na ordem")
+        @DisplayName("série volta com temporadas e episódios na ordem")
         void serieVaiEvolta() {
             var licenca = licencaVigente();
             var serie = Titulo.criarSerie(tenant.id(), "Cerrado",
@@ -330,7 +330,7 @@ class PersistenciaEmPostgresTest {
         }
 
         @Test
-        @DisplayName("busca acha o titulo mesmo digitado sem acento")
+        @DisplayName("busca acha o título mesmo digitado sem acento")
         void buscaSemAcento() {
             var licenca = licencaVigente();
             var filme = Titulo.criarFilme(tenant.id(), "Coracao Sertanejo",
@@ -346,7 +346,7 @@ class PersistenciaEmPostgresTest {
         }
 
         @Test
-        @DisplayName("paginacao do catalogo respeita limite e salto")
+        @DisplayName("paginacao do catálogo respeita limite e salto")
         void paginacao() {
             var licenca = licencaVigente();
             for (int i = 1; i <= 5; i++) {
@@ -363,7 +363,7 @@ class PersistenciaEmPostgresTest {
         }
 
         @Test
-        @DisplayName("revisao de direitos enxerga publicado e bloqueado, nao rascunho")
+        @DisplayName("revisao de direitos enxerga publicado e bloqueado, não rascunho")
         void sujeitosARevisao() {
             var licenca = licencaVigente();
             var noAr = Titulo.criarFilme(tenant.id(), "No ar", ClassificacaoIndicativa.LIVRE,
@@ -400,7 +400,7 @@ class PersistenciaEmPostgresTest {
         }
 
         @Test
-        @DisplayName("plano preserva preco em centavos e teto de qualidade")
+        @DisplayName("plano preserva preço em centavos e teto de qualidade")
         void planoVaiEvolta() {
             var salvo = plano();
 
@@ -419,7 +419,7 @@ class PersistenciaEmPostgresTest {
         }
 
         @Test
-        @DisplayName("cupom e achado pelo codigo em qualquer caixa")
+        @DisplayName("cupom e achado pelo código em qualquer caixa")
         void cupomPorCodigo() {
             cupons.salvar(Cupom.criar(tenant.id(), "metade", 50, null, 10).valorOuFalha());
 
@@ -453,7 +453,7 @@ class PersistenciaEmPostgresTest {
         }
 
         @Test
-        @DisplayName("a assinatura vigente e a que ainda nao encerrou")
+        @DisplayName("a assinatura vigente e a que ainda não encerrou")
         void vigenteIgnoraEncerrada() {
             var plano = plano();
             var usuario = assinante();
@@ -472,7 +472,7 @@ class PersistenciaEmPostgresTest {
     }
 
     @Nested
-    @DisplayName("Exibicao")
+    @DisplayName("Exibição")
     class DaExibicao {
 
         @Test
@@ -507,7 +507,7 @@ class PersistenciaEmPostgresTest {
         }
 
         @Test
-        @DisplayName("grade devolve so o que cruza a janela consultada")
+        @DisplayName("grade devolve só o que cruza a janela consultada")
         void gradePorJanela() {
             var canal = CanalAoVivo.cadastrar(tenant.id(), "Serra TV", 10,
                     ClassificacaoIndicativa.LIVRE).valorOuFalha();
@@ -534,7 +534,7 @@ class PersistenciaEmPostgresTest {
         }
 
         @Test
-        @DisplayName("conta so as sessoes vivas e fecha as abandonadas")
+        @DisplayName("conta só as sessões vivas e fecha as abandonadas")
         void contagemDeSessoes() {
             var usuario = Usuario.criar(tenant.id(), new Email("a@exemplo.com"), "hash", "Maria",
                     Set.of(Papel.ASSINANTE), AGORA).valorOuFalha();

@@ -11,7 +11,7 @@ import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DisplayName("Licenca")
+@DisplayName("Licença")
 class LicencaTest {
 
     private static final UUID TENANT = UUID.randomUUID();
@@ -41,7 +41,7 @@ class LicencaTest {
         }
 
         @Test
-        @DisplayName("recusa sem referencia de contrato")
+        @DisplayName("recusa sem referência de contrato")
         void recusaSemContrato() {
             var resultado = Licenca.cadastrar(TENANT, "Produtora", null, Set.of(Territorio.BRASIL),
                     JanelaDeLicenca.aPartirDe(AGORA), Set.of(TipoDeDispositivo.WEB));
@@ -50,7 +50,7 @@ class LicencaTest {
         }
 
         @Test
-        @DisplayName("recusa sem territorio")
+        @DisplayName("recusa sem território")
         void recusaSemTerritorio() {
             var resultado = Licenca.cadastrar(TENANT, "Produtora", "CT-1", Set.of(),
                     JanelaDeLicenca.aPartirDe(AGORA), Set.of(TipoDeDispositivo.WEB));
@@ -59,7 +59,7 @@ class LicencaTest {
         }
 
         @Test
-        @DisplayName("nasce em rascunho e nao autoriza nada")
+        @DisplayName("nasce em rascunho e não autoriza nada")
         void nasceEmRascunho() {
             var licenca = Licenca.cadastrar(TENANT, "Produtora", "CT-1", Set.of(Territorio.BRASIL),
                     JanelaDeLicenca.aPartirDe(AGORA.minus(Duration.ofDays(1))),
@@ -97,7 +97,7 @@ class LicencaTest {
         }
 
         @Test
-        @DisplayName("licenca rescindida nao volta a vigorar")
+        @DisplayName("licença rescindida não volta a vigorar")
         void rescindidaNaoVolta() {
             var licenca = vigenteNoBrasil();
             licenca.rescindir("acordo desfeito");
@@ -114,21 +114,21 @@ class LicencaTest {
     class AoAutorizar {
 
         @Test
-        @DisplayName("autoriza dentro da janela, do territorio e do dispositivo")
+        @DisplayName("autoriza dentro da janela, do território e do dispositivo")
         void autorizaQuandoTudoBate() {
             assertThat(vigenteNoBrasil().autoriza(Territorio.BRASIL, TipoDeDispositivo.WEB, AGORA))
                     .isTrue();
         }
 
         @Test
-        @DisplayName("recusa fora do territorio contratado")
+        @DisplayName("recusa fora do território contratado")
         void recusaForaDoTerritorio() {
             assertThat(vigenteNoBrasil()
                     .autoriza(new Territorio("PT"), TipoDeDispositivo.WEB, AGORA)).isFalse();
         }
 
         @Test
-        @DisplayName("recusa dispositivo que o contrato nao cobre")
+        @DisplayName("recusa dispositivo que o contrato não cobre")
         void recusaDispositivoForaDoContrato() {
             assertThat(vigenteNoBrasil()
                     .autoriza(Territorio.BRASIL, TipoDeDispositivo.TV_CONECTADA, AGORA)).isFalse();
@@ -144,7 +144,7 @@ class LicencaTest {
         }
 
         @Test
-        @DisplayName("recusa antes do inicio da janela")
+        @DisplayName("recusa antes do início da janela")
         void recusaAntesDaJanela() {
             var antes = AGORA.minus(Duration.ofDays(31));
 
@@ -153,7 +153,7 @@ class LicencaTest {
         }
 
         @Test
-        @DisplayName("licenca mundial cobre qualquer pais")
+        @DisplayName("licença mundial cobre qualquer pais")
         void mundialCobreTudo() {
             var licenca = Licenca.cadastrar(TENANT, "Produtora", "CT-2", Set.of(Territorio.MUNDIAL),
                     JanelaDeLicenca.aPartirDe(AGORA.minus(Duration.ofDays(1))),
@@ -170,19 +170,19 @@ class LicencaTest {
     class NoAvisoDeVencimento {
 
         @Test
-        @DisplayName("acusa licenca que vence dentro do prazo consultado")
+        @DisplayName("acusa licença que vence dentro do prazo consultado")
         void acusaVencimentoProximo() {
             assertThat(vigenteNoBrasil().venceEmAte(AGORA, 60)).isTrue();
         }
 
         @Test
-        @DisplayName("nao acusa licenca que vence depois do prazo")
+        @DisplayName("não acusa licença que vence depois do prazo")
         void naoAcusaVencimentoDistante() {
             assertThat(vigenteNoBrasil().venceEmAte(AGORA, 10)).isFalse();
         }
 
         @Test
-        @DisplayName("licenca por prazo indeterminado nunca aparece no aviso")
+        @DisplayName("licença por prazo indeterminado nunca aparece no aviso")
         void indeterminadaNaoVence() {
             var licenca = Licenca.cadastrar(TENANT, "Produtora", "CT-3", Set.of(Territorio.BRASIL),
                     JanelaDeLicenca.aPartirDe(AGORA), Set.of(TipoDeDispositivo.WEB)).valorOuFalha();

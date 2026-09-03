@@ -27,12 +27,12 @@ import java.util.UUID;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * A decisao de dar play tem muitos jeitos de dar errado, e cada um precisa
+ * A decisão de dar play tem muitos jeitos de dar errado, e cada um precisa
  * chegar no espectador com o motivo certo. Este teste cobre um por um, porque
- * "conteudo indisponivel" para tudo e o que gera chamado de suporte que
- * ninguem consegue responder.
+ * "conteúdo indisponível" para tudo e o que gera chamado de suporte que
+ * ninguém consegue responder.
  */
-@DisplayName("Politica de reproducao")
+@DisplayName("Politica de reprodução")
 class PoliticaDeReproducaoTest {
 
     private static final Instant AGORA = Instant.parse("2026-08-24T20:00:00Z");
@@ -85,7 +85,7 @@ class PoliticaDeReproducaoTest {
     }
 
     /**
-     * O Tenant gera o proprio id, e o cenario precisa que titulo e licenca
+     * O Tenant gera o próprio id, e o cenario precisa que título e licença
      * pertencam a ele. Reconstituir com o id fixo mantem tudo coerente.
      */
     private Tenant tenantComId() {
@@ -95,7 +95,7 @@ class PoliticaDeReproducaoTest {
     }
 
     @Test
-    @DisplayName("autoriza quando tudo esta em ordem")
+    @DisplayName("autoriza quando tudo está em ordem")
     void autorizaCenarioFeliz() {
         var decisao = politica.decidir(contexto());
 
@@ -120,7 +120,7 @@ class PoliticaDeReproducaoTest {
     }
 
     @Test
-    @DisplayName("recusa quando o cliente esta suspenso")
+    @DisplayName("recusa quando o cliente está suspenso")
     void recusaTenantSuspenso() {
         tenant.suspender("inadimplencia");
 
@@ -128,7 +128,7 @@ class PoliticaDeReproducaoTest {
     }
 
     @Test
-    @DisplayName("recusa quando a assinatura nao da acesso")
+    @DisplayName("recusa quando a assinatura não da acesso")
     void recusaAssinaturaSemAcesso() {
         assinatura.cancelar("desistiu", AGORA);
         assinatura.aplicarPassagemDoTempo(AGORA.plus(Duration.ofDays(400)));
@@ -137,7 +137,7 @@ class PoliticaDeReproducaoTest {
     }
 
     @Test
-    @DisplayName("recusa titulo fora do ar, dizendo que e questao de direitos")
+    @DisplayName("recusa título fora do ar, dizendo que e questão de direitos")
     void recusaTituloBloqueado() {
         titulo.revisarDireitos(null, AGORA);
 
@@ -148,12 +148,12 @@ class PoliticaDeReproducaoTest {
     }
 
     /**
-     * A data escolhida fica dentro do ciclo pago e fora da janela da licenca.
+     * A data escolhida fica dentro do ciclo pago e fora da janela da licença.
      * Sem esse cuidado o teste passaria pelo motivo errado: a assinatura
      * venceria antes e a recusa sairia como falta de pagamento.
      */
     @Test
-    @DisplayName("recusa quando a licenca venceu enquanto o titulo seguia no ar")
+    @DisplayName("recusa quando a licença venceu enquanto o título seguia no ar")
     void recusaLicencaVencida() {
         var depoisDaLicenca = AGORA.plus(Duration.ofDays(20));
         assertThat(assinatura.permiteAssistir(depoisDaLicenca)).isTrue();
@@ -168,7 +168,7 @@ class PoliticaDeReproducaoTest {
     }
 
     @Test
-    @DisplayName("recusa fora do territorio licenciado")
+    @DisplayName("recusa fora do território licenciado")
     void recusaForaDoTerritorio() {
         var contexto = new ContextoDeReproducao(tenantComId(), perfil, assinatura, plano, titulo,
                 licenca, dispositivo, new Territorio("PT"), Qualidade.FULL_HD, 0, "acervo/estrada",
@@ -180,7 +180,7 @@ class PoliticaDeReproducaoTest {
     }
 
     @Test
-    @DisplayName("recusa aparelho que o contrato nao autoriza")
+    @DisplayName("recusa aparelho que o contrato não autoriza")
     void recusaDispositivoNaoLicenciado() {
         var tv = Dispositivo.registrar(USUARIO, "tv-1", TipoDeDispositivo.TV_CONECTADA, "Sala",
                 AGORA).valorOuFalha();
@@ -192,7 +192,7 @@ class PoliticaDeReproducaoTest {
     }
 
     @Test
-    @DisplayName("recusa conteudo acima da classificacao do perfil")
+    @DisplayName("recusa conteúdo acima da classificação do perfil")
     void recusaControleParental() {
         var infantil = Perfil.criar(USUARIO, "Kids", null, true, 1).valorOuFalha();
         var contexto = new ContextoDeReproducao(tenantComId(), infantil, assinatura, plano, titulo,
@@ -205,7 +205,7 @@ class PoliticaDeReproducaoTest {
     }
 
     @Test
-    @DisplayName("recusa quando o limite de telas do plano ja esta ocupado")
+    @DisplayName("recusa quando o limite de telas do plano já está ocupado")
     void recusaLimiteDeTelas() {
         var contexto = new ContextoDeReproducao(tenantComId(), perfil, assinatura, plano, titulo,
                 licenca, dispositivo, Territorio.BRASIL, Qualidade.FULL_HD, 2, "acervo/estrada",
@@ -217,7 +217,7 @@ class PoliticaDeReproducaoTest {
     }
 
     @Test
-    @DisplayName("aceita a ultima tela livre do plano")
+    @DisplayName("aceita a última tela livre do plano")
     void aceitaUltimaTela() {
         var contexto = new ContextoDeReproducao(tenantComId(), perfil, assinatura, plano, titulo,
                 licenca, dispositivo, Territorio.BRASIL, Qualidade.FULL_HD, 1, "acervo/estrada",
@@ -227,7 +227,7 @@ class PoliticaDeReproducaoTest {
     }
 
     @Test
-    @DisplayName("recusa quando o arquivo de video ainda nao existe")
+    @DisplayName("recusa quando o arquivo de vídeo ainda não existe")
     void recusaSemVideo() {
         var contexto = new ContextoDeReproducao(tenantComId(), perfil, assinatura, plano, titulo,
                 licenca, dispositivo, Territorio.BRASIL, Qualidade.FULL_HD, 0, null, AGORA);
@@ -237,7 +237,7 @@ class PoliticaDeReproducaoTest {
     }
 
     @Test
-    @DisplayName("recusa titulo de outro cliente mesmo com tudo mais em ordem")
+    @DisplayName("recusa título de outro cliente mesmo com tudo mais em ordem")
     void recusaTituloDeOutroTenant() {
         var deOutro = Titulo.criarFilme(UUID.randomUUID(), "Alheio", ClassificacaoIndicativa.LIVRE,
                 Duration.ofMinutes(80)).valorOuFalha();
@@ -249,7 +249,7 @@ class PoliticaDeReproducaoTest {
     }
 
     @Test
-    @DisplayName("recusa titulo inexistente")
+    @DisplayName("recusa título inexistente")
     void recusaTituloNulo() {
         var contexto = new ContextoDeReproducao(tenantComId(), perfil, assinatura, plano, null,
                 licenca, dispositivo, Territorio.BRASIL, Qualidade.FULL_HD, 0, null, AGORA);
@@ -259,7 +259,7 @@ class PoliticaDeReproducaoTest {
     }
 
     @Test
-    @DisplayName("perfil ausente nao bloqueia: a conta assiste sem escolher perfil")
+    @DisplayName("perfil ausente não bloqueia: a conta assiste sem escolher perfil")
     void perfilAusenteNaoBloqueia() {
         var contexto = new ContextoDeReproducao(tenantComId(), null, assinatura, plano, titulo,
                 licenca, dispositivo, Territorio.BRASIL, Qualidade.FULL_HD, 0, "acervo/estrada",

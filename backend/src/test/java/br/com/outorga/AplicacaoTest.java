@@ -31,9 +31,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * servidor responde.
  *
  * E o teste que responde a pergunta que nenhum teste de unidade responde: as
- * pecas, ligadas do jeito que serao ligadas em producao, funcionam? Aqui
- * passam a configuracao de seguranca, o mapeamento de rota, o serializador,
- * as migracoes, a carga de demonstracao e a escolha dos adaptadores.
+ * pecas, ligadas do jeito que serão ligadas em produção, funcionam? Aqui
+ * passam a configuração de segurança, o mapeamento de rota, o serializador,
+ * as migracoes, a carga de demonstração e a escolha dos adaptadores.
  */
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -69,7 +69,7 @@ class AplicacaoTest {
 
     @Test
     @Order(1)
-    @DisplayName("a carga de demonstracao deixou o servico no ar")
+    @DisplayName("a carga de demonstração deixou o serviço no ar")
     void identidadeDoServico() throws Exception {
         mvc.perform(get("/api/v1/publico/cineserra/identidade"))
                 .andExpect(status().isOk())
@@ -80,7 +80,7 @@ class AplicacaoTest {
 
     @Test
     @Order(2)
-    @DisplayName("o catalogo publico lista so o que tem licenca vigente")
+    @DisplayName("o catálogo público lista só o que tem licença vigente")
     void catalogoPublico() throws Exception {
         var resposta = mvc.perform(get("/api/v1/publico/cineserra/catalogo"))
                 .andExpect(status().isOk())
@@ -90,9 +90,9 @@ class AplicacaoTest {
         var titulos = json.readTree(resposta);
         assertThat(titulos).isNotEmpty();
 
-        // De proposito um filme, e nao a serie: serie so reproduz com
-        // temporada e episodio informados, e o teste de play quer exercitar o
-        // caminho feliz, nao a recusa por falta de episodio.
+        // De proposito um filme, e não a série: série só reproduz com
+        // temporada e episódio informados, e o teste de play quer exercitar o
+        // caminho feliz, não a recusa por falta de episódio.
         for (var titulo : titulos) {
             if ("FILME".equals(titulo.get("tipo").asText())) {
                 tituloId = titulo.get("id").asText();
@@ -101,13 +101,13 @@ class AplicacaoTest {
         }
         assertThat(tituloId).isNotNull();
 
-        // A vista publica nao pode carregar referencia de video nem licenca.
+        // A vista pública não pode carregar referência de vídeo nem licença.
         assertThat(resposta).doesNotContain("referenciaDoVideo").doesNotContain("licencaId");
     }
 
     @Test
     @Order(3)
-    @DisplayName("a tabela de precos vem do banco, nao do codigo")
+    @DisplayName("a tabela de preços vem do banco, não do código")
     void planosPublicos() throws Exception {
         mvc.perform(get("/api/v1/publico/cineserra/planos"))
                 .andExpect(status().isOk())
@@ -117,7 +117,7 @@ class AplicacaoTest {
 
     @Test
     @Order(4)
-    @DisplayName("servico que nao existe devolve 404")
+    @DisplayName("serviço que não existe devolve 404")
     void servicoInexistente() throws Exception {
         mvc.perform(get("/api/v1/publico/naoexiste/identidade"))
                 .andExpect(status().isNotFound())
@@ -159,14 +159,14 @@ class AplicacaoTest {
 
     @Test
     @Order(7)
-    @DisplayName("area logada sem token devolve 401")
+    @DisplayName("área logada sem token devolve 401")
     void areaLogadaExigeToken() throws Exception {
         mvc.perform(get("/api/v1/me/perfis")).andExpect(status().isUnauthorized());
     }
 
     @Test
     @Order(8)
-    @DisplayName("o espectador enxerga os proprios perfis")
+    @DisplayName("o espectador enxerga os próprios perfis")
     void perfisDoEspectador() throws Exception {
         mvc.perform(get("/api/v1/me/perfis").header("Authorization", "Bearer " + tokenDoEspectador))
                 .andExpect(status().isOk())
@@ -175,7 +175,7 @@ class AplicacaoTest {
 
     @Test
     @Order(9)
-    @DisplayName("o espectador nao entra no painel do operador")
+    @DisplayName("o espectador não entra no painel do operador")
     void espectadorNaoEntraNoPainel() throws Exception {
         mvc.perform(get("/api/v1/painel/licencas")
                         .header("Authorization", "Bearer " + tokenDoEspectador))
@@ -184,7 +184,7 @@ class AplicacaoTest {
 
     @Test
     @Order(10)
-    @DisplayName("play autorizado devolve manifesto e abre sessao")
+    @DisplayName("play autorizado devolve manifesto e abre sessão")
     void playAutorizado() throws Exception {
         mvc.perform(post("/api/v1/reproducao/token")
                         .header("Authorization", "Bearer " + tokenDoEspectador)
@@ -198,13 +198,13 @@ class AplicacaoTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.sessaoId").isNotEmpty())
                 .andExpect(jsonPath("$.manifesto").isNotEmpty())
-                // O plano Familia limita em Full HD: pedir 4K nao entrega 4K.
+                // O plano Família limita em Full HD: pedir 4K não entrega 4K.
                 .andExpect(jsonPath("$.qualidade").value("FULL_HD"));
     }
 
     @Test
     @Order(11)
-    @DisplayName("play de titulo inexistente e recusado com o motivo certo")
+    @DisplayName("play de título inexistente e recusado com o motivo certo")
     void playDeTituloInexistente() throws Exception {
         mvc.perform(post("/api/v1/reproducao/token")
                         .header("Authorization", "Bearer " + tokenDoEspectador)
@@ -219,7 +219,7 @@ class AplicacaoTest {
 
     @Test
     @Order(12)
-    @DisplayName("o dono do servico entra no painel e ve as licencas")
+    @DisplayName("o dono do serviço entra no painel e ve as licenças")
     void donoVeOPainel() throws Exception {
         var corpo = mvc.perform(post("/api/v1/auth/login")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -238,7 +238,7 @@ class AplicacaoTest {
 
     @Test
     @Order(13)
-    @DisplayName("o painel avisa da licenca que vence em dois dias")
+    @DisplayName("o painel avisa da licença que vence em dois dias")
     void painelAvisaVencimento() throws Exception {
         mvc.perform(get("/api/v1/painel/licencas/a-vencer")
                         .header("Authorization", "Bearer " + tokenDoDono))
@@ -249,7 +249,7 @@ class AplicacaoTest {
 
     @Test
     @Order(14)
-    @DisplayName("o dono nao abre cliente novo: isso e da plataforma")
+    @DisplayName("o dono não abre cliente novo: isso e da plataforma")
     void donoNaoAbreCliente() throws Exception {
         mvc.perform(get("/api/v1/plataforma/clientes")
                         .header("Authorization", "Bearer " + tokenDoDono))
@@ -258,7 +258,7 @@ class AplicacaoTest {
 
     @Test
     @Order(15)
-    @DisplayName("webhook sem autenticacao e recusado")
+    @DisplayName("webhook sem autenticação e recusado")
     void webhookSemAutenticacao() throws Exception {
         mvc.perform(post("/api/v1/webhooks/pagamento")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -269,7 +269,7 @@ class AplicacaoTest {
 
     @Test
     @Order(16)
-    @DisplayName("o simulador de pagamento responde em modo demonstracao")
+    @DisplayName("o simulador de pagamento responde em modo demonstração")
     void simuladorDePagamento() throws Exception {
         mvc.perform(get("/api/v1/publico/checkout-simulado")
                         .param("referencia", "demo_teste")
@@ -279,7 +279,7 @@ class AplicacaoTest {
 
     @Test
     @Order(17)
-    @DisplayName("o assinante exporta os proprios dados")
+    @DisplayName("o assinante exporta os próprios dados")
     void exportacaoLgpd() throws Exception {
         mvc.perform(get("/api/v1/me/meus-dados")
                         .header("Authorization", "Bearer " + tokenDoEspectador))
@@ -290,7 +290,7 @@ class AplicacaoTest {
 
     @Test
     @Order(18)
-    @DisplayName("nao apaga conta com assinatura ativa")
+    @DisplayName("não apaga conta com assinatura ativa")
     void naoApagaContaComAssinatura() throws Exception {
         mvc.perform(delete("/api/v1/me/minha-conta")
                         .header("Authorization", "Bearer " + tokenDoEspectador))
@@ -309,7 +309,7 @@ class AplicacaoTest {
 
     @Test
     @Order(20)
-    @DisplayName("a documentacao da API esta publicada")
+    @DisplayName("a documentacao da API está publicada")
     void documentacaoPublicada() throws Exception {
         mvc.perform(get("/v3/api-docs"))
                 .andExpect(status().isOk())
