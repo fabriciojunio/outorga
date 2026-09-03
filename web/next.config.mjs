@@ -2,8 +2,8 @@
 const nextConfig = {
   reactStrictMode: true,
 
-  // Source map em producao entrega o codigo original para qualquer um que
-  // abrir o inspetor. Nao ha ganho que compense.
+  // Source map em produção entrega o código original para qualquer um que
+  // abrir o inspetor. Não há ganho que compense.
   productionBrowserSourceMaps: false,
 
   poweredByHeader: false,
@@ -26,9 +26,9 @@ const nextConfig = {
             value: 'max-age=31536000; includeSubDomains',
           },
           {
-            // O player precisa buscar manifesto e segmento de video no
-            // proprio provedor, por isso media-src e connect-src sao mais
-            // largos que o resto. O que nao entra e script de terceiro.
+            // O player precisa buscar manifesto e segmento de vídeo no
+            // próprio provedor, por isso media-src e connect-src são mais
+            // largos que o resto. O que não entra é script de terceiro.
             key: 'Content-Security-Policy',
             value: [
               "default-src 'self'",
