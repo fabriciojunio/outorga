@@ -20,7 +20,7 @@ import java.util.Set;
 import java.util.UUID;
 
 /**
- * Operacao da plataforma: abrir, suspender e encerrar cliente. So o
+ * Operação da plataforma: abrir, suspender e encerrar cliente. So o
  * ADMIN_PLATAFORMA entra aqui.
  */
 public class AdministrarTenants {

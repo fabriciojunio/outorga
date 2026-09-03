@@ -15,12 +15,12 @@ import java.util.Set;
 import java.util.UUID;
 
 /**
- * Raiz do agregado de catalogo. Um titulo e um filme ou uma serie.
+ * Raiz do agregado de catálogo. Um título e um filme ou uma série.
  *
- * O metodo que importa aqui e {@link #publicar(Licenca, Instant)}: nao existe
- * outro caminho para o status PUBLICADO. Se a licenca nao estiver vigente, o
- * titulo nao vai ao ar, e nenhum campo publico permite forcar o status por
- * fora. Esse e o "gate de conteudo" do blueprint, escrito como invariante.
+ * O metodo que importa aqui e {@link #publicar(Licença, Instant)}: não existe
+ * outro caminho para o status PUBLICADO. Se a licença não estiver vigente, o
+ * título não vai ao ar, e nenhum campo público permite forcar o status por
+ * fora. Esse e o "gate de conteúdo" do blueprint, escrito como invariante.
  */
 public class Titulo {
 
@@ -59,7 +59,7 @@ public class Titulo {
         }
         if (duracao == null || duracao.isZero() || duracao.isNegative()) {
             return Result.erro(new FalhaDeNegocio("TITULO_SEM_DURACAO",
-                    "Filme precisa de duracao"));
+                    "Filme precisa de duração"));
         }
         var titulo = new Titulo(UUID.randomUUID(), tenantId, TipoDeTitulo.FILME, nome.trim(), classificacao);
         titulo.duracao = duracao;
@@ -79,42 +79,42 @@ public class Titulo {
                                                         ClassificacaoIndicativa classificacao) {
         if (tenantId == null) {
             return Optional.of(new FalhaDeNegocio("TITULO_SEM_TENANT",
-                    "Titulo precisa pertencer a um tenant"));
+                    "Título precisa pertencer a um tenant"));
         }
         if (nome == null || nome.isBlank()) {
-            return Optional.of(new FalhaDeNegocio("TITULO_SEM_NOME", "Informe o nome do titulo"));
+            return Optional.of(new FalhaDeNegocio("TITULO_SEM_NOME", "Informe o nome do título"));
         }
         if (classificacao == null) {
             return Optional.of(new FalhaDeNegocio("TITULO_SEM_CLASSIFICACAO",
-                    "Informe a classificacao indicativa"));
+                    "Informe a classificação indicativa"));
         }
         return Optional.empty();
     }
 
     /**
-     * Unica porta para o ar. Recusa quando a licenca nao pertence ao tenant,
-     * nao esta vigente na data ou quando nao ha video para reproduzir.
+     * Única porta para o ar. Recusa quando a licença não pertence ao tenant,
+     * não está vigente na data ou quando não ha vídeo para reproduzir.
      */
     public Result<Titulo> publicar(Licenca licenca, Instant agora) {
         if (licenca == null) {
             return Result.erro(new FalhaDeNegocio("PUBLICACAO_SEM_LICENCA",
-                    "Vincule uma licenca antes de publicar"));
+                    "Vincule uma licença antes de publicar"));
         }
         if (!licenca.tenantId().equals(tenantId)) {
             return Result.erro(new FalhaDeNegocio("LICENCA_DE_OUTRO_TENANT",
-                    "A licenca informada pertence a outro tenant"));
+                    "A licença informada pertence a outro tenant"));
         }
         if (!licenca.vigenteEm(agora)) {
             return Result.erro(new FalhaDeNegocio("LICENCA_NAO_VIGENTE",
-                    "A licenca nao esta vigente nesta data")
+                    "A licença não está vigente nesta data")
                     .com("statusDaLicenca", licenca.status().name())
                     .com("inicio", licenca.janela().inicio().toString()));
         }
         if (!temConteudoReproduzivel()) {
             return Result.erro(new FalhaDeNegocio("TITULO_SEM_VIDEO",
                     tipo == TipoDeTitulo.FILME
-                            ? "Envie o video do filme antes de publicar"
-                            : "A serie precisa de ao menos um episodio com video"));
+                            ? "Envie o vídeo do filme antes de publicar"
+                            : "A série precisa de ao menos um episódio com vídeo"));
         }
         this.licencaId = licenca.id();
         this.status = StatusDePublicacao.PUBLICADO;
@@ -124,9 +124,9 @@ public class Titulo {
     }
 
     /**
-     * Rodada de conferencia dos direitos. Tira do ar o que perdeu licenca e
-     * devolve ao ar o que foi bloqueado e voltou a ter licenca vigente.
-     * Retorna verdadeiro quando houve mudanca de status.
+     * Rodada de conferencia dos direitos. Tira do ar o que perdeu licença e
+     * devolve ao ar o que foi bloqueado e voltou a ter licença vigente.
+     * Retorna verdadeiro quando houve mudança de status.
      */
     public boolean revisarDireitos(Licenca licenca, Instant agora) {
         boolean vigente = licenca != null && licenca.vigenteEm(agora);
@@ -134,7 +134,7 @@ public class Titulo {
         if (status == StatusDePublicacao.PUBLICADO && !vigente) {
             this.status = StatusDePublicacao.BLOQUEADO_POR_DIREITO;
             this.motivoDoBloqueio = licenca == null
-                    ? "Licenca vinculada nao encontrada"
+                    ? "Licença vinculada não encontrada"
                     : motivoPara(licenca, agora);
             return true;
         }
@@ -149,18 +149,18 @@ public class Titulo {
 
     private static String motivoPara(Licenca licenca, Instant agora) {
         return switch (licenca.status()) {
-            case RESCINDIDA -> "Licenca rescindida";
-            case RASCUNHO -> "Licenca sem comprovacao anexada";
+            case RESCINDIDA -> "Licença rescindida";
+            case RASCUNHO -> "Licença sem comprovacao anexada";
             case VIGENTE -> licenca.janela().expiradaEm(agora)
                     ? "Janela de licenciamento vencida"
-                    : "Janela de licenciamento ainda nao comecou";
+                    : "Janela de licenciamento ainda não comecou";
         };
     }
 
     public Result<Titulo> despublicar(String motivo) {
         if (status != StatusDePublicacao.PUBLICADO) {
             return Result.erro(new FalhaDeNegocio("TITULO_NAO_PUBLICADO",
-                    "So da para despublicar um titulo no ar"));
+                    "So da para despublicar um título no ar"));
         }
         this.status = StatusDePublicacao.DESPUBLICADO;
         this.motivoDoBloqueio = motivo;
@@ -170,7 +170,7 @@ public class Titulo {
     public Result<Titulo> adicionarTemporada(Temporada temporada) {
         if (tipo != TipoDeTitulo.SERIE) {
             return Result.erro(new FalhaDeNegocio("TEMPORADA_EM_FILME",
-                    "Filme nao tem temporada"));
+                    "Filme não tem temporada"));
         }
         boolean duplicada = temporadas.stream().anyMatch(t -> t.numero() == temporada.numero());
         if (duplicada) {
@@ -185,11 +185,11 @@ public class Titulo {
     public Result<Titulo> definirVideoDoFilme(String referencia) {
         if (tipo != TipoDeTitulo.FILME) {
             return Result.erro(new FalhaDeNegocio("VIDEO_DIRETO_EM_SERIE",
-                    "Em serie o video fica no episodio"));
+                    "Em série o vídeo fica no episódio"));
         }
         if (referencia == null || referencia.isBlank()) {
             return Result.erro(new FalhaDeNegocio("VIDEO_SEM_REFERENCIA",
-                    "Informe a referencia do video no provedor"));
+                    "Informe a referência do vídeo no provedor"));
         }
         this.referenciaDoVideo = referencia.trim();
         return Result.ok(this);
@@ -206,7 +206,7 @@ public class Titulo {
         return status == StatusDePublicacao.PUBLICADO;
     }
 
-    /** Controle parental: o perfil so ve o que cabe no teto dele. */
+    /** Controle parental: o perfil só ve o que cabe no teto dele. */
     public boolean visivelPara(ClassificacaoIndicativa tetoDoPerfil) {
         return classificacao.liberadaPara(tetoDoPerfil);
     }

@@ -144,7 +144,7 @@ class PoliticaDeReproducaoTest {
         var decisao = politica.decidir(contexto());
         assertThat(decisao.falha().orElseThrow().codigo()).isEqualTo("TITULO_FORA_DO_AR");
         assertThat(decisao.falha().orElseThrow().mensagem())
-                .isEqualTo("Titulo indisponivel por questao de direitos");
+                .isEqualTo("Título indisponível por questão de direitos");
     }
 
     /**

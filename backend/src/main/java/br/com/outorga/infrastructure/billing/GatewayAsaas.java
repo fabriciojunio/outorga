@@ -22,14 +22,14 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * Cobranca pelo Asaas.
+ * Cobrança pelo Asaas.
  *
- * Escolhido por um motivo comercial antes de tecnico: nao tem mensalidade nem
- * taxa de adesao. Enquanto o produto nao vende, o gateway nao cobra, e isso e
+ * Escolhido por um motivo comercial antes de tecnico: não tem mensalidade nem
+ * taxa de adesao. Enquanto o produto não vende, o gateway não cobra, e isso e
  * o que permite deixar a plataforma no ar antes do primeiro cliente.
  *
- * Nenhum dado de cartao passa por este processo. O que sai daqui e um pedido
- * de cobranca; o que volta e uma URL de fatura e uma referencia.
+ * Nenhum dado de cartão passa por este processo. O que sai daqui e um pedido
+ * de cobrança; o que volta e uma URL de fatura e uma referência.
  */
 public class GatewayAsaas implements GatewayDePagamento {
 
@@ -65,8 +65,8 @@ public class GatewayAsaas implements GatewayDePagamento {
 
             var corpo = new LinkedHashMap<String, Object>();
             corpo.put("customer", clienteId.valorOuFalha());
-            // UNDEFINED deixa o pagador escolher entre PIX, boleto e cartao na
-            // propria fatura. Fixar a forma aqui so reduz conversao.
+            // UNDEFINED deixa o pagador escolher entre PIX, boleto e cartão na
+            // própria fatura. Fixar a forma aqui só reduz conversao.
             corpo.put("billingType", "UNDEFINED");
             corpo.put("value", valorEmReais(pedido.valor()));
             corpo.put("nextDueDate", vencimento.toString());
@@ -78,7 +78,7 @@ public class GatewayAsaas implements GatewayDePagamento {
                     .retrieve().body(JsonNode.class);
             if (resposta == null || !resposta.hasNonNull("id")) {
                 return Result.erro(new FalhaDeNegocio("GATEWAY_SEM_RESPOSTA",
-                        "O gateway nao devolveu a assinatura criada"));
+                        "O gateway não devolveu a assinatura criada"));
             }
 
             var referencia = resposta.get("id").asText();
@@ -87,7 +87,7 @@ public class GatewayAsaas implements GatewayDePagamento {
         } catch (Exception e) {
             log.error("Falha ao abrir assinatura no gateway", e);
             return Result.erro(new FalhaDeNegocio("GATEWAY_INDISPONIVEL",
-                    "Nao foi possivel abrir a cobranca agora. Tente de novo em instantes"));
+                    "Não foi possível abrir a cobrança agora. Tente de novo em instantes"));
         }
     }
 
@@ -108,12 +108,12 @@ public class GatewayAsaas implements GatewayDePagamento {
         var criado = http.post().uri("/customers").body(corpo).retrieve().body(JsonNode.class);
         if (criado == null || !criado.hasNonNull("id")) {
             return Result.erro(new FalhaDeNegocio("GATEWAY_CLIENTE",
-                    "Nao foi possivel cadastrar o pagador no gateway"));
+                    "Não foi possível cadastrar o pagador no gateway"));
         }
         return Result.ok(criado.get("id").asText());
     }
 
-    /** A URL que o assinante abre para pagar a primeira cobranca do ciclo. */
+    /** A URL que o assinante abre para pagar a primeira cobrança do ciclo. */
     private Map<String, String> primeiraFatura(String assinaturaNoGateway) {
         try {
             var pagamentos = http.get().uri("/subscriptions/{id}/payments", assinaturaNoGateway)
@@ -127,7 +127,7 @@ public class GatewayAsaas implements GatewayDePagamento {
                 return saida;
             }
         } catch (Exception e) {
-            log.warn("Assinatura criada mas a fatura ainda nao existe: {}", e.getMessage());
+            log.warn("Assinatura criada mas a fatura ainda não existe: {}", e.getMessage());
         }
         return Map.of();
     }
@@ -140,12 +140,12 @@ public class GatewayAsaas implements GatewayDePagamento {
         } catch (Exception e) {
             log.error("Falha ao cancelar assinatura {} no gateway", referenciaNoGateway, e);
             return Result.erro(new FalhaDeNegocio("GATEWAY_INDISPONIVEL",
-                    "O cancelamento foi registrado aqui, mas o gateway nao respondeu"));
+                    "O cancelamento foi registrado aqui, mas o gateway não respondeu"));
         }
     }
 
     /**
-     * O Asaas manda um token fixo no cabecalho de cada webhook. Comparacao em
+     * O Asaas manda um token fixo no cabeçalho de cada webhook. Comparacao em
      * tempo constante: comparar segredo com equals vaza o prefixo correto para
      * quem souber medir.
      */
@@ -193,7 +193,7 @@ public class GatewayAsaas implements GatewayDePagamento {
             return Result.ok(new EventoDeCobranca(tipo, referencia, valor, evento));
         } catch (Exception e) {
             return Result.erro(new FalhaDeNegocio("WEBHOOK_ILEGIVEL",
-                    "Corpo do webhook nao pode ser lido"));
+                    "Corpo do webhook não pode ser lido"));
         }
     }
 

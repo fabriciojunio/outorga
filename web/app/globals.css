@@ -1,12 +1,15 @@
 /*
  * Identidade do Outorga TV.
  *
- * A referencia e um outorga de estrada no fim da tarde: fundo escuro com um
- * pouco de azul, luz ambar cortando, e o horizonte como linha que separa as
- * secoes. Nada de gradiente roxo nem cartao com sombra difusa.
+ * A referência é um mirante de estrada no fim da tarde: fundo escuro com um
+ * pouco de azul, luz âmbar cortando, e o horizonte como linha que separa as
+ * seções. Nada de gradiente roxo nem cartão com sombra difusa.
  *
- * As cores da marca vem do servidor por variavel CSS, porque cada cliente
- * pinta o proprio servico. Os valores aqui sao so o ponto de partida.
+ * O nome do produto mudou, a referência visual não: a palavra "mirante" aqui
+ * é a paisagem que deu origem à paleta, e não o nome antigo do sistema.
+ *
+ * As cores da marca vêm do servidor por variável CSS, porque cada cliente
+ * pinta o próprio serviço. Os valores aqui são só o ponto de partida.
  */
 
 :root {
@@ -444,7 +447,7 @@ textarea {
 .abertura {
   padding: 68px 0 54px;
   border-bottom: 1px solid var(--borda);
-  /* A linha ambar no rodape da secao e o horizonte visto do outorga. */
+  /* A linha âmbar no rodapé da seção é o horizonte visto do mirante. */
   background:
     radial-gradient(1100px 340px at 50% -180px, rgba(230, 184, 0, 0.09), transparent 70%);
 }

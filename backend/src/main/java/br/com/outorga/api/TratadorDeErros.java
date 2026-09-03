@@ -20,9 +20,9 @@ import java.util.UUID;
 /**
  * Erros que escapam do caminho feliz.
  *
- * Regra da casa: o cliente recebe uma mensagem util e um codigo; o stack trace
+ * Regra da casa: o cliente recebe uma mensagem útil e um código; o stack trace
  * fica no log com um identificador que aparece nos dois lados. Detalhe de
- * excecao vazado na resposta e mapa do sistema entregue de graca.
+ * exceção vazado na resposta e mapa do sistema entregue de graca.
  */
 @RestControllerAdvice
 public class TratadorDeErros {
@@ -43,13 +43,13 @@ public class TratadorDeErros {
             MethodArgumentTypeMismatchException.class})
     public ResponseEntity<Respostas.Erro> requisicaoMalFormada(Exception e) {
         return ResponseEntity.badRequest().body(new Respostas.Erro(
-                "REQUISICAO_INVALIDA", "Nao foi possivel ler a requisicao", Map.of()));
+                "REQUISICAO_INVALIDA", "Não foi possível ler a requisicao", Map.of()));
     }
 
     @ExceptionHandler(AccessDeniedException.class)
     public ResponseEntity<Respostas.Erro> semPermissao(AccessDeniedException e) {
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new Respostas.Erro(
-                "SEM_PERMISSAO", "Sem permissao para esta operacao", Map.of()));
+                "SEM_PERMISSAO", "Sem permissão para está operação", Map.of()));
     }
 
     @ExceptionHandler(Exception.class)
@@ -59,7 +59,7 @@ public class TratadorDeErros {
                 requisicao.getRequestURI(), e);
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new Respostas.Erro(
                 "ERRO_INTERNO",
-                "Algo deu errado do nosso lado. Guarde o codigo " + identificador
+                "Algo deu errado do nosso lado. Guarde o código " + identificador
                         + " se precisar falar com o suporte",
                 Map.of("identificador", identificador)));
     }

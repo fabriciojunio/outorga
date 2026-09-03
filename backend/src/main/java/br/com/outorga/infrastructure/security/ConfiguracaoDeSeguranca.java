@@ -15,11 +15,11 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import java.util.List;
 
 /**
- * Seguranca HTTP.
+ * Segurança HTTP.
  *
- * A API e sem estado e sem cookie de sessao, entao CSRF nao se aplica e fica
- * desligado por escolha, nao por esquecimento. O que protege escrita e o
- * token no cabecalho, que nenhum navegador manda sozinho.
+ * A API e sem estado e sem cookie de sessão, então CSRF não se aplica e fica
+ * desligado por escolha, não por esquecimento. O que protege escrita e o
+ * token no cabeçalho, que nenhum navegador manda sozinho.
  */
 @Configuration
 @EnableMethodSecurity
@@ -38,8 +38,8 @@ public class ConfiguracaoDeSeguranca {
         http
                 .csrf(csrf -> csrf.disable())
                 // Sem isto o Spring devolve 403 para quem nem mandou token, e
-                // o cliente nao consegue distinguir "faca login" de "voce nao
-                // tem permissao", que sao coisas diferentes na tela.
+                // o cliente não consegue distinguir "faca login" de "você não
+                // tem permissão", que são coisas diferentes na tela.
                 .exceptionHandling(erros -> erros
                         .authenticationEntryPoint(new RespostaDeNaoAutenticado()))
                 .cors(Customizer.withDefaults())

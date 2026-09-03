@@ -8,7 +8,7 @@ import java.util.Set;
 import java.util.UUID;
 
 /**
- * Emissao e conferencia dos tokens de sessao. O refresh e rotativo: cada uso
+ * Emissao e conferencia dos tokens de sessão. O refresh e rotativo: cada uso
  * queima o anterior, para que um token vazado tenha janela curta e o reuso
  * apareca.
  */

@@ -13,13 +13,13 @@ import java.time.Clock;
 import java.util.Map;
 
 /**
- * Webhook de cobranca.
+ * Webhook de cobrança.
  *
- * Duas coisas nao sao negociaveis aqui. A assinatura do webhook e conferida
- * antes de qualquer leitura do corpo, porque este endereco e publico. E o
+ * Duas coisas não são negociaveis aqui. A assinatura do webhook e conferida
+ * antes de qualquer leitura do corpo, porque este endereço e público. E o
  * processamento e idempotente por natureza: confirmar duas vezes o mesmo
- * pagamento estende o ciclo a partir do fim vigente, entao reentrega de
- * webhook nao vira mes de graca.
+ * pagamento estende o ciclo a partir do fim vigente, então reentrega de
+ * webhook não vira mes de graca.
  */
 public class ProcessarEventoDeCobranca {
 
@@ -41,7 +41,7 @@ public class ProcessarEventoDeCobranca {
     public Result<String> executar(Map<String, String> cabecalhos, String corpo) {
         if (!gateway.webhookAutentico(cabecalhos, corpo)) {
             return Result.erro(new FalhaDeNegocio("WEBHOOK_NAO_AUTENTICO",
-                    "Assinatura do webhook nao confere"));
+                    "Assinatura do webhook não confere"));
         }
 
         var leitura = gateway.interpretar(corpo);
@@ -56,9 +56,9 @@ public class ProcessarEventoDeCobranca {
 
         var achada = assinaturas.porReferenciaNoGateway(evento.referenciaNoGateway());
         if (achada.isEmpty()) {
-            // Nao e erro do gateway: pode ser cobranca de outro ambiente
+            // Não e erro do gateway: pode ser cobrança de outro ambiente
             // apontando para a mesma URL. Responder 200 evita reentrega infinita.
-            return Result.ok("assinatura nao encontrada para " + evento.referenciaNoGateway());
+            return Result.ok("assinatura não encontrada para " + evento.referenciaNoGateway());
         }
 
         var assinatura = achada.get();

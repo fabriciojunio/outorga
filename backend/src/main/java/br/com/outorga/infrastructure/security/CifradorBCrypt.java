@@ -7,11 +7,11 @@ import org.springframework.stereotype.Component;
 /**
  * BCrypt com custo 12.
  *
- * Argon2id seria a escolha de manual, e o dominio nao muda se trocarmos: e um
- * adaptador atras de uma interface. O que decidiu foi a memoria. A instancia
+ * Argon2id seria a escolha de manual, e o dominio não muda se trocarmos: e um
+ * adaptador atrás de uma interface. O que decidiu foi a memória. A instancia
  * gratuita onde isso roda tem 512 MB, e o Argon2 com parametro decente come
- * dezenas de MB por hash simultaneo. Custo 12 de BCrypt gasta CPU, nao RAM, e
- * cabe. Quando o servidor crescer, esta classe e o unico lugar a mexer.
+ * dezenas de MB por hash simultaneo. Custo 12 de BCrypt gasta CPU, não RAM, e
+ * cabe. Quando o servidor crescer, está classe e o único lugar a mexer.
  */
 @Component
 public class CifradorBCrypt implements CifradorDeSenha {
@@ -33,7 +33,7 @@ public class CifradorBCrypt implements CifradorDeSenha {
         try {
             return codificador.matches(senhaEmTextoClaro, hash);
         } catch (IllegalArgumentException e) {
-            // Hash em formato invalido, como o marcador de conta anonimizada.
+            // Hash em formato inválido, como o marcador de conta anonimizada.
             return false;
         }
     }

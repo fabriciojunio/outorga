@@ -9,7 +9,7 @@ import java.time.Clock;
 import java.util.Map;
 
 /**
- * Passa o pente nas assinaturas que venceram e nao voltaram. Sem isso, quem
+ * Passa o pente nas assinaturas que venceram e não voltaram. Sem isso, quem
  * cancelou em janeiro continua assistindo em marco, porque nada no sistema
  * repara sozinho na passagem do tempo.
  */

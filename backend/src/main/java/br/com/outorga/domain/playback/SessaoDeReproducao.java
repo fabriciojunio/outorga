@@ -5,11 +5,11 @@ import java.time.Instant;
 import java.util.UUID;
 
 /**
- * Sessao aberta de reproducao. E o que sustenta o limite de telas.
+ * Sessão aberta de reprodução. E o que sustenta o limite de telas.
  *
- * O player manda um sinal de vida periodico. Sessao sem sinal por mais que
+ * O player manda um sinal de vida periodico. Sessão sem sinal por mais que
  * {@link #TOLERANCIA} e considerada morta, porque fechar o app na marra e
- * perder a rede sao a regra, nao a excecao, e ninguem quer ligar para o
+ * perder a rede são a regra, não a exceção, e ninguém quer ligar para o
  * suporte porque o celular que caiu ontem ainda ocupa uma tela.
  */
 public class SessaoDeReproducao {

@@ -6,8 +6,8 @@ import java.time.Instant;
 import java.util.UUID;
 
 /**
- * Decisao positiva de reproducao. Nao carrega URL: quem transforma a
- * referencia em endereco assinado e a infraestrutura, fora do dominio.
+ * Decisão positiva de reprodução. Não carrega URL: quem transforma a
+ * referência em endereço assinado e a infraestrutura, fora do dominio.
  */
 public record Autorizacao(
         UUID sessaoId,

@@ -26,12 +26,12 @@ import java.util.stream.Collectors;
 /**
  * Tokens de acesso e refresh.
  *
- * O acesso e um JWT curto que ninguem consulta no banco: e essa a razao de ser
+ * O acesso e um JWT curto que ninguém consulta no banco: e essa a razão de ser
  * dele. O refresh e longo, rotaciona a cada uso e tem estado no banco, porque
- * um token de 14 dias sem revogacao possivel e um problema esperando data.
+ * um token de 14 dias sem revogacao possível e um problema esperando data.
  *
- * Deteccao de reuso: se um refresh ja marcado como usado voltar, a sessao
- * inteira daquele usuario e derrubada. Ou o token vazou, ou o cliente esta com
+ * Deteccao de reuso: se um refresh já marcado como usado voltar, a sessão
+ * inteira daquele usuário e derrubada. Ou o token vazou, ou o cliente está com
  * defeito; nos dois casos o certo e cortar e pedir login de novo.
  */
 @Component
@@ -108,7 +108,7 @@ public class EmissorDeTokenJwt implements EmissorDeToken {
             var decodificado = verificador.verify(token);
             if (!TIPO_ACESSO.equals(decodificado.getClaim(CLAIM_TIPO).asString())) {
                 return Result.erro(new FalhaDeNegocio("TOKEN_DE_TIPO_ERRADO",
-                        "Use o token de acesso neste cabecalho"));
+                        "Use o token de acesso neste cabeçalho"));
             }
             return Result.ok(new Conteudo(
                     UUID.fromString(decodificado.getClaim(CLAIM_TENANT).asString()),
@@ -116,7 +116,7 @@ public class EmissorDeTokenJwt implements EmissorDeToken {
                     papeisDe(decodificado.getClaim(CLAIM_PAPEIS).asList(String.class)),
                     decodificado.getId()));
         } catch (JWTVerificationException | IllegalArgumentException e) {
-            return Result.erro(new FalhaDeNegocio("TOKEN_INVALIDO", "Sessao invalida ou expirada"));
+            return Result.erro(new FalhaDeNegocio("TOKEN_INVALIDO", "Sessão inválida ou expirada"));
         }
     }
 
@@ -126,11 +126,11 @@ public class EmissorDeTokenJwt implements EmissorDeToken {
         try {
             decodificado = verificador.verify(refreshToken);
         } catch (JWTVerificationException e) {
-            return Result.erro(new FalhaDeNegocio("TOKEN_INVALIDO", "Sessao invalida ou expirada"));
+            return Result.erro(new FalhaDeNegocio("TOKEN_INVALIDO", "Sessão inválida ou expirada"));
         }
         if (!TIPO_REFRESH.equals(decodificado.getClaim(CLAIM_TIPO).asString())) {
             return Result.erro(new FalhaDeNegocio("TOKEN_DE_TIPO_ERRADO",
-                    "Este endereco espera o token de renovacao"));
+                    "Este endereço espera o token de renovação"));
         }
 
         var jti = UUID.fromString(decodificado.getId());
@@ -150,17 +150,17 @@ public class EmissorDeTokenJwt implements EmissorDeToken {
                 .optional();
 
         if (estado.isEmpty()) {
-            return Result.erro(new FalhaDeNegocio("TOKEN_INVALIDO", "Sessao invalida ou expirada"));
+            return Result.erro(new FalhaDeNegocio("TOKEN_INVALIDO", "Sessão inválida ou expirada"));
         }
         if (estado.get().revogadoEm() != null || !agora.isBefore(estado.get().expiraEm())) {
-            return Result.erro(new FalhaDeNegocio("TOKEN_INVALIDO", "Sessao invalida ou expirada"));
+            return Result.erro(new FalhaDeNegocio("TOKEN_INVALIDO", "Sessão inválida ou expirada"));
         }
         if (estado.get().usadoEm() != null) {
-            log.warn("Refresh reaproveitado para o usuario {}. Derrubando todas as sessoes dele.",
+            log.warn("Refresh reaproveitado para o usuário {}. Derrubando todas as sessões dele.",
                     usuarioId);
             revogar(usuarioId);
             return Result.erro(new FalhaDeNegocio("TOKEN_REAPROVEITADO",
-                    "Sessao encerrada por seguranca. Entre de novo"));
+                    "Sessão encerrada por segurança. Entre de novo"));
         }
 
         jdbc.sql("update refresh_tokens set usado_em = :agora where jti = :jti")
@@ -182,7 +182,7 @@ public class EmissorDeTokenJwt implements EmissorDeToken {
                 .update();
     }
 
-    /** Limpeza do que ja venceu, para a tabela nao crescer para sempre. */
+    /** Limpeza do que já venceu, para a tabela não crescer para sempre. */
     public int limparVencidos() {
         return jdbc.sql("delete from refresh_tokens where expira_em < :agora")
                 .param("agora", Timestamp.from(relogio.instant()))

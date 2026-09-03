@@ -12,9 +12,9 @@ import {
 /**
  * Painel do operador.
  *
- * A ordem das secoes na tela e a ordem do trabalho: primeiro o que esta
- * vencendo, depois as licencas, depois o catalogo. Quem abre o painel de
- * manha precisa ver o problema antes de ver a lista.
+ * A ordem das seções na tela é a ordem do trabalho: primeiro o que está
+ * vencendo, depois as licenças, depois o catálogo. Quem abre o painel de
+ * manhã precisa ver o problema antes de ver a lista.
  */
 export default function Painel() {
   const [licencas, setLicencas] = useState<LicencaVista[]>([]);
@@ -56,14 +56,14 @@ export default function Painel() {
   }
 
   async function rescindir(licencaId: string) {
-    const motivo = window.prompt('Motivo da rescisao:');
+    const motivo = window.prompt('Motivo da rescisão:');
     if (motivo === null) return;
     try {
       const saida = await painel.rescindir(licencaId, motivo);
       setErro(null);
       await recarregar();
       window.alert(
-        `Licenca rescindida. ${saida.titulosBloqueados} titulo(s) e ${saida.canaisTirados} canal(is) sairam do ar agora.`,
+        `Licença rescindida. ${saida.titulosBloqueados} título(s) e ${saida.canaisTirados} canal(is) saíram do ar agora.`,
       );
     } catch (e) {
       setErro((e as Error).message);
@@ -87,7 +87,7 @@ export default function Painel() {
           <h2 className="titulo-secao">Direitos vencendo nos proximos 60 dias</h2>
           {aVencer.length === 0 ? (
             <div className="aviso ok">
-              Nenhuma licenca vence nos proximos 60 dias. Tudo que esta no ar tem contrato em dia.
+              Nenhuma licença vence nos proximos 60 dias. Tudo que está no ar tem contrato em dia.
             </div>
           ) : (
             <div className="rolagem">
@@ -97,7 +97,7 @@ export default function Painel() {
                     <th>Titular</th>
                     <th>Contrato</th>
                     <th>Faltam</th>
-                    <th>Titulos afetados</th>
+                    <th>Títulos afetados</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -124,14 +124,14 @@ export default function Painel() {
 
       <section className="secao">
         <div className="envolucro">
-          <h2 className="titulo-secao">Licencas</h2>
+          <h2 className="titulo-secao">Licenças</h2>
           <div className="rolagem">
             <table className="tabela">
               <thead>
                 <tr>
                   <th>Titular</th>
                   <th>Contrato</th>
-                  <th>Territorio</th>
+                  <th>Território</th>
                   <th>Aparelhos</th>
                   <th>Vigencia</th>
                   <th>Status</th>
@@ -178,22 +178,22 @@ export default function Painel() {
             </table>
           </div>
           <p className="apagado" style={{ marginTop: 12 }}>
-            Rescindir tira do ar, na mesma hora, todo titulo e canal que dependia daquela licenca.
+            Rescindir tira do ar, na mesma hora, todo título e canal que dependia daquela licença.
           </p>
         </div>
       </section>
 
       <section className="secao">
         <div className="envolucro">
-          <h2 className="titulo-secao">Catalogo</h2>
+          <h2 className="titulo-secao">Catálogo</h2>
           <div className="rolagem">
             <table className="tabela">
               <thead>
                 <tr>
-                  <th>Titulo</th>
+                  <th>Título</th>
                   <th>Tipo</th>
-                  <th>Classificacao</th>
-                  <th>Situacao</th>
+                  <th>Classificação</th>
+                  <th>Situação</th>
                   <th />
                 </tr>
               </thead>

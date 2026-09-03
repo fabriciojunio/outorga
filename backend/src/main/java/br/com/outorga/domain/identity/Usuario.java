@@ -10,11 +10,11 @@ import java.util.Set;
 import java.util.UUID;
 
 /**
- * Usuario do sistema, seja operador de painel ou assinante. O que separa um
- * do outro e o papel, nao a tabela.
+ * Usuário do sistema, seja operador de painel ou assinante. O que separa um
+ * do outro e o papel, não a tabela.
  *
  * O bloqueio por tentativa erra para o lado seguro: conta bloqueada recusa
- * login mesmo com a senha certa, ate o prazo passar.
+ * login mesmo com a senha certa, até o prazo passar.
  */
 public class Usuario {
 
@@ -50,10 +50,10 @@ public class Usuario {
                                         Set<Papel> papeis, Instant agora) {
         if (tenantId == null) {
             return Result.erro(new FalhaDeNegocio("USUARIO_SEM_TENANT",
-                    "Usuario precisa pertencer a um tenant"));
+                    "Usuário precisa pertencer a um tenant"));
         }
         if (email == null) {
-            return Result.erro(new FalhaDeNegocio("EMAIL_INVALIDO", "Informe um e-mail valido"));
+            return Result.erro(new FalhaDeNegocio("EMAIL_INVALIDO", "Informe um e-mail válido"));
         }
         if (senhaHash == null || senhaHash.isBlank()) {
             return Result.erro(new FalhaDeNegocio("SENHA_OBRIGATORIA", "Informe a senha"));
@@ -115,7 +115,7 @@ public class Usuario {
     }
 
     /**
-     * Atendimento a um pedido de exclusao. Troca o que identifica a pessoa por
+     * Atendimento a um pedido de exclusão. Troca o que identifica a pessoa por
      * um marcador e trava a conta. A linha continua existindo porque
      * assinatura, pagamento e auditoria apontam para ela; o que sai e o nome,
      * o e-mail e qualquer possibilidade de entrar de novo.

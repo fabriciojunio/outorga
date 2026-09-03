@@ -17,9 +17,9 @@ import java.util.stream.Collectors;
  * Conversoes entre o ResultSet e os tipos do dominio.
  *
  * Arranjo e jsonb chegam ao banco como literal com cast explicito no SQL
- * ({@code :papeis::text[]}). O driver aceita, o plano de execucao nao muda e
+ * ({@code :papeis::text[]}). O driver aceita, o plano de execucao não muda e
  * evita espalhar {@code createArrayOf} com Connection na mao por todo
- * repositorio. O preco e ter que escapar o literal, feito uma vez aqui.
+ * repositorio. O preço e ter que escapar o literal, feito uma vez aqui.
  */
 public final class Colunas {
 

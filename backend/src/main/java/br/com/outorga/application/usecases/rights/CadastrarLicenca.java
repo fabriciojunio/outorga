@@ -33,7 +33,7 @@ public class CadastrarLicenca {
 
     public Result<Licenca> executar(ContextoDoChamador chamador, Entrada entrada) {
         if (!chamador.podePublicarCatalogo()) {
-            return Result.erro(Falhas.semPermissao("cadastrar licenca"));
+            return Result.erro(Falhas.semPermissao("cadastrar licença"));
         }
 
         var territorios = new LinkedHashSet<Territorio>();
@@ -60,8 +60,8 @@ public class CadastrarLicenca {
 
         var licenca = criada.valorOuFalha();
 
-        // Cadastro com comprovacao ja em maos vira VIGENTE de uma vez; sem
-        // comprovacao a licenca nasce em rascunho e nao publica nada.
+        // Cadastro com comprovacao já em maos vira VIGENTE de uma vez; sem
+        // comprovacao a licença nasce em rascunho e não pública nada.
         if (entrada.comprovacaoUri() != null && !entrada.comprovacaoUri().isBlank()) {
             var anexo = licenca.anexarComprovacao(entrada.comprovacaoUri());
             if (anexo.falhou()) {

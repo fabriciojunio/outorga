@@ -1,8 +1,8 @@
 /**
  * Cliente da API do Outorga TV.
  *
- * Tudo passa por aqui de proposito. Assim existe um lugar so que conhece o
- * cabecalho de autenticacao, o identificador do aparelho e o formato do erro
+ * Tudo passa por aqui de propósito. Assim existe um lugar só que conhece o
+ * cabeçalho de autenticação, o identificador do aparelho e o formato do erro
  * que o servidor devolve, e as telas ficam falando de tela.
  */
 
@@ -120,7 +120,7 @@ async function chamar<T>(caminho: string, opcoes: Opcoes = {}): Promise<T> {
     const erro = corpo as ErroDaApi;
     throw new FalhaDaApi(
       erro?.codigo ?? 'ERRO',
-      erro?.mensagem ?? 'Nao foi possivel completar a operacao',
+      erro?.mensagem ?? 'Nao foi possível completar a operação',
       resposta.status,
       erro?.detalhes ?? {},
     );

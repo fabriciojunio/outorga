@@ -7,11 +7,11 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
- * Porta de cobranca. A implementacao de partida e o Asaas, que cobre PIX,
- * cartao e assinatura recorrente com webhook.
+ * Porta de cobrança. A implementacao de partida e o Asaas, que cobre PIX,
+ * cartão e assinatura recorrente com webhook.
  *
- * Nenhum dado de cartao passa por dentro do Outorga TV: o gateway devolve um
- * endereco de checkout e o sistema guarda so a referencia da cobranca.
+ * Nenhum dado de cartão passa por dentro do Outorga TV: o gateway devolve um
+ * endereço de checkout e o sistema guarda só a referência da cobrança.
  */
 public interface GatewayDePagamento {
 

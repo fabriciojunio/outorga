@@ -21,13 +21,13 @@ import java.util.Optional;
 import java.util.UUID;
 
 /**
- * Portas de persistencia. Ficam agrupadas porque sao contrato, nao
- * implementacao: um arquivo por interface de tres metodos so espalha o
+ * Portas de persistencia. Ficam agrupadas porque são contrato, não
+ * implementacao: um arquivo por interface de três metodos só espalha o
  * contrato sem deixar nada mais claro.
  *
- * Toda consulta recebe o tenant explicitamente. O filtro por tenant tambem
- * existe no Hibernate, mas depender so dele significa que um esquecimento de
- * configuracao vaza dado de cliente. Aqui a assinatura do metodo cobra.
+ * Toda consulta recebe o tenant explicitamente. O filtro por tenant também
+ * existe no Hibernate, mas depender só dele significa que um esquecimento de
+ * configuração vaza dado de cliente. Aqui a assinatura do metodo cobra.
  */
 public interface Repositorios {
 
@@ -87,9 +87,9 @@ public interface Repositorios {
         List<Titulo> porLicenca(UUID tenantId, UUID licencaId);
 
         /**
-         * Titulos que a varredura de direitos precisa olhar: os que estao no
-         * ar e os que ela mesma tirou do ar, porque licenca vencida pode
-         * voltar a vigorar e o titulo tem que voltar sozinho.
+         * Títulos que a varredura de direitos precisa olhar: os que estão no
+         * ar e os que ela mesma tirou do ar, porque licença vencida pode
+         * voltar a vigorar e o título tem que voltar sozinho.
          */
         List<Titulo> sujeitosARevisaoDeDireitos(UUID tenantId);
 

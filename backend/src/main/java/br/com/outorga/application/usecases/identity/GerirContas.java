@@ -22,7 +22,7 @@ import java.util.UUID;
 
 /**
  * Cadastro de conta, perfis e aparelhos. Reune o que o assinante faz na
- * propria conta e o que o painel faz com operadores.
+ * própria conta e o que o painel faz com operadores.
  */
 public class GerirContas {
 
@@ -52,7 +52,7 @@ public class GerirContas {
     public Result<Usuario> criar(ContextoDoChamador chamador, NovaConta nova) {
         boolean criandoOperador = nova.papeis().stream().anyMatch(Papel::acessaPainel);
         if (criandoOperador && !chamador.tem(Papel.DONO) && !chamador.tem(Papel.ADMIN_PLATAFORMA)) {
-            return Result.erro(Falhas.semPermissao("criar usuario de painel"));
+            return Result.erro(Falhas.semPermissao("criar usuário de painel"));
         }
         if (nova.papeis().contains(Papel.ADMIN_PLATAFORMA) && !chamador.tem(Papel.ADMIN_PLATAFORMA)) {
             return Result.erro(Falhas.semPermissao("criar administrador de plataforma"));
@@ -105,7 +105,7 @@ public class GerirContas {
 
     /**
      * Remover aparelho e a valvula de escape do limite de dispositivos. So o
-     * dono da conta remove os proprios.
+     * dono da conta remove os próprios.
      */
     public Result<String> removerDispositivo(ContextoDoChamador chamador, UUID dispositivoId) {
         var meus = dispositivos.doUsuario(chamador.usuarioId());

@@ -31,7 +31,7 @@ public class CriarTitulo {
 
     public Result<Titulo> executar(ContextoDoChamador chamador, Entrada entrada) {
         if (!chamador.podePublicarCatalogo()) {
-            return Result.erro(Falhas.semPermissao("cadastrar titulo"));
+            return Result.erro(Falhas.semPermissao("cadastrar título"));
         }
 
         var criacao = entrada.tipo() == TipoDeTitulo.FILME

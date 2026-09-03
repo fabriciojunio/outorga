@@ -15,9 +15,9 @@ import java.util.Locale;
  * Assinatura SigV4 para URL pre-assinada em storage compativel com S3.
  *
  * Escrito na mao em vez de trazer o SDK da AWS. O SDK resolve um universo de
- * casos que este projeto nao tem, e custa dezenas de megabytes no jar e
- * memoria de processo que a instancia gratuita nao tem para dar. O que o
- * sistema precisa e de uma operacao so, GET pre-assinado, e ela cabe aqui.
+ * casos que este projeto não tem, e custa dezenas de megabytes no jar e
+ * memória de processo que a instancia gratuita não tem para dar. O que o
+ * sistema precisa e de uma operação só, GET pre-assinado, e ela cabe aqui.
  */
 public final class AssinaturaS3 {
 
@@ -45,8 +45,8 @@ public final class AssinaturaS3 {
     }
 
     /**
-     * URL de GET valida por um tempo curto. Depois do prazo o endereco vira
-     * lixo, que e o ponto: link copiado do inspetor do navegador nao vira
+     * URL de GET válida por um tempo curto. Depois do prazo o endereço vira
+     * lixo, que e o ponto: link copiado do inspetor do navegador não vira
      * distribuicao paralela.
      */
     public String preAssinarGet(String chaveDoObjeto, Duration validade, Instant agora) {
@@ -95,7 +95,7 @@ public final class AssinaturaS3 {
             mac.init(new SecretKeySpec(chave, "HmacSHA256"));
             return mac.doFinal(dado.getBytes(StandardCharsets.UTF_8));
         } catch (Exception e) {
-            throw new IllegalStateException("falha ao assinar a URL do video", e);
+            throw new IllegalStateException("falha ao assinar a URL do vídeo", e);
         }
     }
 
@@ -120,7 +120,7 @@ public final class AssinaturaS3 {
         return URLEncoder.encode(valor, StandardCharsets.UTF_8).replace("+", "%20");
     }
 
-    /** A barra separa segmentos e nao pode ser escapada; o resto pode. */
+    /** A barra separa segmentos e não pode ser escapada; o resto pode. */
     private static String codificarCaminho(String chave) {
         var partes = chave.split("/");
         var saida = new StringBuilder();

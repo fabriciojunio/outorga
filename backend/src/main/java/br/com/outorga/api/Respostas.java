@@ -11,9 +11,9 @@ import java.util.function.Function;
 /**
  * Traducao entre o Result do dominio e a resposta HTTP.
  *
- * O mapa abaixo e a unica fonte da verdade do status de cada falha. Deixar
- * cada controller escolher o proprio codigo e como se acaba com o mesmo erro
- * saindo 400 num endereco e 422 no outro, e cliente nenhum consegue tratar.
+ * O mapa abaixo e a única fonte da verdade do status de cada falha. Deixar
+ * cada controller escolher o próprio código e como se acaba com o mesmo erro
+ * saindo 400 num endereço e 422 no outro, e cliente nenhum consegue tratar.
  */
 public final class Respostas {
 
@@ -36,7 +36,7 @@ public final class Respostas {
             Map.entry("GATEWAY_INDISPONIVEL", HttpStatus.BAD_GATEWAY),
             Map.entry("GATEWAY_SEM_RESPOSTA", HttpStatus.BAD_GATEWAY),
             Map.entry("SERVICO_INDISPONIVEL", HttpStatus.SERVICE_UNAVAILABLE),
-            // As recusas de reproducao merecem 403 e nao 400: o pedido estava
+            // As recusas de reprodução merecem 403 e não 400: o pedido estava
             // certo, o que faltou foi direito de ver aquilo.
             Map.entry("ASSINATURA_SEM_ACESSO", HttpStatus.PAYMENT_REQUIRED),
             Map.entry("SEM_ASSINATURA", HttpStatus.PAYMENT_REQUIRED),
@@ -50,7 +50,7 @@ public final class Respostas {
             Map.entry("LIMITE_DE_DISPOSITIVOS", HttpStatus.CONFLICT),
             Map.entry("VIDEO_INDISPONIVEL", HttpStatus.SERVICE_UNAVAILABLE));
 
-    /** Corpo de erro. Sempre com codigo estavel, para o cliente ramificar. */
+    /** Corpo de erro. Sempre com código estável, para o cliente ramificar. */
     public record Erro(String codigo, String mensagem, Map<String, Object> detalhes) {
 
         static Erro de(FalhaDeNegocio falha) {

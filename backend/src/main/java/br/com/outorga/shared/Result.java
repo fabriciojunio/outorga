@@ -6,9 +6,9 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 /**
- * Resultado de uma operacao de negocio: ou deu certo e carrega um valor, ou
+ * Resultado de uma operação de negocio: ou deu certo e carrega um valor, ou
  * falhou e carrega o motivo. Casos de uso devolvem Result; a camada HTTP faz o
- * unwrap. O dominio nao lanca excecao para condicao esperada.
+ * unwrap. O dominio não lanca exceção para condição esperada.
  */
 public sealed interface Result<T> permits Result.Ok, Result.Erro {
 
@@ -67,7 +67,7 @@ public sealed interface Result<T> permits Result.Ok, Result.Erro {
         };
     }
 
-    /** Encadeia uma verificacao que nao produz valor novo. */
+    /** Encadeia uma verificacao que não produz valor novo. */
     default Result<T> verificar(Supplier<Optional<FalhaDeNegocio>> verificacao) {
         if (falhou()) {
             return this;

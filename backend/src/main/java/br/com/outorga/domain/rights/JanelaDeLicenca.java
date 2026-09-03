@@ -4,7 +4,7 @@ import java.time.Duration;
 import java.time.Instant;
 
 /**
- * Periodo contratado de exploracao. O fim e opcional: contrato por prazo
+ * Período contratado de exploracao. O fim e opcional: contrato por prazo
  * indeterminado existe, mas fica marcado como tal em vez de virar uma data
  * distante e mentirosa.
  */
@@ -12,10 +12,10 @@ public record JanelaDeLicenca(Instant inicio, Instant fim) {
 
     public JanelaDeLicenca {
         if (inicio == null) {
-            throw new IllegalArgumentException("inicio da janela e obrigatorio");
+            throw new IllegalArgumentException("início da janela e obrigatório");
         }
         if (fim != null && !fim.isAfter(inicio)) {
-            throw new IllegalArgumentException("fim da janela precisa ser depois do inicio");
+            throw new IllegalArgumentException("fim da janela precisa ser depois do início");
         }
     }
 

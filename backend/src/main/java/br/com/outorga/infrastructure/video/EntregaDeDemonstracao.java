@@ -10,15 +10,15 @@ import java.time.Clock;
 import java.time.Duration;
 
 /**
- * Entrega usada quando nao ha bucket configurado.
+ * Entrega usada quando não ha bucket configurado.
  *
- * Devolve um HLS publico de teste para que a plataforma inteira possa ser
- * demonstrada sem contratar armazenamento e sem hospedar obra de ninguem.
- * Toda a cadeia de decisao continua valendo: assinatura, licenca, territorio,
- * classificacao e limite de telas sao verificados do mesmo jeito. O que muda e
- * so o arquivo que toca no fim.
+ * Devolve um HLS público de teste para que a plataforma inteira possa ser
+ * demonstrada sem contratar armazenamento e sem hospedar obra de ninguém.
+ * Toda a cadeia de decisão continua valendo: assinatura, licença, território,
+ * classificação e limite de telas são verificados do mesmo jeito. O que muda e
+ * só o arquivo que toca no fim.
  *
- * Nao serve para producao, e o proprio sistema avisa isso em
+ * Não serve para produção, e o próprio sistema avisa isso em
  * {@code /actuator/info} e no painel.
  */
 public class EntregaDeDemonstracao implements EntregaDeVideo {
@@ -36,7 +36,7 @@ public class EntregaDeDemonstracao implements EntregaDeVideo {
                                                    Duration validade) {
         if (referenciaDoAtivo == null || referenciaDoAtivo.isBlank()) {
             return Result.erro(new FalhaDeNegocio("VIDEO_INDISPONIVEL",
-                    "O arquivo de video ainda nao esta pronto"));
+                    "O arquivo de vídeo ainda não está pronto"));
         }
         return Result.ok(new EnderecoDeReproducao(amostra, "HLS",
                 relogio.instant().plus(validade), "demonstracao"));

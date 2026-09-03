@@ -17,12 +17,12 @@ import java.util.Locale;
 import java.util.Map;
 
 /**
- * Recebimento de eventos de cobranca e, em demonstracao, o simulador que os
+ * Recebimento de eventos de cobrança e, em demonstração, o simulador que os
  * dispara.
  *
  * O webhook responde 200 para quase tudo que consegue interpretar, inclusive
- * para cobranca que nao bate com nenhuma assinatura daqui. Gateway que recebe
- * erro reentrega, e reentrega em laco de um evento que nunca vai casar so
+ * para cobrança que não bate com nenhuma assinatura daqui. Gateway que recebe
+ * erro reentrega, e reentrega em laco de um evento que nunca vai casar só
  * enche o log e atrasa os eventos que importam.
  */
 @RestController
@@ -48,9 +48,9 @@ public class CobrancaWebhookController {
     }
 
     /**
-     * Tela de pagamento simulada. Existe so no modo demonstracao e serve para
-     * a demonstracao comercial: da para mostrar o fluxo inteiro de assinatura,
-     * do clique ate a liberacao do catalogo, sem gateway contratado.
+     * Tela de pagamento simulada. Existe só no modo demonstração e serve para
+     * a demonstração comercial: da para mostrar o fluxo inteiro de assinatura,
+     * do clique até a liberacao do catálogo, sem gateway contratado.
      */
     @GetMapping(value = "/publico/checkout-simulado", produces = MediaType.TEXT_HTML_VALUE)
     public ResponseEntity<String> checkoutSimulado(@RequestParam String referencia,

@@ -7,12 +7,12 @@ import java.util.Locale;
 import java.util.Set;
 
 /**
- * Territorio de exploracao, em codigo ISO 3166-1 alpha-2. O valor especial
+ * Território de exploracao, em código ISO 3166-1 alpha-2. O valor especial
  * "WW" cobre o mundo todo.
  */
 public record Territorio(String codigo) {
 
-    // A ordem destas tres linhas importa. As constantes abaixo passam pelo
+    // A ordem destas três linhas importa. As constantes abaixo passam pelo
     // construtor, que consulta ISO; se ISO for declarado depois delas, ele
     // ainda e nulo na hora e a classe nem carrega.
     private static final Set<String> ISO = Set.of(Locale.getISOCountries());
@@ -22,11 +22,11 @@ public record Territorio(String codigo) {
 
     public Territorio {
         if (codigo == null) {
-            throw new IllegalArgumentException("territorio e obrigatorio");
+            throw new IllegalArgumentException("território e obrigatório");
         }
         codigo = codigo.trim().toUpperCase(Locale.ROOT);
         if (!codigo.equals("WW") && !ISO.contains(codigo)) {
-            throw new IllegalArgumentException("territorio invalido: " + codigo);
+            throw new IllegalArgumentException("território inválido: " + codigo);
         }
     }
 
@@ -38,7 +38,7 @@ public record Territorio(String codigo) {
         }
     }
 
-    /** Mundial cobre qualquer territorio; os demais cobrem apenas a si mesmos. */
+    /** Mundial cobre qualquer território; os demais cobrem apenas a si mesmos. */
     public boolean cobre(Territorio outro) {
         return equals(MUNDIAL) || equals(outro);
     }

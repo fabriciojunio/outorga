@@ -5,7 +5,7 @@ import java.math.RoundingMode;
 import java.util.Locale;
 
 /**
- * Valor monetario em centavos. Nao existe double em dinheiro neste projeto.
+ * Valor monetario em centavos. Não existe double em dinheiro neste projeto.
  */
 public record Dinheiro(long centavos, String moeda) implements Comparable<Dinheiro> {
 
@@ -13,10 +13,10 @@ public record Dinheiro(long centavos, String moeda) implements Comparable<Dinhei
 
     public Dinheiro {
         if (centavos < 0) {
-            throw new IllegalArgumentException("valor nao pode ser negativo");
+            throw new IllegalArgumentException("valor não pode ser negativo");
         }
         if (moeda == null || moeda.length() != 3) {
-            throw new IllegalArgumentException("moeda em codigo ISO de 3 letras");
+            throw new IllegalArgumentException("moeda em código ISO de 3 letras");
         }
         moeda = moeda.toUpperCase(Locale.ROOT);
     }
@@ -44,12 +44,12 @@ public record Dinheiro(long centavos, String moeda) implements Comparable<Dinhei
 
     public Dinheiro vezes(int fator) {
         if (fator < 0) {
-            throw new IllegalArgumentException("fator nao pode ser negativo");
+            throw new IllegalArgumentException("fator não pode ser negativo");
         }
         return new Dinheiro(centavos * fator, moeda);
     }
 
-    /** Desconto percentual com arredondamento para o centavo mais proximo. */
+    /** Desconto percentual com arredondamento para o centavo mais próximo. */
     public Dinheiro comDescontoDe(int percentual) {
         if (percentual < 0 || percentual > 100) {
             throw new IllegalArgumentException("percentual entre 0 e 100");

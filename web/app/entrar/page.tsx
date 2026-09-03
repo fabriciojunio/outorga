@@ -84,7 +84,7 @@ export default function Entrar() {
           </button>
 
           <p className="apagado" style={{ textAlign: 'center', marginBottom: 0, marginTop: 16 }}>
-            {modo === 'entrar' ? 'Ainda nao tem conta? ' : 'Ja tem conta? '}
+            {modo === 'entrar' ? 'Ainda não tem conta? ' : 'Já tem conta? '}
             <button
               type="button"
               onClick={() => {

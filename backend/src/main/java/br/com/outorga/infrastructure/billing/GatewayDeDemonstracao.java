@@ -11,17 +11,17 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
- * Cobranca simulada, usada enquanto nao ha chave de gateway.
+ * Cobrança simulada, usada enquanto não ha chave de gateway.
  *
- * A URL de checkout que ela devolve aponta para um endereco do proprio
+ * A URL de checkout que ela devolve aponta para um endereço do próprio
  * sistema, que dispara o mesmo webhook que o gateway real dispararia. O
- * caminho do dinheiro fica exercitado de ponta a ponta, incluindo a mudanca de
+ * caminho do dinheiro fica exercitado de ponta a ponta, incluindo a mudança de
  * status da assinatura e a trilha de auditoria, sem nenhum centavo circulando.
  *
- * Um cuidado deliberado: esta classe so entra em cena com o sistema em
- * DEMONSTRACAO. Em PRODUCAO sem chave de gateway o sistema recusa subir, em
+ * Um cuidado deliberado: está classe só entra em cena com o sistema em
+ * Demonstração. Em Produção sem chave de gateway o sistema recusa subir, em
  * vez de silenciosamente liberar assinatura de graca para todo mundo, que e o
- * jeito mais caro de descobrir que faltou uma variavel de ambiente.
+ * jeito mais caro de descobrir que faltou uma variável de ambiente.
  */
 public class GatewayDeDemonstracao implements GatewayDePagamento {
 
@@ -48,9 +48,9 @@ public class GatewayDeDemonstracao implements GatewayDePagamento {
     }
 
     /**
-     * Em demonstracao o webhook so aceita chamada vinda do proprio simulador,
-     * marcada por um cabecalho interno. Nao e seguranca de verdade, e nem
-     * precisa ser: o modo inteiro nao move dinheiro.
+     * Em demonstração o webhook só aceita chamada vinda do próprio simulador,
+     * marcada por um cabeçalho interno. Não e segurança de verdade, e nem
+     * precisa ser: o modo inteiro não move dinheiro.
      */
     @Override
     public boolean webhookAutentico(Map<String, String> cabecalhos, String corpo) {
@@ -73,7 +73,7 @@ public class GatewayDeDemonstracao implements GatewayDePagamento {
                     "simulacao"));
         } catch (Exception e) {
             return Result.erro(new FalhaDeNegocio("WEBHOOK_ILEGIVEL",
-                    "Corpo do webhook simulado nao pode ser lido"));
+                    "Corpo do webhook simulado não pode ser lido"));
         }
     }
 }

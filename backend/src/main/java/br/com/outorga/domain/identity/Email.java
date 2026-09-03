@@ -13,11 +13,11 @@ public record Email(String valor) {
 
     public Email {
         if (valor == null) {
-            throw new IllegalArgumentException("email e obrigatorio");
+            throw new IllegalArgumentException("email e obrigatório");
         }
         valor = valor.trim().toLowerCase(Locale.ROOT);
         if (!FORMATO.matcher(valor).matches()) {
-            throw new IllegalArgumentException("email invalido");
+            throw new IllegalArgumentException("email inválido");
         }
     }
 
@@ -25,11 +25,11 @@ public record Email(String valor) {
         try {
             return Result.ok(new Email(valor));
         } catch (IllegalArgumentException e) {
-            return Result.erro(new FalhaDeNegocio("EMAIL_INVALIDO", "Informe um e-mail valido"));
+            return Result.erro(new FalhaDeNegocio("EMAIL_INVALIDO", "Informe um e-mail válido"));
         }
     }
 
-    /** Para log e tela de suporte, sem expor o endereco inteiro. */
+    /** Para log e tela de suporte, sem expor o endereço inteiro. */
     public String mascarado() {
         int arroba = valor.indexOf('@');
         String local = valor.substring(0, arroba);

@@ -10,11 +10,11 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 import java.io.IOException;
 
 /**
- * Resposta para requisicao sem autenticacao.
+ * Resposta para requisicao sem autenticação.
  *
- * O padrao do Spring aqui e 403, o que confunde: 403 diz "voce nao pode", e o
- * caso e "voce ainda nao disse quem e". A diferenca importa para o cliente,
- * que precisa mandar para a tela de login em um caso e mostrar "sem permissao"
+ * O padrão do Spring aqui e 403, o que confunde: 403 diz "você não pode", e o
+ * caso e "você ainda não disse quem e". A diferença importa para o cliente,
+ * que precisa mandar para a tela de login em um caso e mostrar "sem permissão"
  * no outro. O corpo sai no mesmo formato de todos os erros da API.
  */
 public class RespostaDeNaoAutenticado implements AuthenticationEntryPoint {

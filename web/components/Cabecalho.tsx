@@ -6,8 +6,8 @@ import { useEffect, useState } from 'react';
 import { encerrarSessao, sessaoGuardada, vitrine, type Identidade } from '@/lib/api';
 
 /**
- * Barra de topo. Le a identidade do servico na API para se pintar com a marca
- * do cliente: e o que faz a mesma base servir a servicos diferentes.
+ * Barra de topo. Le a identidade do serviço na API para se pintar com a marca
+ * do cliente: é o que faz a mesma base servir a serviços diferentes.
  */
 export function Cabecalho() {
   const caminho = usePathname();
@@ -40,7 +40,7 @@ export function Cabecalho() {
           </Link>
           <nav className="navegacao">
             <Link href="/" className={caminho === '/' ? 'ativo' : ''}>
-              Catalogo
+              Catálogo
             </Link>
             {operador && (
               <Link href="/painel" className={caminho.startsWith('/painel') ? 'ativo' : ''}>
@@ -76,15 +76,15 @@ export function Cabecalho() {
 }
 
 /**
- * A faixa existe para que ninguem confunda a demonstracao com um servico em
- * operacao. Some sozinha quando o ambiente sai do modo de demonstracao.
+ * A faixa existe para que ninguém confunda a demonstração com um serviço em
+ * operação. Some sozinha quando o ambiente sai do modo de demonstração.
  */
 function FaixaDeDemonstracao() {
   const [mostrar, setMostrar] = useState(false);
 
   useEffect(() => {
-    // O modo aparece no proprio comportamento do checkout, mas para a faixa
-    // basta a variavel de ambiente do build.
+    // O modo aparece no próprio comportamento do checkout, mas para a faixa
+    // basta a variável de ambiente do build.
     setMostrar(process.env.NEXT_PUBLIC_DEMONSTRACAO !== 'false');
   }, []);
 
@@ -92,8 +92,8 @@ function FaixaDeDemonstracao() {
 
   return (
     <div className="faixa-demonstracao">
-      Ambiente de demonstracao. O catalogo e ficticio, o video e um arquivo de teste e nenhuma
-      cobranca e feita de verdade.
+      Ambiente de demonstração. O catálogo e fictício, o vídeo e um arquivo de teste e nenhuma
+      cobrança e feita de verdade.
     </div>
   );
 }

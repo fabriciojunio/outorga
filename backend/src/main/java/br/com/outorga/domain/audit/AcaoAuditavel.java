@@ -1,8 +1,8 @@
 package br.com.outorga.domain.audit;
 
 /**
- * Acoes que precisam deixar rastro. A lista e fechada de proposito: auditoria
- * com string livre vira lixo em tres meses.
+ * Ações que precisam deixar rastro. A lista e fechada de propósito: auditoria
+ * com string livre vira lixo em três meses.
  */
 public enum AcaoAuditavel {
 

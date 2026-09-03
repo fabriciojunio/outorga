@@ -13,9 +13,9 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
- * Publicar exige informar qual licenca autoriza aquele titulo. Nao ha
- * publicacao sem licenca no sistema, nem por atalho de administrador: o
- * proprio ADMIN_PLATAFORMA passa por aqui.
+ * Publicar exige informar qual licença autoriza aquele título. Não ha
+ * publicação sem licença no sistema, nem por atalho de administrador: o
+ * próprio ADMIN_PLATAFORMA passa por aqui.
  */
 public class PublicarTitulo {
 
@@ -34,7 +34,7 @@ public class PublicarTitulo {
 
     public Result<Titulo> executar(ContextoDoChamador chamador, UUID tituloId, UUID licencaId) {
         if (!chamador.podePublicarCatalogo()) {
-            return Result.erro(Falhas.semPermissao("publicar titulo"));
+            return Result.erro(Falhas.semPermissao("publicar título"));
         }
 
         var achado = titulos.porId(chamador.tenantId(), tituloId);

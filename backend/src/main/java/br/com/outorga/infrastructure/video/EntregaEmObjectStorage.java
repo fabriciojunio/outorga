@@ -13,11 +13,11 @@ import java.time.Duration;
  * Entrega de VOD a partir de um bucket compativel com S3, com URL assinada e
  * de vida curta.
  *
- * A convencao de chave e {@code <referencia>/<altura>p/playlist.m3u8}, com um
- * mestre em {@code <referencia>/mestre.m3u8}. Quando o plano limita a
+ * A convencao de chave e {@code <referência>/<altura>p/playlist.m3u8}, com um
+ * mestre em {@code <referência>/mestre.m3u8}. Quando o plano limita a
  * qualidade, o servidor entrega a renditura daquele teto em vez do mestre, e
- * assim o limite de plano vale de verdade: nao adianta o player pedir 4K se o
- * manifesto entregue nao tem 4K dentro.
+ * assim o limite de plano vale de verdade: não adianta o player pedir 4K se o
+ * manifesto entregue não tem 4K dentro.
  */
 public class EntregaEmObjectStorage implements EntregaDeVideo {
 
@@ -35,7 +35,7 @@ public class EntregaEmObjectStorage implements EntregaDeVideo {
                                                    Duration validade) {
         if (referenciaDoAtivo == null || referenciaDoAtivo.isBlank()) {
             return Result.erro(new FalhaDeNegocio("VIDEO_INDISPONIVEL",
-                    "O arquivo de video ainda nao esta pronto"));
+                    "O arquivo de vídeo ainda não está pronto"));
         }
         var agora = relogio.instant();
         var chave = referenciaDoAtivo + "/" + qualidade.alturaMaxima() + "p/playlist.m3u8";
@@ -45,9 +45,9 @@ public class EntregaEmObjectStorage implements EntregaDeVideo {
 
     @Override
     public Result<EnderecoDeReproducao> assinarAoVivo(String referenciaDoCanal, Duration validade) {
-        // Canal linear nao passa por bucket: a fonte e continua e o
-        // empacotador entrega o manifesto. Enquanto o ingest proprio nao
-        // existe, o endereco cadastrado no canal e usado como esta.
+        // Canal linear não passa por bucket: a fonte e continua e o
+        // empacotador entrega o manifesto. Enquanto o ingest próprio não
+        // existe, o endereço cadastrado no canal e usado como está.
         if (referenciaDoCanal == null || referenciaDoCanal.isBlank()) {
             return Result.erro(new FalhaDeNegocio("CANAL_SEM_FONTE",
                     "Canal sem fonte configurada"));

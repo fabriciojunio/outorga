@@ -83,7 +83,7 @@ public class GerirCanais {
         return Result.ok(canal.get());
     }
 
-    /** Grade que o espectador ve, ja filtrada pelo teto do perfil. */
+    /** Grade que o espectador ve, já filtrada pelo teto do perfil. */
     public Result<List<CanalAoVivo>> grade(UUID tenantId, UUID perfilId) {
         var teto = ClassificacaoIndicativa.DEZOITO_ANOS;
         if (perfilId != null) {
@@ -115,9 +115,9 @@ public class GerirCanais {
     }
 
     /**
-     * Carga da grade. Recusa o lote inteiro quando ha choque de horario, em
+     * Carga da grade. Recusa o lote inteiro quando ha choque de horário, em
      * vez de gravar metade: EPG parcialmente carregado e pior de depurar do
-     * que EPG que nao carregou.
+     * que EPG que não carregou.
      */
     public Result<Integer> carregarGrade(ContextoDoChamador chamador, List<ProgramaEpg> programas) {
         if (!chamador.podePublicarCatalogo()) {

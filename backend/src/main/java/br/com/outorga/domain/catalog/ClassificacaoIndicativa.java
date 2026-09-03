@@ -1,7 +1,7 @@
 package br.com.outorga.domain.catalog;
 
 /**
- * Classificacao indicativa brasileira. A ordem do enum importa: e ela que
+ * Classificação indicativa brasileira. A ordem do enum importa: e ela que
  * define o que o controle parental libera.
  */
 public enum ClassificacaoIndicativa {
@@ -23,7 +23,7 @@ public enum ClassificacaoIndicativa {
         return idadeMinima;
     }
 
-    /** Verdadeiro quando um perfil limitado a {@code teto} pode ver este conteudo. */
+    /** Verdadeiro quando um perfil limitado a {@code teto} pode ver este conteúdo. */
     public boolean liberadaPara(ClassificacaoIndicativa teto) {
         return this.idadeMinima <= teto.idadeMinima;
     }

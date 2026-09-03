@@ -12,9 +12,9 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
- * Rescisao com efeito imediato: tira do ar, na mesma transacao, tudo que
- * dependia daquela licenca. Esperar o job noturno seria manter conteudo sem
- * direito no ar por horas, que e exatamente o que a operacao precisa evitar.
+ * Rescisão com efeito imediato: tira do ar, na mesma transação, tudo que
+ * dependia daquela licença. Esperar o job noturno seria manter conteúdo sem
+ * direito no ar por horas, que e exatamente o que a operação precisa evitar.
  */
 public class RescindirLicenca {
 
@@ -38,7 +38,7 @@ public class RescindirLicenca {
 
     public Result<Saida> executar(ContextoDoChamador chamador, UUID licencaId, String motivo) {
         if (!chamador.podePublicarCatalogo()) {
-            return Result.erro(Falhas.semPermissao("rescindir licenca"));
+            return Result.erro(Falhas.semPermissao("rescindir licença"));
         }
         var achada = licencas.porId(chamador.tenantId(), licencaId);
         if (achada.isEmpty()) {
@@ -58,7 +58,7 @@ public class RescindirLicenca {
                 titulos.salvar(titulo);
                 bloqueados++;
                 auditor.registrar(chamador, AcaoAuditavel.TITULO_BLOQUEADO_POR_DIREITO, "titulo",
-                        titulo.id().toString(), Map.of("motivo", "licenca rescindida"));
+                        titulo.id().toString(), Map.of("motivo", "licença rescindida"));
             }
         }
 
@@ -68,7 +68,7 @@ public class RescindirLicenca {
                 canais.salvar(canal);
                 tirados++;
                 auditor.registrar(chamador, AcaoAuditavel.CANAL_FORA_DO_AR, "canal",
-                        canal.id().toString(), Map.of("motivo", "licenca rescindida"));
+                        canal.id().toString(), Map.of("motivo", "licença rescindida"));
             }
         }
 

@@ -12,9 +12,9 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 
 /**
- * Le o token do cabecalho e coloca a identidade no contexto. Token ausente ou
- * invalido nao para a requisicao aqui: quem decide se aquele endereco exige
- * autenticacao e a configuracao de seguranca.
+ * Le o token do cabeçalho e coloca a identidade no contexto. Token ausente ou
+ * inválido não para a requisicao aqui: quem decide se aquele endereço exige
+ * autenticação e a configuração de segurança.
  */
 @Component
 public class FiltroDeAutenticacao extends OncePerRequestFilter {
@@ -41,8 +41,8 @@ public class FiltroDeAutenticacao extends OncePerRequestFilter {
     }
 
     /**
-     * Atras de proxy o IP real vem no X-Forwarded-For. Pega so o primeiro
-     * salto: o resto da lista e o proxy contando a propria historia e nao
+     * Atrás de proxy o IP real vem no X-Forwarded-For. Pega só o primeiro
+     * salto: o resto da lista e o proxy contando a própria historia e não
      * serve para auditoria.
      */
     public static String ipDe(HttpServletRequest requisicao) {

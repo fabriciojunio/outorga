@@ -9,12 +9,12 @@ import java.time.Instant;
 import java.util.UUID;
 
 /**
- * Canal linear. Vale a mesma regra do catalogo: so vai ao ar com licenca
+ * Canal linear. Vale a mesma regra do catálogo: só vai ao ar com licença
  * vigente, e a fonte precisa estar declarada como autorizada.
  *
- * A plataforma nao captura nem retransmite sinal de terceiro por conta
- * propria. A fonte e informada pelo cliente, que declara ter o direito, e o
- * cadastro da licenca e o que libera a exibicao.
+ * A plataforma não captura nem retransmite sinal de terceiro por conta
+ * própria. A fonte e informada pelo cliente, que declara ter o direito, e o
+ * cadastro da licença e o que libera a exibição.
  */
 public class CanalAoVivo {
 
@@ -30,7 +30,7 @@ public class CanalAoVivo {
     private String motivoDoBloqueio;
     /**
      * Distingue "a varredura tirou por falta de direito" de "o operador tirou
-     * de proposito". Sem essa diferenca, um canal em manutencao voltaria ao ar
+     * de propósito". Sem essa diferença, um canal em manutencao voltaria ao ar
      * sozinho na proxima varredura, contra a vontade de quem o desligou.
      */
     private boolean bloqueadoPorDireito;
@@ -55,11 +55,11 @@ public class CanalAoVivo {
         }
         if (numero < 1) {
             return Result.erro(new FalhaDeNegocio("CANAL_NUMERO_INVALIDO",
-                    "O numero do canal comeca em 1"));
+                    "O número do canal comeca em 1"));
         }
         if (classificacao == null) {
             return Result.erro(new FalhaDeNegocio("CANAL_SEM_CLASSIFICACAO",
-                    "Informe a classificacao indicativa do canal"));
+                    "Informe a classificação indicativa do canal"));
         }
         return Result.ok(new CanalAoVivo(UUID.randomUUID(), tenantId, nome.trim(), numero, classificacao));
     }
@@ -85,11 +85,11 @@ public class CanalAoVivo {
         }
         if (licenca == null || !licenca.tenantId().equals(tenantId)) {
             return Result.erro(new FalhaDeNegocio("LICENCA_INVALIDA",
-                    "Vincule uma licenca deste tenant ao canal"));
+                    "Vincule uma licença deste tenant ao canal"));
         }
         if (!licenca.vigenteEm(agora)) {
             return Result.erro(new FalhaDeNegocio("LICENCA_NAO_VIGENTE",
-                    "A licenca do canal nao esta vigente"));
+                    "A licença do canal não está vigente"));
         }
         this.licencaId = licenca.id();
         this.noAr = true;
@@ -103,7 +103,7 @@ public class CanalAoVivo {
         if (noAr && !vigente) {
             this.noAr = false;
             this.bloqueadoPorDireito = true;
-            this.motivoDoBloqueio = "Licenca do canal sem vigencia";
+            this.motivoDoBloqueio = "Licença do canal sem vigencia";
             return true;
         }
         if (!noAr && bloqueadoPorDireito && vigente && urlDaFonte != null) {
@@ -117,7 +117,7 @@ public class CanalAoVivo {
 
     public Result<CanalAoVivo> tirarDoAr(String motivo) {
         if (!noAr) {
-            return Result.erro(new FalhaDeNegocio("CANAL_JA_FORA_DO_AR", "O canal ja esta fora do ar"));
+            return Result.erro(new FalhaDeNegocio("CANAL_JA_FORA_DO_AR", "O canal já está fora do ar"));
         }
         this.noAr = false;
         this.bloqueadoPorDireito = false;

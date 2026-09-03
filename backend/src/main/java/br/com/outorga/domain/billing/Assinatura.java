@@ -11,11 +11,11 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * Assinatura de um espectador ao servico de um cliente.
+ * Assinatura de um espectador ao serviço de um cliente.
  *
- * A carencia depois de uma cobranca falha e deliberada: cartao recusado por
+ * A carencia depois de uma cobrança falha e deliberada: cartão recusado por
  * limite volta a passar em dois dias na maioria das vezes, e derrubar o acesso
- * no mesmo minuto gera cancelamento que nao precisava acontecer.
+ * no mesmo minuto gera cancelamento que não precisava acontecer.
  */
 public class Assinatura {
 
@@ -48,7 +48,7 @@ public class Assinatura {
         }
         if (!plano.ativo()) {
             return Result.erro(new FalhaDeNegocio("PLANO_INATIVO",
-                    "Este plano nao esta mais em venda"));
+                    "Este plano não está mais em venda"));
         }
         if (!plano.tenantId().equals(tenantId)) {
             return Result.erro(new FalhaDeNegocio("PLANO_DE_OUTRO_TENANT",
@@ -82,7 +82,7 @@ public class Assinatura {
                 || status == StatusDaAssinatura.CANCELADA;
         this.status = StatusDaAssinatura.ATIVA;
         registrar(TipoDeEvento.PAGAMENTO_CONFIRMADO,
-                "ciclo ate " + fimDoCicloAtual, agora);
+                "ciclo até " + fimDoCicloAtual, agora);
         if (voltando) {
             registrar(TipoDeEvento.REATIVADA, null, agora);
         }
@@ -92,27 +92,27 @@ public class Assinatura {
     public Result<Assinatura> registrarFalhaDePagamento(String motivo, Instant agora) {
         if (status == StatusDaAssinatura.ENCERRADA) {
             return Result.erro(new FalhaDeNegocio("ASSINATURA_ENCERRADA",
-                    "Assinatura ja encerrada"));
+                    "Assinatura já encerrada"));
         }
         registrar(TipoDeEvento.PAGAMENTO_FALHOU, motivo, agora);
         if (status != StatusDaAssinatura.INADIMPLENTE) {
             this.status = StatusDaAssinatura.INADIMPLENTE;
             this.fimDaCarencia = agora.plus(CARENCIA_POR_INADIMPLENCIA);
             registrar(TipoDeEvento.ENTROU_EM_CARENCIA,
-                    "acesso ate " + fimDaCarencia, agora);
+                    "acesso até " + fimDaCarencia, agora);
         }
         return Result.ok(this);
     }
 
-    /** Cancelamento a pedido: para de renovar, mas o ciclo pago vale ate o fim. */
+    /** Cancelamento a pedido: para de renovar, mas o ciclo pago vale até o fim. */
     public Result<Assinatura> cancelar(String motivo, Instant agora) {
         if (status == StatusDaAssinatura.ENCERRADA) {
             return Result.erro(new FalhaDeNegocio("ASSINATURA_ENCERRADA",
-                    "Assinatura ja encerrada"));
+                    "Assinatura já encerrada"));
         }
         if (status == StatusDaAssinatura.CANCELADA) {
             return Result.erro(new FalhaDeNegocio("CANCELAMENTO_JA_PEDIDO",
-                    "O cancelamento ja tinha sido pedido"));
+                    "O cancelamento já tinha sido pedido"));
         }
         this.status = StatusDaAssinatura.CANCELADA;
         registrar(TipoDeEvento.CANCELAMENTO_PEDIDO, motivo, agora);
@@ -120,7 +120,7 @@ public class Assinatura {
     }
 
     /**
-     * Passagem do tempo. Encerra o que venceu de vez, sem depender de alguem
+     * Passagem do tempo. Encerra o que venceu de vez, sem depender de alguém
      * clicar em nada. Retorna verdadeiro quando o status mudou.
      */
     public boolean aplicarPassagemDoTempo(Instant agora) {
@@ -155,14 +155,14 @@ public class Assinatura {
 
     public Result<Assinatura> trocarPlano(Plano novo, Instant agora) {
         if (novo == null || !novo.ativo()) {
-            return Result.erro(new FalhaDeNegocio("PLANO_INATIVO", "Plano indisponivel"));
+            return Result.erro(new FalhaDeNegocio("PLANO_INATIVO", "Plano indisponível"));
         }
         if (!novo.tenantId().equals(tenantId)) {
             return Result.erro(new FalhaDeNegocio("PLANO_DE_OUTRO_TENANT",
                     "O plano informado pertence a outro tenant"));
         }
         if (novo.id().equals(planoId)) {
-            return Result.erro(new FalhaDeNegocio("MESMO_PLANO", "O assinante ja esta neste plano"));
+            return Result.erro(new FalhaDeNegocio("MESMO_PLANO", "O assinante já está neste plano"));
         }
         this.planoId = novo.id();
         registrar(TipoDeEvento.PLANO_TROCADO, novo.nome(), agora);

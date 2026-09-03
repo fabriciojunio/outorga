@@ -25,7 +25,7 @@ public class Temporada {
     public static Result<Temporada> criar(int numero, String titulo) {
         if (numero < 1) {
             return Result.erro(new FalhaDeNegocio("TEMPORADA_NUMERO_INVALIDO",
-                    "Numero da temporada comeca em 1"));
+                    "Número da temporada comeca em 1"));
         }
         return Result.ok(new Temporada(UUID.randomUUID(), numero,
                 titulo == null || titulo.isBlank() ? "Temporada " + numero : titulo.trim()));
@@ -35,7 +35,7 @@ public class Temporada {
         boolean duplicado = episodios.stream().anyMatch(e -> e.numero() == episodio.numero());
         if (duplicado) {
             return Result.erro(new FalhaDeNegocio("EPISODIO_DUPLICADO",
-                    "Ja existe episodio " + episodio.numero() + " na temporada " + numero));
+                    "Ja existe episódio " + episodio.numero() + " na temporada " + numero));
         }
         episodios.add(episodio);
         episodios.sort(Comparator.comparingInt(Episodio::numero));

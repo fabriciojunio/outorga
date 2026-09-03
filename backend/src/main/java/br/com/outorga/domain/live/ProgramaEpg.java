@@ -18,11 +18,11 @@ public record ProgramaEpg(UUID id, UUID tenantId, UUID canalId, String titulo, S
     public static Result<ProgramaEpg> criar(UUID tenantId, UUID canalId, String titulo, Instant inicio,
                                             Instant fim, ClassificacaoIndicativa classificacao) {
         if (titulo == null || titulo.isBlank()) {
-            return Result.erro(new FalhaDeNegocio("EPG_SEM_TITULO", "Informe o titulo do programa"));
+            return Result.erro(new FalhaDeNegocio("EPG_SEM_TITULO", "Informe o título do programa"));
         }
         if (inicio == null || fim == null || !fim.isAfter(inicio)) {
             return Result.erro(new FalhaDeNegocio("EPG_HORARIO_INVALIDO",
-                    "O fim do programa precisa ser depois do inicio"));
+                    "O fim do programa precisa ser depois do início"));
         }
         return Result.ok(new ProgramaEpg(UUID.randomUUID(), tenantId, canalId, titulo.trim(), null,
                 inicio, fim, classificacao == null ? ClassificacaoIndicativa.LIVRE : classificacao));
@@ -38,7 +38,7 @@ public record ProgramaEpg(UUID id, UUID tenantId, UUID canalId, String titulo, S
                 && outro.inicio.isBefore(fim);
     }
 
-    /** Programa no ar agora, dentro de uma grade ja carregada. */
+    /** Programa no ar agora, dentro de uma grade já carregada. */
     public static Optional<ProgramaEpg> agora(List<ProgramaEpg> grade, Instant momento) {
         return grade.stream().filter(p -> p.noArEm(momento)).findFirst();
     }

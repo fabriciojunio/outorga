@@ -15,11 +15,11 @@ import {
 } from '@/lib/api';
 
 /**
- * Pagina de reproducao.
+ * Página de reprodução.
  *
- * O tratamento de erro aqui e a razao de a API devolver codigo estavel para
- * cada recusa. Quem chega numa tela dizendo "conteudo indisponivel" abre
- * chamado; quem le "voce atingiu o limite de 2 telas" resolve sozinho.
+ * O tratamento de erro aqui é a razão de a API devolver código estável para
+ * cada recusa. Quem chega numa tela dizendo "conteúdo indisponível" abre
+ * chamado; quem lê "você atingiu o limite de 2 telas" resolve sozinho.
  */
 export default function Assistir({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
@@ -71,11 +71,11 @@ export default function Assistir({ params }: { params: Promise<{ id: string }> }
       <section className="secao">
         <div className="envolucro">
           <div className="aviso erro">
-            Este titulo nao esta disponivel. Ou saiu do ar, ou a licenca que autorizava a exibicao
+            Este título não está disponível. Ou saiu do ar, ou a licença que autorizava a exibição
             deixou de valer.
           </div>
           <Link href="/" className="botao secundario">
-            Voltar ao catalogo
+            Voltar ao catálogo
           </Link>
         </div>
       </section>
@@ -98,7 +98,7 @@ export default function Assistir({ params }: { params: Promise<{ id: string }> }
             }}
           >
             <button className="botao" onClick={() => void darPlay()} disabled={recusa !== null}>
-              {titulo.tipo === 'SERIE' ? 'Escolha um episodio abaixo' : 'Assistir'}
+              {titulo.tipo === 'SERIE' ? 'Escolha um episódio abaixo' : 'Assistir'}
             </button>
           </div>
         )}

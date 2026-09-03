@@ -7,7 +7,7 @@ import br.com.outorga.shared.Result;
 import java.util.UUID;
 
 /**
- * Perfil de exibicao dentro de uma conta. O teto de classificacao mora aqui,
+ * Perfil de exibição dentro de uma conta. O teto de classificação mora aqui,
  * junto com o PIN que protege o perfil adulto do controle remoto da sala.
  */
 public class Perfil {
@@ -40,7 +40,7 @@ public class Perfil {
         }
         if (perfisJaExistentes >= MAXIMO_POR_CONTA) {
             return Result.erro(new FalhaDeNegocio("LIMITE_DE_PERFIS",
-                    "A conta ja tem " + MAXIMO_POR_CONTA + " perfis"));
+                    "A conta já tem " + MAXIMO_POR_CONTA + " perfis"));
         }
         var tetoEfetivo = infantil ? ClassificacaoIndicativa.DEZ_ANOS
                 : (teto == null ? ClassificacaoIndicativa.DEZOITO_ANOS : teto);
@@ -49,11 +49,11 @@ public class Perfil {
 
     public Result<Perfil> ajustarTeto(ClassificacaoIndicativa novoTeto) {
         if (novoTeto == null) {
-            return Result.erro(new FalhaDeNegocio("TETO_INVALIDO", "Informe a classificacao maxima"));
+            return Result.erro(new FalhaDeNegocio("TETO_INVALIDO", "Informe a classificação maxima"));
         }
         if (infantil && !novoTeto.liberadaPara(ClassificacaoIndicativa.DOZE_ANOS)) {
             return Result.erro(new FalhaDeNegocio("TETO_INFANTIL",
-                    "Perfil infantil nao passa de 12 anos"));
+                    "Perfil infantil não passa de 12 anos"));
         }
         this.tetoDeClassificacao = novoTeto;
         return Result.ok(this);

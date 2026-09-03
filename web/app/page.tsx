@@ -50,17 +50,17 @@ export default function Vitrine() {
     <>
       <section className="abertura">
         <div className="envolucro">
-          <h1>Seu catalogo no ar, com o direito de exibicao no lugar certo</h1>
+          <h1>Seu catálogo no ar, com o direito de exibição no lugar certo</h1>
           <p>
-            Cada titulo aqui so aparece porque existe uma licenca vigente por tras dele. Quando o
-            contrato vence, o sistema tira do ar sozinho, sem depender de alguem lembrar.
+            Cada título aqui só aparece porque existe uma licença vigente por trás dele. Quando o
+            contrato vence, o sistema tira do ar sozinho, sem depender de alguém lembrar.
           </p>
           <div className="acoes">
             <a href="#planos" className="botao">
               Ver planos
             </a>
             <Link href="/entrar" className="botao secundario">
-              Ja sou assinante
+              Já sou assinante
             </Link>
           </div>
         </div>
@@ -70,7 +70,7 @@ export default function Vitrine() {
         <div className="envolucro">
           <div className="espalha" style={{ marginBottom: 20 }}>
             <h2 className="titulo-secao" style={{ margin: 0 }}>
-              Catalogo
+              Catálogo
             </h2>
             <input
               className="campo"
@@ -92,8 +92,8 @@ export default function Vitrine() {
 
           {!carregando && titulos.length === 0 && (
             <p className="fraco">
-              Nada por aqui ainda. Se voce e o operador, cadastre a licenca e publique o primeiro
-              titulo pelo painel.
+              Nada por aqui ainda. Se você e o operador, cadastre a licença e publique o primeiro
+              título pelo painel.
             </p>
           )}
 
@@ -160,8 +160,8 @@ export default function Vitrine() {
             ))}
           </div>
           <p className="apagado" style={{ marginTop: 18 }}>
-            Precos definidos pelo operador do servico. Cancelamento a qualquer momento, com acesso
-            garantido ate o fim do periodo ja pago.
+            Precos definidos pelo operador do serviço. Cancelamento a qualquer momento, com acesso
+            garantido até o fim do período já pago.
           </p>
         </div>
       </section>
@@ -185,7 +185,7 @@ function CartaoDePlano({ plano, destaque }: { plano: PlanoVisto; destaque: boole
       if (checkout.urlDeCheckout) {
         window.location.href = checkout.urlDeCheckout;
       } else {
-        setErro('A cobranca foi aberta, mas o gateway ainda nao devolveu o link de pagamento.');
+        setErro('A cobrança foi aberta, mas o gateway ainda não devolveu o link de pagamento.');
       }
     } catch (e) {
       setErro((e as Error).message);
@@ -199,18 +199,18 @@ function CartaoDePlano({ plano, destaque }: { plano: PlanoVisto; destaque: boole
       <div className="apagado mono">{plano.nome}</div>
       <div className="preco">{plano.preco}</div>
       <div className="periodo">
-        {plano.periodicidade === 'ANUAL' ? 'por ano' : 'por mes'}
+        {plano.periodicidade === 'ANUAL' ? 'por ano' : 'por mês'}
         {plano.diasDeTeste > 0 ? ` · ${plano.diasDeTeste} dias de teste` : ''}
       </div>
       <ul>
         <li>{plano.telas === 1 ? '1 tela por vez' : `${plano.telas} telas ao mesmo tempo`}</li>
-        <li>Ate {plano.qualidade.replace('_', ' ')}</li>
+        <li>Até {plano.qualidade.replace('_', ' ')}</li>
         <li>{plano.telas * 2} aparelhos registrados</li>
         {plano.descricao && <li>{plano.descricao}</li>}
       </ul>
       {erro && <div className="aviso erro">{erro}</div>}
       <button className="botao largo" onClick={() => void assinar()} disabled={processando}>
-        {processando ? 'Abrindo cobranca...' : 'Assinar'}
+        {processando ? 'Abrindo cobrança...' : 'Assinar'}
       </button>
     </div>
   );

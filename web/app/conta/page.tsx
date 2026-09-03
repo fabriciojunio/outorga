@@ -44,7 +44,7 @@ export default function Conta() {
   async function removerAparelho(id: string) {
     try {
       await conta.removerDispositivo(id);
-      setMensagem('Aparelho removido. A vaga ja esta livre.');
+      setMensagem('Aparelho removido. A vaga já está livre.');
       await recarregar();
     } catch (e) {
       setErro((e as Error).message);
@@ -52,12 +52,12 @@ export default function Conta() {
   }
 
   async function cancelar() {
-    const motivo = window.prompt('Pode contar o motivo? Ajuda a melhorar o servico.');
+    const motivo = window.prompt('Pode contar o motivo? Ajuda a melhorar o serviço.');
     if (motivo === null) return;
     try {
       const nova = await apiAssinatura.cancelar(motivo);
       setAssinatura(nova);
-      setMensagem('Assinatura cancelada. Voce continua assistindo ate o fim do periodo pago.');
+      setMensagem('Assinatura cancelada. Você continua assistindo até o fim do período pago.');
     } catch (e) {
       setErro((e as Error).message);
     }
@@ -110,7 +110,7 @@ export default function Conta() {
                   </div>
                   <div className="apagado">
                     {assinatura.assistindoAgora
-                      ? `Acesso liberado ate ${assinatura.fimDoCiclo.slice(0, 10)}`
+                      ? `Acesso liberado até ${assinatura.fimDoCiclo.slice(0, 10)}`
                       : 'Sem acesso no momento'}
                   </div>
                 </div>
@@ -123,7 +123,7 @@ export default function Conta() {
             </div>
           ) : (
             <p className="fraco">
-              Voce ainda nao tem assinatura. <a href="/#planos">Ver planos</a>
+              Você ainda não tem assinatura. <a href="/#planos">Ver planos</a>
             </p>
           )}
         </div>
@@ -158,7 +158,7 @@ export default function Conta() {
             ))}
           </div>
           <p className="apagado" style={{ marginTop: 12 }}>
-            O perfil escolhido filtra o catalogo pela classificacao indicativa.
+            O perfil escolhido filtra o catálogo pela classificação indicativa.
           </p>
         </div>
       </section>
@@ -172,7 +172,7 @@ export default function Conta() {
                 <tr>
                   <th>Aparelho</th>
                   <th>Tipo</th>
-                  <th>Ultimo uso</th>
+                  <th>Último uso</th>
                   <th />
                 </tr>
               </thead>
@@ -204,9 +204,9 @@ export default function Conta() {
           <h2 className="titulo-secao">Seus dados</h2>
           <div className="cartao">
             <p className="fraco" style={{ marginTop: 0 }}>
-              Pela LGPD voce pode ver tudo que guardamos e pedir a exclusao. A exclusao apaga o
-              que identifica voce; o registro contabil das cobrancas continua, sem dono, porque a
-              lei obriga a guarda-lo.
+              Pela LGPD você pode ver tudo que guardamos e pedir a exclusão. A exclusão apaga o
+              que identifica você; o registro contábil das cobranças continua, sem dono, porque a
+              lei obriga a guardá-lo.
             </p>
             <div className="linha">
               <button className="botao secundario" onClick={() => void baixarMeusDados()}>

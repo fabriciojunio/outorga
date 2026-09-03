@@ -6,8 +6,8 @@ import br.com.outorga.shared.Result;
 import java.util.UUID;
 
 /**
- * Plano vendido pelo cliente aos assinantes dele. Telas e qualidade nao sao
- * enfeite de tabela de preco: entram na decisao de reproduzir.
+ * Plano vendido pelo cliente aos assinantes dele. Telas e qualidade não são
+ * enfeite de tabela de preço: entram na decisão de reproduzir.
  */
 public class Plano {
 
@@ -47,7 +47,7 @@ public class Plano {
             return Result.erro(new FalhaDeNegocio("PLANO_SEM_NOME", "Informe o nome do plano"));
         }
         if (preco == null) {
-            return Result.erro(new FalhaDeNegocio("PLANO_SEM_PRECO", "Informe o preco do plano"));
+            return Result.erro(new FalhaDeNegocio("PLANO_SEM_PRECO", "Informe o preço do plano"));
         }
         if (telasSimultaneas < 1 || telasSimultaneas > MAXIMO_DE_TELAS) {
             return Result.erro(new FalhaDeNegocio("PLANO_TELAS_INVALIDO",
@@ -63,16 +63,16 @@ public class Plano {
 
     /**
      * Quantos aparelhos a conta pode manter registrados. Fica no dobro das
-     * telas porque a familia troca de celular e liga a TV da casa de praia
-     * sem avisar ninguem, e a fila de suporte com "remova meu aparelho antigo"
+     * telas porque a família troca de celular e liga a TV da casa de praia
+     * sem avisar ninguém, e a fila de suporte com "remova meu aparelho antigo"
      * custa mais caro do que a banda que esse folego consome. O limite que
-     * protege receita e o de telas simultaneas, nao o de cadastro.
+     * protege receita e o de telas simultaneas, não o de cadastro.
      */
     public int dispositivosRegistraveis() {
         return telasSimultaneas * 2;
     }
 
-    /** Qualidade efetiva de uma sessao: o menor entre o pedido e o teto do plano. */
+    /** Qualidade efetiva de uma sessão: o menor entre o pedido e o teto do plano. */
     public Qualidade limitar(Qualidade pedida) {
         return qualidadeMaxima.cobre(pedida) ? pedida : qualidadeMaxima;
     }

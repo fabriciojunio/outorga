@@ -25,12 +25,12 @@ import java.util.Optional;
 import java.util.UUID;
 
 /**
- * Orquestra a autorizacao de play: carrega os fatos, chama a politica e, se a
- * politica disser sim, pede o endereco assinado e abre a sessao.
+ * Orquestra a autorização de play: carrega os fatos, chama a politica e, se a
+ * politica disser sim, pede o endereço assinado e abre a sessão.
  *
- * A politica de decisao fica no dominio. Aqui so tem busca, efeito colateral
+ * A politica de decisão fica no dominio. Aqui só tem busca, efeito colateral
  * e traducao. Nenhum "if" de regra de negocio mora neste arquivo, e essa
- * separacao e o que deixa a regra testavel sem banco.
+ * separação e o que deixa a regra testavel sem banco.
  */
 public class AutorizarReproducao {
 
@@ -150,8 +150,8 @@ public class AutorizarReproducao {
     }
 
     /**
-     * Serie pede temporada e episodio; filme reproduz a referencia do proprio
-     * titulo. Devolver null aqui e legitimo: a politica trata como
+     * Série pede temporada e episódio; filme reproduz a referência do próprio
+     * título. Devolver null aqui e legitimo: a politica trata como
      * VIDEO_INDISPONIVEL e a mensagem sai certa para o espectador.
      */
     private String referenciaDoVideo(Titulo titulo, Entrada entrada) {
@@ -169,7 +169,7 @@ public class AutorizarReproducao {
     }
 
     /**
-     * Aparelho ja conhecido passa direto. Aparelho novo so entra se ainda
+     * Aparelho já conhecido passa direto. Aparelho novo só entra se ainda
      * couber no limite do plano; quando estoura, a mensagem diz o que fazer,
      * porque "erro ao reproduzir" nessa hora vira chamado de suporte.
      */
@@ -183,7 +183,7 @@ public class AutorizarReproducao {
         int registrados = dispositivos.doUsuario(usuarioId).size();
         if (registrados >= plano.dispositivosRegistraveis()) {
             return Result.erro(new FalhaDeNegocio("LIMITE_DE_DISPOSITIVOS",
-                    "Esta conta ja tem " + plano.dispositivosRegistraveis()
+                    "Esta conta já tem " + plano.dispositivosRegistraveis()
                             + " aparelhos registrados. Remova um em Minha conta para liberar este")
                     .com("limite", plano.dispositivosRegistraveis()));
         }

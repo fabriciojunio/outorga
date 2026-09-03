@@ -4,7 +4,7 @@ import java.util.regex.Pattern;
 
 /**
  * Identidade visual do cliente. E o que faz a mesma base servir a marcas
- * diferentes sem uma linha de codigo por cliente.
+ * diferentes sem uma linha de código por cliente.
  */
 public record Marca(String nomeExibido, String logoUri, String corPrimaria, String corDeFundo) {
 
@@ -12,7 +12,7 @@ public record Marca(String nomeExibido, String logoUri, String corPrimaria, Stri
 
     public Marca {
         if (nomeExibido == null || nomeExibido.isBlank()) {
-            throw new IllegalArgumentException("nome exibido e obrigatorio");
+            throw new IllegalArgumentException("nome exibido e obrigatório");
         }
         corPrimaria = validarCor(corPrimaria, "#e6b800");
         corDeFundo = validarCor(corDeFundo, "#0d0f14");

@@ -22,7 +22,7 @@ import java.time.Clock;
 import java.util.UUID;
 
 /**
- * Operacao da plataforma. So o time do Outorga TV entra aqui: e daqui que
+ * Operação da plataforma. So o time do Outorga TV entra aqui: e daqui que
  * cliente novo nasce.
  */
 @RestController
@@ -94,9 +94,9 @@ public class PlataformaController {
     }
 
     /**
-     * Dispara a varredura de direitos sem esperar a hora cheia. Util depois de
-     * uma carga grande de catalogo e para provar em demonstracao que o
-     * bloqueio por licenca vencida acontece mesmo.
+     * Dispara a varredura de direitos sem esperar a hora cheia. Útil depois de
+     * uma carga grande de catálogo e para provar em demonstração que o
+     * bloqueio por licença vencida acontece mesmo.
      */
     @PostMapping("/revisao-de-direitos")
     public ResponseEntity<?> revisar() {

@@ -35,11 +35,11 @@ import java.util.Set;
 import java.util.UUID;
 
 /**
- * Painel do cliente: catalogo, licencas, planos e canais.
+ * Painel do cliente: catálogo, licenças, planos e canais.
  *
- * A ordem natural de uso e essa mesma: cadastra a licenca, anexa a
- * comprovacao, cadastra o titulo, publica apontando para a licenca. Tentar
- * pular a licenca da erro, e da de proposito.
+ * A ordem natural de uso e essa mesma: cadastra a licença, anexa a
+ * comprovacao, cadastra o título, pública apontando para a licença. Tentar
+ * pular a licença da erro, e da de propósito.
  */
 @RestController
 @RequestMapping("/api/v1/painel")
@@ -76,7 +76,7 @@ public class PainelController {
         this.auditoria = auditoria;
     }
 
-    // ---------- Licencas ----------
+    // ---------- Licenças ----------
 
     public record NovaLicenca(
             @NotBlank String titular,
@@ -128,7 +128,7 @@ public class PainelController {
         return Respostas.de(licencasAVencer.executar(contexto(), dias));
     }
 
-    // ---------- Catalogo ----------
+    // ---------- Catálogo ----------
 
     public record NovoTitulo(
             @NotNull TipoDeTitulo tipo,

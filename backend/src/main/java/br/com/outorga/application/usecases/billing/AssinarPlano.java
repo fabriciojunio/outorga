@@ -16,12 +16,12 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
- * Abre a assinatura no Outorga TV e a cobranca no gateway.
+ * Abre a assinatura no Outorga TV e a cobrança no gateway.
  *
- * A assinatura nasce antes da cobranca de proposito. Se o gateway cair no
+ * A assinatura nasce antes da cobrança de propósito. Se o gateway cair no
  * meio, sobra um registro INADIMPLENTE que o webhook conserta quando o
  * pagamento entrar, em vez de um pagamento no gateway sem contraparte aqui,
- * que e o tipo de furo que so aparece na conciliacao do fim do mes.
+ * que e o tipo de furo que só aparece na conciliacao do fim do mes.
  */
 public class AssinarPlano {
 
@@ -67,14 +67,14 @@ public class AssinarPlano {
         var jaTem = assinaturas.vigenteDoUsuario(chamador.tenantId(), chamador.usuarioId());
         if (jaTem.isPresent() && jaTem.get().permiteAssistir(agora)) {
             return Result.erro(new FalhaDeNegocio("JA_ASSINA",
-                    "Esta conta ja tem assinatura ativa. Troque de plano em vez de abrir outra"));
+                    "Esta conta já tem assinatura ativa. Troque de plano em vez de abrir outra"));
         }
 
         Cupom cupom = null;
         if (entrada.codigoDoCupom() != null && !entrada.codigoDoCupom().isBlank()) {
             var achado = cupons.porCodigo(chamador.tenantId(), entrada.codigoDoCupom());
             if (achado.isEmpty()) {
-                return Result.erro(new FalhaDeNegocio("CUPOM_INEXISTENTE", "Cupom nao encontrado"));
+                return Result.erro(new FalhaDeNegocio("CUPOM_INEXISTENTE", "Cupom não encontrado"));
             }
             var resgate = achado.get().resgatar(agora);
             if (resgate.falhou()) {

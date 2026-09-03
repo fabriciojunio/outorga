@@ -8,12 +8,12 @@ import org.springframework.validation.annotation.Validated;
 import java.time.Duration;
 
 /**
- * Configuracao da aplicacao, validada na subida. Servidor com configuracao
- * incompleta nao sobe pela metade: recusa iniciar e diz o que falta.
+ * Configuração da aplicacao, validada na subida. Servidor com configuração
+ * incompleta não sobe pela metade: recusa iniciar e diz o que falta.
  *
- * O campo {@code modo} decide o que acontece quando nao ha credencial de
- * fornecedor. Em DEMONSTRACAO o sistema roda inteiro com adaptadores locais,
- * sem gastar um centavo e sem chamar ninguem de fora. E o que permite ter o
+ * O campo {@code modo} decide o que acontece quando não ha credencial de
+ * fornecedor. Em Demonstração o sistema roda inteiro com adaptadores locais,
+ * sem gastar um centavo e sem chamar ninguém de fora. E o que permite ter o
  * produto no ar antes de existir contrato com gateway ou com CDN.
  */
 @Validated
@@ -26,7 +26,7 @@ public record ConfiguracaoDaOutorga(
         String urlPublicaDaApi) {
 
     public enum Modo {
-        /** Sem fornecedor externo. Video de amostra e cobranca simulada. */
+        /** Sem fornecedor externo. Vídeo de amostra e cobrança simulada. */
         DEMONSTRACAO,
         /** Fornecedores reais configurados. */
         PRODUCAO
@@ -43,7 +43,7 @@ public record ConfiguracaoDaOutorga(
 
     /**
      * @param segredo        chave de assinatura do JWT. Curta demais e o mesmo
-     *                       que nao ter, entao o tamanho minimo e cobrado aqui
+     *                       que não ter, então o tamanho mínimo e cobrado aqui
      * @param validadeAcesso vida do token de acesso
      * @param validadeRefresh vida do refresh, que rotaciona a cada uso
      */
@@ -60,8 +60,8 @@ public record ConfiguracaoDaOutorga(
     }
 
     /**
-     * Entrega de video. O padrao e um bucket compativel com S3; a escolha de
-     * partida e o Cloudflare R2, que nao cobra saida de dados e por isso
+     * Entrega de vídeo. O padrão e um bucket compativel com S3; a escolha de
+     * partida e o Cloudflare R2, que não cobra saída de dados e por isso
      * mantem o custo previsivel quando o trafego cresce.
      */
     public record Video(
@@ -89,8 +89,8 @@ public record ConfiguracaoDaOutorga(
     }
 
     /**
-     * Cobranca. A implementacao de partida e o Asaas, escolhido por nao ter
-     * mensalidade: enquanto nao entra dinheiro, nao sai.
+     * Cobrança. A implementacao de partida e o Asaas, escolhido por não ter
+     * mensalidade: enquanto não entra dinheiro, não sai.
      */
     public record Cobranca(
             String urlBase,

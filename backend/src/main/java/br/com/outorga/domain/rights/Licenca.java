@@ -11,12 +11,12 @@ import java.util.Set;
 import java.util.UUID;
 
 /**
- * Autorizacao de distribuicao de uma obra ou canal, com titular, contrato,
- * territorio, janela e comprovacao. E a peca que decide se algo pode ir ao ar.
+ * Autorização de distribuicao de uma obra ou canal, com titular, contrato,
+ * território, janela e comprovacao. E a peca que decide se algo pode ir ao ar.
  *
- * Regra da casa: sem licenca VIGENTE cobrindo hoje e o territorio do
- * espectador, nao existe reproducao. Nao ha caminho no dominio que contorne
- * isso, e por isso a checagem mora aqui e nao no controller.
+ * Regra da casa: sem licença VIGENTE cobrindo hoje e o território do
+ * espectador, não existe reprodução. Não ha caminho no dominio que contorne
+ * isso, e por isso a checagem mora aqui e não no controller.
  */
 public class Licenca {
 
@@ -49,7 +49,7 @@ public class Licenca {
                                             Set<TipoDeDispositivo> dispositivos) {
         if (tenantId == null) {
             return Result.erro(new FalhaDeNegocio("LICENCA_SEM_TENANT",
-                    "Licenca precisa pertencer a um tenant"));
+                    "Licença precisa pertencer a um tenant"));
         }
         if (titular == null || titular.isBlank()) {
             return Result.erro(new FalhaDeNegocio("LICENCA_SEM_TITULAR",
@@ -57,11 +57,11 @@ public class Licenca {
         }
         if (referenciaDoContrato == null || referenciaDoContrato.isBlank()) {
             return Result.erro(new FalhaDeNegocio("LICENCA_SEM_CONTRATO",
-                    "Informe a referencia do contrato ou da autorizacao"));
+                    "Informe a referência do contrato ou da autorização"));
         }
         if (territorios == null || territorios.isEmpty()) {
             return Result.erro(new FalhaDeNegocio("LICENCA_SEM_TERRITORIO",
-                    "Informe ao menos um territorio contratado"));
+                    "Informe ao menos um território contratado"));
         }
         if (dispositivos == null || dispositivos.isEmpty()) {
             return Result.erro(new FalhaDeNegocio("LICENCA_SEM_DISPOSITIVO",
@@ -76,17 +76,17 @@ public class Licenca {
     }
 
     /**
-     * Anexar a comprovacao e o que promove a licenca a VIGENTE. Enquanto nao
-     * houver documento, ela nao autoriza nada.
+     * Anexar a comprovacao e o que promove a licença a VIGENTE. Enquanto não
+     * houver documento, ela não autoriza nada.
      */
     public Result<Licenca> anexarComprovacao(String uri) {
         if (uri == null || uri.isBlank()) {
             return Result.erro(new FalhaDeNegocio("COMPROVACAO_VAZIA",
-                    "Anexe o contrato, a invoice ou a autorizacao por escrito"));
+                    "Anexe o contrato, a invoice ou a autorização por escrito"));
         }
         if (status == StatusDaLicenca.RESCINDIDA) {
             return Result.erro(new FalhaDeNegocio("LICENCA_RESCINDIDA",
-                    "Licenca rescindida nao volta a vigorar; cadastre uma nova"));
+                    "Licença rescindida não volta a vigorar; cadastre uma nova"));
         }
         this.comprovacaoUri = uri.trim();
         this.status = StatusDaLicenca.VIGENTE;
@@ -96,7 +96,7 @@ public class Licenca {
     public Result<Licenca> rescindir(String motivo) {
         if (status == StatusDaLicenca.RESCINDIDA) {
             return Result.erro(new FalhaDeNegocio("LICENCA_JA_RESCINDIDA",
-                    "Licenca ja esta rescindida"));
+                    "Licença já está rescindida"));
         }
         this.status = StatusDaLicenca.RESCINDIDA;
         this.observacao = motivo;
@@ -104,8 +104,8 @@ public class Licenca {
     }
 
     /**
-     * Pergunta central do produto: esta licenca autoriza exibir para alguem
-     * neste territorio, neste dispositivo, agora?
+     * Pergunta central do produto: está licença autoriza exibir para alguém
+     * neste território, neste dispositivo, agora?
      */
     public boolean autoriza(Territorio territorioDoEspectador, TipoDeDispositivo dispositivo, Instant agora) {
         return vigenteEm(agora)
@@ -113,7 +113,7 @@ public class Licenca {
                 && dispositivosAutorizados.contains(dispositivo);
     }
 
-    /** Versao sem dispositivo, usada na decisao de publicar no catalogo. */
+    /** Versão sem dispositivo, usada na decisão de publicar no catálogo. */
     public boolean vigenteEm(Instant agora) {
         return status == StatusDaLicenca.VIGENTE && janela.contem(agora);
     }
@@ -149,7 +149,7 @@ public class Licenca {
 
     public String observacao() { return observacao; }
 
-    /** Reconstrucao a partir do banco, sem revalidar o que ja passou pela entrada. */
+    /** Reconstrucao a partir do banco, sem revalidar o que já passou pela entrada. */
     public static Licenca reconstituir(UUID id, UUID tenantId, String titular, String referenciaDoContrato,
                                        Set<Territorio> territorios, JanelaDeLicenca janela,
                                        Set<TipoDeDispositivo> dispositivos, String comprovacaoUri,

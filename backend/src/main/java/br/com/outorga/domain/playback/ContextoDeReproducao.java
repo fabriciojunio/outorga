@@ -13,8 +13,8 @@ import br.com.outorga.domain.tenant.Tenant;
 import java.time.Instant;
 
 /**
- * Tudo que a decisao de reproduzir precisa saber, ja carregado. A politica e
- * pura: recebe fatos, devolve decisao, nao vai ao banco.
+ * Tudo que a decisão de reproduzir precisa saber, já carregado. A politica e
+ * pura: recebe fatos, devolve decisão, não vai ao banco.
  */
 public record ContextoDeReproducao(
         Tenant tenant,

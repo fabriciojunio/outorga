@@ -22,8 +22,8 @@ import java.util.UUID;
  * A conta pela otica de quem assina: perfis, aparelhos, senha e os direitos
  * de titular de dados.
  *
- * Os dois ultimos enderecos existem por causa da LGPD e nao sao enfeite de
- * conformidade: o exportar devolve de fato o que esta guardado, e o apagar
+ * Os dois ultimos enderecos existem por causa da LGPD e não são enfeite de
+ * conformidade: o exportar devolve de fato o que está guardado, e o apagar
  * anonimiza de verdade.
  */
 @RestController

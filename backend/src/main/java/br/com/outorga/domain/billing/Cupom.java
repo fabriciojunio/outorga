@@ -32,7 +32,7 @@ public class Cupom {
     public static Result<Cupom> criar(UUID tenantId, String codigo, int percentual, Instant validoAte,
                                       int usosMaximos) {
         if (codigo == null || codigo.isBlank()) {
-            return Result.erro(new FalhaDeNegocio("CUPOM_SEM_CODIGO", "Informe o codigo do cupom"));
+            return Result.erro(new FalhaDeNegocio("CUPOM_SEM_CODIGO", "Informe o código do cupom"));
         }
         if (percentual < 1 || percentual > 100) {
             return Result.erro(new FalhaDeNegocio("CUPOM_PERCENTUAL_INVALIDO",
@@ -54,7 +54,7 @@ public class Cupom {
             return Result.erro(new FalhaDeNegocio("CUPOM_VENCIDO", "Cupom fora do prazo"));
         }
         if (usos >= usosMaximos) {
-            return Result.erro(new FalhaDeNegocio("CUPOM_ESGOTADO", "Cupom ja atingiu o limite de uso"));
+            return Result.erro(new FalhaDeNegocio("CUPOM_ESGOTADO", "Cupom já atingiu o limite de uso"));
         }
         usos++;
         return Result.ok(this);

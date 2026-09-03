@@ -7,12 +7,12 @@ import { reproducao } from '@/lib/api';
 /**
  * Player HLS.
  *
- * Duas coisas aqui nao sao detalhe. O sinal de vida a cada trinta segundos e
- * o que sustenta o limite de telas do plano: sem ele, uma sessao que caiu
- * continuaria ocupando vaga. E o encerramento ao sair da pagina devolve a
+ * Duas coisas aqui não são detalhe. O sinal de vida a cada trinta segundos e
+ * o que sustenta o limite de telas do plano: sem ele, uma sessão que caiu
+ * continuaria ocupando vaga. E o encerramento ao sair da página devolve a
  * vaga na hora, em vez de esperar a tolerancia estourar.
  *
- * Safari toca HLS nativo e nao precisa da biblioteca; o resto dos navegadores
+ * Safari toca HLS nativo e não precisa da biblioteca; o resto dos navegadores
  * precisa. A checagem cobre os dois casos.
  */
 export function Player({

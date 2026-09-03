@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-/** Persistencia de canal, grade, sessao de reproducao e auditoria. */
+/** Persistencia de canal, grade, sessão de reprodução e auditoria. */
 public final class PersistenciaDeExibicao {
 
     private PersistenciaDeExibicao() {}
@@ -194,9 +194,9 @@ public final class PersistenciaDeExibicao {
         }
 
         /**
-         * Conta so o que esta vivo: aberto e com sinal recente. Sessao que
-         * ficou sem sinal nao entra na conta mesmo antes da limpeza rodar,
-         * senao o espectador que perdeu a rede fica sem assistir ate o job
+         * Conta só o que está vivo: aberto e com sinal recente. Sessão que
+         * ficou sem sinal não entra na conta mesmo antes da limpeza rodar,
+         * senao o espectador que perdeu a rede fica sem assistir até o job
          * passar.
          */
         @Override

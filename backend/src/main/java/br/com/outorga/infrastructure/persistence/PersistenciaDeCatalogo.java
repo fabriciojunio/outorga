@@ -27,11 +27,11 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
- * Persistencia de catalogo e de licenca.
+ * Persistencia de catálogo e de licença.
  *
- * Serie e agregado: titulo, temporada e episodio sao lidos e gravados juntos.
- * O custo disso e uma consulta a mais por titulo; o beneficio e que nunca
- * existe temporada orfa nem episodio de serie que ninguem sabe de quem e.
+ * Série e agregado: título, temporada e episódio são lidos e gravados juntos.
+ * O custo disso e uma consulta a mais por título; o beneficio e que nunca
+ * existe temporada orfa nem episódio de série que ninguém sabe de quem e.
  */
 public final class PersistenciaDeCatalogo {
 
@@ -133,7 +133,7 @@ public final class PersistenciaDeCatalogo {
             this.jdbc = jdbc;
         }
 
-        /** Linha crua do titulo, sem as temporadas. */
+        /** Linha crua do título, sem as temporadas. */
         private record Linha(UUID id, UUID tenantId, TipoDeTitulo tipo, String nome, String sinopse,
                              Integer ano, ClassificacaoIndicativa classificacao,
                              java.time.Duration duracao, String referenciaVideo, String capa,
@@ -321,9 +321,9 @@ public final class PersistenciaDeCatalogo {
         }
 
         /**
-         * Uma consulta para todas as temporadas e uma para todos os episodios,
-         * independente de quantos titulos vieram. Carregar episodio dentro de
-         * laco de temporada e o caminho mais curto para uma tela de catalogo
+         * Uma consulta para todas as temporadas e uma para todos os episódios,
+         * independente de quantos títulos vieram. Carregar episódio dentro de
+         * laco de temporada e o caminho mais curto para uma tela de catálogo
          * com trezentas consultas.
          */
         private Map<UUID, List<Temporada>> carregarTemporadas(List<UUID> tituloIds) {

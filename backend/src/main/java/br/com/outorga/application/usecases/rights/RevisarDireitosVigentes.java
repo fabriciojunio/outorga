@@ -12,12 +12,12 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
- * Varredura de direitos. Roda de hora em hora e faz uma coisa so: comparar o
- * que esta no ar com o que tem licenca vigente agora, e acertar a diferenca
+ * Varredura de direitos. Roda de hora em hora e faz uma coisa só: comparar o
+ * que está no ar com o que tem licença vigente agora, e acertar a diferença
  * nos dois sentidos.
  *
- * E o que sustenta a promessa comercial do produto. Sem esta rotina, "gate de
- * conteudo" e uma frase no contrato; com ela, e um comportamento observavel.
+ * E o que sustenta a promessa comercial do produto. Sem está rotina, "gate de
+ * conteúdo" e uma frase no contrato; com ela, e um comportamento observavel.
  */
 public class RevisarDireitosVigentes {
 
@@ -69,7 +69,7 @@ public class RevisarDireitosVigentes {
                     } else {
                         liberados++;
                         auditor.registrar(chamador, AcaoAuditavel.TITULO_PUBLICADO, "titulo",
-                                titulo.id().toString(), Map.of("motivo", "licenca voltou a vigorar"));
+                                titulo.id().toString(), Map.of("motivo", "licença voltou a vigorar"));
                     }
                 }
             }

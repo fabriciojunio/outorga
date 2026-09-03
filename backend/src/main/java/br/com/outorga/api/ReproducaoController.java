@@ -21,11 +21,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import java.util.UUID;
 
 /**
- * Reproducao.
+ * Reprodução.
  *
- * O token devolvido aqui vale poucos minutos e vale para uma sessao so. O
+ * O token devolvido aqui vale poucos minutos e vale para uma sessão só. O
  * player renova enquanto assiste; se o assinante perder o direito no meio do
- * filme, a proxima renovacao ja nao sai.
+ * filme, a proxima renovação já não sai.
  */
 @RestController
 @RequestMapping("/api/v1/reproducao")

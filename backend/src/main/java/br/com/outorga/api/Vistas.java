@@ -14,10 +14,10 @@ import java.util.UUID;
 /**
  * Projecoes para a API.
  *
- * Entidade de dominio nao vira JSON direto. O motivo pratico aparece aqui:
- * {@code Titulo} carrega a URL da fonte do video e o id da licenca, que o
- * espectador nao tem nada que ver. Separar a vista da entidade e o que impede
- * que um campo novo no dominio vaze para a resposta sem ninguem decidir.
+ * Entidade de dominio não vira JSON direto. O motivo pratico aparece aqui:
+ * {@code Título} carrega a URL da fonte do vídeo e o id da licença, que o
+ * espectador não tem nada que ver. Separar a vista da entidade e o que impede
+ * que um campo novo no dominio vaze para a resposta sem ninguém decidir.
  */
 public final class Vistas {
 
@@ -61,7 +61,7 @@ public final class Vistas {
         }
     }
 
-    /** Vista do painel: mostra o que o espectador nao ve, inclusive o motivo do bloqueio. */
+    /** Vista do painel: mostra o que o espectador não ve, inclusive o motivo do bloqueio. */
     public record TituloNoPainel(UUID id, String tipo, String nome, String status,
                                  String classificacao, UUID licencaId, String motivoDoBloqueio,
                                  boolean temVideo) {

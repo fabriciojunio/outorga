@@ -2,7 +2,7 @@ package br.com.outorga.domain.billing;
 
 /**
  * Teto de qualidade de imagem por plano. A ordem define o que cada plano
- * libera: um plano em FULL_HD tambem entrega HD e SD.
+ * libera: um plano em FULL_HD também entrega HD e SD.
  */
 public enum Qualidade {
 

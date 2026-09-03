@@ -12,8 +12,8 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
- * Anexa a comprovacao e coloca a licenca em vigencia. E o momento em que o
- * conteudo dela passa a valer para publicacao.
+ * Anexa a comprovacao e coloca a licença em vigencia. E o momento em que o
+ * conteúdo dela passa a valer para publicação.
  */
 public class ComprovarLicenca {
 
@@ -27,7 +27,7 @@ public class ComprovarLicenca {
 
     public Result<Licenca> executar(ContextoDoChamador chamador, UUID licencaId, String comprovacaoUri) {
         if (!chamador.podePublicarCatalogo()) {
-            return Result.erro(Falhas.semPermissao("comprovar licenca"));
+            return Result.erro(Falhas.semPermissao("comprovar licença"));
         }
         var achada = licencas.porId(chamador.tenantId(), licencaId);
         if (achada.isEmpty()) {

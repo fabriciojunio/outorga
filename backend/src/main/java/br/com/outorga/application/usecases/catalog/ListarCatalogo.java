@@ -10,8 +10,8 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * Catalogo visto pelo espectador. Ja chega filtrado pelo teto de
- * classificacao do perfil: conteudo adulto nao pode aparecer nem como capa
+ * Catálogo visto pelo espectador. Ja chega filtrado pelo teto de
+ * classificação do perfil: conteúdo adulto não pode aparecer nem como capa
  * borrada num perfil infantil.
  */
 public class ListarCatalogo {

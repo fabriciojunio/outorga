@@ -18,11 +18,11 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * Vitrine: o que da para ver antes de entrar. Catalogo, planos, canais e a
- * identidade visual do cliente, tudo pelo slug do servico.
+ * Vitrine: o que da para ver antes de entrar. Catálogo, planos, canais e a
+ * identidade visual do cliente, tudo pelo slug do serviço.
  *
- * O catalogo aqui ja sai filtrado por publicacao, e publicacao so existe com
- * licenca vigente. Ou seja: nao ha caminho publico que liste uma obra sem
+ * O catálogo aqui já sai filtrado por publicação, e publicação só existe com
+ * licença vigente. Ou seja: não ha caminho público que liste uma obra sem
  * direito, nem mesmo a capa.
  */
 @RestController

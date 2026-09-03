@@ -11,7 +11,7 @@ import java.util.UUID;
 /**
  * Identidade autenticada, do jeito que o Spring Security espera, mas
  * carregando o tenant. Os papeis viram authorities com prefixo ROLE_ para
- * funcionar com as anotacoes padrao.
+ * funcionar com as anotacoes padrão.
  */
 public class UsuarioAutenticado extends AbstractAuthenticationToken {
 

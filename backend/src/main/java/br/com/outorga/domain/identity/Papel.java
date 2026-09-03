@@ -3,20 +3,20 @@ package br.com.outorga.domain.identity;
 import java.util.Set;
 
 /**
- * Papeis do sistema. O primeiro e o unico que enxerga varios tenants; os
- * demais vivem dentro de um so.
+ * Papeis do sistema. O primeiro e o único que enxerga vários tenants; os
+ * demais vivem dentro de um só.
  */
 public enum Papel {
 
-    /** Operacao do Outorga TV. Abre e fecha cliente. */
+    /** Operação do Outorga TV. Abre e fecha cliente. */
     ADMIN_PLATAFORMA,
-    /** Dono da conta do cliente. Faz tudo dentro do proprio tenant. */
+    /** Dono da conta do cliente. Faz tudo dentro do próprio tenant. */
     DONO,
-    /** Cadastra catalogo, licenca e canal. Nao mexe em plano nem em cobranca. */
+    /** Cadastra catálogo, licença e canal. Não mexe em plano nem em cobrança. */
     EDITOR,
-    /** Atende assinante. Le, nao publica. */
+    /** Atende assinante. Le, não pública. */
     SUPORTE,
-    /** Espectador que assina o servico do cliente. */
+    /** Espectador que assina o serviço do cliente. */
     ASSINANTE;
 
     private static final Set<Papel> DO_PAINEL = Set.of(ADMIN_PLATAFORMA, DONO, EDITOR, SUPORTE);

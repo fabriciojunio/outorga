@@ -181,7 +181,7 @@ class TituloTest {
             boolean mudou = filme.revisarDireitos(licenca, AGORA);
 
             assertThat(mudou).isTrue();
-            assertThat(filme.motivoDoBloqueio()).isEqualTo("Licenca rescindida");
+            assertThat(filme.motivoDoBloqueio()).isEqualTo("Licença rescindida");
         }
 
         @Test
@@ -193,7 +193,7 @@ class TituloTest {
             boolean mudou = filme.revisarDireitos(null, AGORA);
 
             assertThat(mudou).isTrue();
-            assertThat(filme.motivoDoBloqueio()).isEqualTo("Licenca vinculada nao encontrada");
+            assertThat(filme.motivoDoBloqueio()).isEqualTo("Licença vinculada não encontrada");
         }
 
         @Test

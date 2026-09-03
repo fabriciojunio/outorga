@@ -507,7 +507,7 @@ class CasosDeUsoTest {
             var saida = caso().executar(java.util.Map.of(), "{}");
 
             assertThat(saida.sucesso()).isTrue();
-            assertThat(saida.valorOuFalha()).contains("nao encontrada");
+            assertThat(saida.valorOuFalha()).contains("não encontrada");
         }
     }
 

@@ -13,8 +13,8 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * Painel de vencimento. Renovacao de licenca leva semanas para ser assinada,
- * entao avisar no dia do vencimento nao serve de nada: o padrao aqui e olhar
+ * Painel de vencimento. Renovação de licença leva semanas para ser assinada,
+ * então avisar no dia do vencimento não serve de nada: o padrão aqui e olhar
  * 60 dias para frente.
  */
 public class ListarLicencasAVencer {
@@ -38,7 +38,7 @@ public class ListarLicencasAVencer {
 
     public Result<List<Item>> executar(ContextoDoChamador chamador, int dias) {
         if (!chamador.podePublicarCatalogo()) {
-            return Result.erro(Falhas.semPermissao("consultar licencas"));
+            return Result.erro(Falhas.semPermissao("consultar licenças"));
         }
         var agora = relogio.instant();
         var janela = dias <= 0 ? DIAS_PADRAO : dias;
@@ -57,7 +57,7 @@ public class ListarLicencasAVencer {
         return Result.ok(itens);
     }
 
-    /** Usado pelo alerta automatico, sem contexto de usuario. */
+    /** Usado pelo alerta automático, sem contexto de usuário. */
     public List<Licenca> vencendoEm(int dias) {
         return licencas.vencendoAte(relogio.instant().plus(dias, ChronoUnit.DAYS));
     }

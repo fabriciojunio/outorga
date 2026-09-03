@@ -9,7 +9,7 @@ import java.util.UUID;
 
 /**
  * Aparelho registrado numa conta. O identificador vem do cliente e e tratado
- * como opaco: o servidor nao tenta adivinhar o que ele significa.
+ * como opaco: o servidor não tenta adivinhar o que ele significa.
  */
 public class Dispositivo {
 

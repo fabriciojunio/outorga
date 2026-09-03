@@ -183,9 +183,9 @@ public final class PersistenciaComercial {
         }
 
         /**
-         * A conta pode ter historico de assinaturas encerradas. A que vale e a
-         * mais recente que ainda nao encerrou; se todas encerraram, devolve a
-         * ultima, porque a tela precisa mostrar o que aconteceu.
+         * A conta pode ter histórico de assinaturas encerradas. A que vale e a
+         * mais recente que ainda não encerrou; se todas encerraram, devolve a
+         * última, porque a tela precisa mostrar o que aconteceu.
          */
         @Override
         public Optional<Assinatura> vigenteDoUsuario(UUID tenantId, UUID usuarioId) {
@@ -248,9 +248,9 @@ public final class PersistenciaComercial {
         }
 
         /**
-         * Evento e append-only: nada de update. O conflito por id existe so
-         * porque a entidade em memoria carrega os eventos ja gravados e uma
-         * segunda gravacao passaria por eles de novo.
+         * Evento e append-only: nada de update. O conflito por id existe só
+         * porque a entidade em memória carrega os eventos já gravados e uma
+         * segunda gravação passaria por eles de novo.
          */
         private void gravarEventos(Assinatura assinatura) {
             for (EventoDaAssinatura evento : assinatura.eventos()) {

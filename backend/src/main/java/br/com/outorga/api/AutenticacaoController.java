@@ -24,8 +24,8 @@ import java.util.Set;
 import java.util.UUID;
 
 /**
- * Entrada no sistema. Todos os enderecos aqui sao publicos e por isso
- * carregam o identificador do servico no proprio corpo: sem token ainda nao
+ * Entrada no sistema. Todos os enderecos aqui são publicos e por isso
+ * carregam o identificador do serviço no próprio corpo: sem token ainda não
  * da para saber de qual cliente e a conta.
  */
 @RestController
@@ -89,8 +89,8 @@ public class AutenticacaoController {
     }
 
     /**
-     * Cadastro de espectador. Nasce sempre como ASSINANTE; papel de painel so
-     * sai de dentro do painel, nunca de um endereco publico.
+     * Cadastro de espectador. Nasce sempre como ASSINANTE; papel de painel só
+     * sai de dentro do painel, nunca de um endereço público.
      */
     @PostMapping("/cadastro")
     public ResponseEntity<?> cadastrar(@Valid @RequestBody PedidoDeCadastro pedido,

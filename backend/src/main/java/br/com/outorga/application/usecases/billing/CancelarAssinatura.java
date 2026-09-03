@@ -13,8 +13,8 @@ import java.time.Clock;
 import java.util.Map;
 
 /**
- * Cancelamento pelo proprio assinante. Nao corta o acesso na hora: o ciclo
- * pago vale ate o fim, porque cobrar por um mes e tirar no dia 3 e o tipo de
+ * Cancelamento pelo próprio assinante. Não corta o acesso na hora: o ciclo
+ * pago vale até o fim, porque cobrar por um mes e tirar no dia 3 e o tipo de
  * coisa que rende reclamacao no Reclame Aqui e chargeback.
  */
 public class CancelarAssinatura {

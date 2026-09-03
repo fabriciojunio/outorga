@@ -19,10 +19,10 @@ import java.util.UUID;
 /**
  * Login por e-mail e senha.
  *
- * Detalhe que parece bobo e nao e: quando o e-mail nao existe, o cifrador
- * roda mesmo assim contra um hash descartavel. Sem isso, a diferenca de tempo
- * entre "usuario nao existe" e "senha errada" entrega a lista de assinantes
- * de qualquer cliente para quem medir o relogio.
+ * Detalhe que parece bobo e não e: quando o e-mail não existe, o cifrador
+ * roda mesmo assim contra um hash descartavel. Sem isso, a diferença de tempo
+ * entre "usuário não existe" e "senha errada" entrega a lista de assinantes
+ * de qualquer cliente para quem medir o relógio.
  */
 public class AutenticarUsuario {
 
@@ -59,7 +59,7 @@ public class AutenticarUsuario {
         var tenant = tenants.porId(entrada.tenantId());
         if (tenant.isEmpty()) {
             return Result.erro(new FalhaDeNegocio("SERVICO_NAO_ENCONTRADO",
-                    "Servico nao encontrado"));
+                    "Serviço não encontrado"));
         }
 
         var email = Email.de(entrada.email());
@@ -71,7 +71,7 @@ public class AutenticarUsuario {
         var achado = usuarios.porEmail(entrada.tenantId(), email.valorOuFalha());
         if (achado.isEmpty()) {
             cifrador.confere(entrada.senha(), HASH_DE_COMPARACAO);
-            registrarRecusa(entrada, email.valorOuFalha().mascarado(), "usuario inexistente");
+            registrarRecusa(entrada, email.valorOuFalha().mascarado(), "usuário inexistente");
             return Result.erro(new FalhaDeNegocio("CREDENCIAL_INVALIDA",
                     "E-mail ou senha incorretos"));
         }

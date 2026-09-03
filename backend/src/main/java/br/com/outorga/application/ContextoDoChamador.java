@@ -6,8 +6,8 @@ import java.util.Set;
 import java.util.UUID;
 
 /**
- * Quem esta pedindo. Todo caso de uso recebe isto explicitamente em vez de ir
- * buscar em variavel de thread: um caso de uso chamado por job, por fila ou
+ * Quem está pedindo. Todo caso de uso recebe isto explicitamente em vez de ir
+ * buscar em variável de thread: um caso de uso chamado por job, por fila ou
  * por teste continua tendo autor conhecido.
  */
 public record ContextoDoChamador(UUID tenantId, UUID usuarioId, String descricao,

@@ -14,9 +14,9 @@ import org.springframework.stereotype.Component;
  * Rotinas de fundo.
  *
  * Cada uma existe porque alguma coisa no sistema depende da passagem do tempo
- * e ninguem vai clicar em nada para que ela aconteca. A varredura de direitos
- * e a mais importante das quatro: e ela que faz o gate de conteudo valer
- * depois que a licenca vence, e nao so no dia em que alguem cadastrou.
+ * e ninguém vai clicar em nada para que ela aconteca. A varredura de direitos
+ * e a mais importante das quatro: e ela que faz o gate de conteúdo valer
+ * depois que a licença vence, e não só no dia em que alguém cadastrou.
  */
 @Component
 public class Rotinas {
@@ -40,9 +40,9 @@ public class Rotinas {
     }
 
     /**
-     * De hora em hora, com um atraso inicial para nao competir com a subida da
-     * aplicacao. Roda tambem logo depois de subir, de proposito: instancia que
-     * dormiu a noite inteira precisa acertar o catalogo antes de atender o
+     * De hora em hora, com um atraso inicial para não competir com a subida da
+     * aplicacao. Roda também logo depois de subir, de propósito: instancia que
+     * dormiu a noite inteira precisa acertar o catálogo antes de atender o
      * primeiro espectador da manha.
      */
     @Scheduled(initialDelayString = "PT30S", fixedDelayString = "PT1H")
@@ -54,7 +54,7 @@ public class Rotinas {
             metricas.counter("outorga.direitos.titulos_liberados")
                     .increment(resultado.titulosLiberados());
             if (resultado.houveMudanca()) {
-                log.info("Varredura de direitos: {} titulos bloqueados, {} liberados, {} canais",
+                log.info("Varredura de direitos: {} títulos bloqueados, {} liberados, {} canais",
                         resultado.titulosBloqueados(), resultado.titulosLiberados(),
                         resultado.canaisAfetados());
             }
@@ -75,13 +75,13 @@ public class Rotinas {
         }
     }
 
-    /** Sessao sem sinal de vida nao pode continuar ocupando uma tela do plano. */
+    /** Sessão sem sinal de vida não pode continuar ocupando uma tela do plano. */
     @Scheduled(fixedDelayString = "PT2M")
     public void limparSessoes() {
         try {
             sessoes.fecharAbandonadas();
         } catch (Exception e) {
-            log.error("Limpeza de sessoes falhou", e);
+            log.error("Limpeza de sessões falhou", e);
         }
     }
 

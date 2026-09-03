@@ -9,8 +9,8 @@ import java.util.UUID;
 import java.util.regex.Pattern;
 
 /**
- * Cliente da plataforma: quem contrata o Outorga TV para rodar o proprio
- * servico de streaming. Todo dado do sistema pendura em um tenant.
+ * Cliente da plataforma: quem contrata o Outorga TV para rodar o próprio
+ * serviço de streaming. Todo dado do sistema pendura em um tenant.
  */
 public class Tenant {
 
@@ -53,7 +53,7 @@ public class Tenant {
     public Result<Tenant> liberarParaProducao() {
         if (status == StatusDoTenant.ENCERRADO) {
             return Result.erro(new FalhaDeNegocio("TENANT_ENCERRADO",
-                    "Cliente encerrado nao volta a operar sem novo contrato"));
+                    "Cliente encerrado não volta a operar sem novo contrato"));
         }
         this.status = StatusDoTenant.ATIVO;
         this.motivoDaSuspensao = null;
@@ -62,7 +62,7 @@ public class Tenant {
 
     public Result<Tenant> suspender(String motivo) {
         if (status == StatusDoTenant.ENCERRADO) {
-            return Result.erro(new FalhaDeNegocio("TENANT_ENCERRADO", "Cliente ja encerrado"));
+            return Result.erro(new FalhaDeNegocio("TENANT_ENCERRADO", "Cliente já encerrado"));
         }
         this.status = StatusDoTenant.SUSPENSO;
         this.motivoDaSuspensao = motivo;
@@ -74,7 +74,7 @@ public class Tenant {
         return Result.ok(this);
     }
 
-    /** Espectador so entra quando o cliente esta ativo ou em periodo de teste. */
+    /** Espectador só entra quando o cliente está ativo ou em período de teste. */
     public boolean aceitaTrafegoDeEspectador(Instant agora) {
         return switch (status) {
             case ATIVO -> true;

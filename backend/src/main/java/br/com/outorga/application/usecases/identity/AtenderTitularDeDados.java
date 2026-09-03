@@ -14,12 +14,12 @@ import java.util.Map;
 
 /**
  * Direitos do titular previstos na LGPD: ver o que a plataforma guarda sobre
- * ele e pedir a exclusao.
+ * ele e pedir a exclusão.
  *
- * A exclusao aqui e anonimizacao, nao DELETE. Registro de pagamento e trilha
- * de auditoria tem obrigacao legal de guarda propria, e apagar a linha
+ * A exclusão aqui e anonimização, não DELETE. Registro de pagamento e trilha
+ * de auditoria tem obrigacao legal de guarda própria, e apagar a linha
  * inteira quebraria a conciliacao financeira do cliente. O que se apaga e o
- * que identifica a pessoa; o que fica e o fato contabil, sem dono.
+ * que identifica a pessoa; o que fica e o fato contábil, sem dono.
  */
 public class AtenderTitularDeDados {
 
@@ -87,7 +87,7 @@ public class AtenderTitularDeDados {
         var assinatura = assinaturas.vigenteDoUsuario(chamador.tenantId(), usuario.id());
         if (assinatura.isPresent() && assinatura.get().permiteAssistir(relogio.instant())) {
             return Result.erro(Falhas.conflito(
-                    "Cancele a assinatura antes de pedir a exclusao da conta"));
+                    "Cancele a assinatura antes de pedir a exclusão da conta"));
         }
 
         var emailAntes = usuario.email().mascarado();

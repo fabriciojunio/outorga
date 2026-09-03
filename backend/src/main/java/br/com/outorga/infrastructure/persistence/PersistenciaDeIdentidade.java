@@ -25,8 +25,8 @@ import java.util.stream.Collectors;
 /**
  * Persistencia de cliente, conta, perfil e aparelho.
  *
- * O gravar e sempre upsert por id: a entidade ja nasce com identidade no
- * dominio, entao a camada de dados nao precisa saber se e a primeira vez.
+ * O gravar e sempre upsert por id: a entidade já nasce com identidade no
+ * dominio, então a camada de dados não precisa saber se e a primeira vez.
  */
 public final class PersistenciaDeIdentidade {
 

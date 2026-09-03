@@ -10,7 +10,7 @@ import java.time.Clock;
 import java.util.UUID;
 
 /**
- * Sinal de vida e encerramento da sessao. O player chama o sinal a cada
+ * Sinal de vida e encerramento da sessão. O player chama o sinal a cada
  * trinta segundos; a posicao vem junto e serve de "continuar assistindo".
  */
 public class AcompanharSessao {
@@ -46,7 +46,7 @@ public class AcompanharSessao {
         return Result.ok(sessoes.salvar(sessao));
     }
 
-    /** Rotina de limpeza: sessao sem sinal ha tempo demais nao ocupa tela. */
+    /** Rotina de limpeza: sessão sem sinal ha tempo demais não ocupa tela. */
     public int fecharAbandonadas() {
         return sessoes.fecharAbandonadas(
                 relogio.instant().minus(SessaoDeReproducao.TOLERANCIA));

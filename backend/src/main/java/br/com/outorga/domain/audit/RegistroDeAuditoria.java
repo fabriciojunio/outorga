@@ -6,7 +6,7 @@ import java.util.UUID;
 
 /**
  * Trilha de auditoria. Guarda quem fez o que, em qual tenant e sobre qual
- * recurso. Nunca guarda senha, token, numero de cartao nem o corpo inteiro de
+ * recurso. Nunca guarda senha, token, número de cartão nem o corpo inteiro de
  * uma requisicao.
  */
 public record RegistroDeAuditoria(

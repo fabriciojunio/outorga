@@ -35,11 +35,11 @@ import java.time.Clock;
 /**
  * Raiz de composicao.
  *
- * Os casos de uso sao classes comuns, sem anotacao do Spring. O beneficio e
+ * Os casos de uso são classes comuns, sem anotacao do Spring. O beneficio e
  * concreto: da para instanciar qualquer um deles num teste passando dublês,
- * sem subir contexto, e ler aqui, num arquivo so, de quem cada um depende. Se
+ * sem subir contexto, e ler aqui, num arquivo só, de quem cada um depende. Se
  * uma dependencia nova aparecer, ela aparece nesta lista, o que torna o
- * inchaco visivel em vez de escondido atras de injecao por campo.
+ * inchaco visivel em vez de escondido atrás de injecao por campo.
  */
 @Configuration
 public class ComposicaoDaAplicacao {

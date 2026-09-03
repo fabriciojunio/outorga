@@ -7,8 +7,8 @@ import java.time.Duration;
 import java.util.UUID;
 
 /**
- * Episodio de uma temporada. Carrega a referencia do ativo de video no
- * provedor de entrega; o dominio nao conhece o provedor, so guarda a chave.
+ * Episódio de uma temporada. Carrega a referência do ativo de vídeo no
+ * provedor de entrega; o dominio não conhece o provedor, só guarda a chave.
  */
 public class Episodio {
 
@@ -33,15 +33,15 @@ public class Episodio {
                                          String referenciaDoVideo) {
         if (numero < 1) {
             return Result.erro(new FalhaDeNegocio("EPISODIO_NUMERO_INVALIDO",
-                    "Numero do episodio comeca em 1"));
+                    "Número do episódio comeca em 1"));
         }
         if (titulo == null || titulo.isBlank()) {
             return Result.erro(new FalhaDeNegocio("EPISODIO_SEM_TITULO",
-                    "Informe o titulo do episodio"));
+                    "Informe o título do episódio"));
         }
         if (duracao == null || duracao.isZero() || duracao.isNegative()) {
             return Result.erro(new FalhaDeNegocio("EPISODIO_SEM_DURACAO",
-                    "Informe a duracao do episodio"));
+                    "Informe a duração do episódio"));
         }
         return Result.ok(new Episodio(UUID.randomUUID(), numero, titulo.trim(), null, duracao,
                 referenciaDoVideo));
